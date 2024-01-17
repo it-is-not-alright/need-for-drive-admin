@@ -12,7 +12,7 @@ div#log-in-page {
     margin: 1rem;
   }
 
-  div#sign-in-message {
+  div#log-in-page__sign-in-alert {
     @include m.card;
 
     grid-column: 2;

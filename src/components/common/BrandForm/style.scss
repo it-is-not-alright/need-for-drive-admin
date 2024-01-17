@@ -35,12 +35,9 @@ form.brand-form {
       a {
         flex-grow: 1000;
         padding: 0.5rem 0.5rem 0.5rem 0;
+        color: c.$blue;
         font-size: 0.8rem;
         text-decoration: none;
-  
-        &:link, &:visited, &:hover, &:active {
-          color: c.$blue;
-        }
       }
   
       button {

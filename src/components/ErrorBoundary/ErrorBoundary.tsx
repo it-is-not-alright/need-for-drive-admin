@@ -1,5 +1,6 @@
 import React, { Component, ErrorInfo } from 'react';
 
+import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import { ErrorBoundaryProps, ErrorBoundaryState } from './types';
 
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
@@ -15,14 +16,21 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     this.setState({ errorMessage });
   }
 
-  // private reset = (): void => {
-  //   this.setState({ errorMessage: '' });
-  // };
+  private reset = (): void => {
+    this.setState({ errorMessage: '' });
+  };
 
   render() {
     const { errorMessage } = this.state;
     if (errorMessage) {
-      return <p>{errorMessage}</p>;
+      return (
+        <ErrorPage
+          code="???"
+          title="Что-то пошло не так"
+          message={errorMessage}
+          reset={this.reset}
+        />
+      );
     }
     const { children } = this.props;
     return children;

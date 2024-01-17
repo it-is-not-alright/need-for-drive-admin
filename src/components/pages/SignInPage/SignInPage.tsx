@@ -61,7 +61,7 @@ function SignInPage() {
         title="Регистрация"
         linkLabel="Вход"
         linkHref={AppRoute.LogIn}
-        buttonLabel="Создать"
+        buttonLabel="Зарегистрироваться"
         onSubmit={formOnSubmit}
       >
         <TextInput

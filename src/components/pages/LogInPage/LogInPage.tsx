@@ -24,7 +24,7 @@ function LogInPage() {
   const [afterSignIn, setAfterSignIn] = useState<boolean>(false);
 
   useEffect(() => {
-    setAfterSignIn(params.has(signInParam));
+    setAfterSignIn(params.get(signInParam) === 'true');
   }, [params]);
 
   const formOnSubmit = () => {
@@ -72,8 +72,8 @@ function LogInPage() {
         />
       </BrandForm>
       {afterSignIn && (
-        <div id="sign-in-message">
-          <p className="fs-2">Регистрация успешно пройдена</p>
+        <div id="log-in-page__sign-in-alert">
+          <p className="fs-2">Регистрация пройдена успешно</p>
         </div>
       )}
     </div>

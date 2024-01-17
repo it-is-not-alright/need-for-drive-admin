@@ -6,7 +6,7 @@ div.text-input {
   margin-top: 0.5rem;
   border-width: 1px;
   border-style: solid;
-  border-color: c.$light-gray;
+  border-color: c.$lavender-gray;
   border-radius: 0.25rem;
 
   &.invalid {
@@ -39,7 +39,7 @@ div.text-input {
     padding: 0 0.75rem;
 
     svg {
-      fill: c.$blue-gray;
+      fill: c.$police-blue;
     }
   }
 }

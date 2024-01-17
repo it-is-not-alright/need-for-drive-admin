@@ -25,7 +25,7 @@ function TextInput({
       <div className={classNames('text-input', { invalid: error })}>
         <input
           type={hidden ? 'password' : 'text'}
-          className="blue-gray"
+          className="police-blue"
           value={value}
           onChange={onChange}
           tabIndex={0}
