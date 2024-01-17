@@ -1,0 +1,51 @@
+@use '~/comp/_mixins' as m;
+@use '~/comp/_colors' as c;
+
+form.brand-form {
+  height: fit-content;
+  
+  div.brand-form__logo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  div.brand-form__body {
+    @include m.card;
+
+    margin-top: 1rem;
+    
+    div.brand-form__body__header {
+      padding: 1.5rem;
+      text-align: center;
+    }
+  
+    div.brand-form__body__main {
+      padding: 1rem 1rem 0;
+    }
+  
+    div.brand-form__body__footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 0 1rem 1rem;
+  
+      a {
+        flex-grow: 1000;
+        padding: 0.5rem 0.5rem 0.5rem 0;
+        font-size: 0.8rem;
+        text-decoration: none;
+  
+        &:link, &:visited, &:hover, &:active {
+          color: c.$blue;
+        }
+      }
+  
+      button {
+        flex-grow: 1;
+      }
+    }
+  }
+}

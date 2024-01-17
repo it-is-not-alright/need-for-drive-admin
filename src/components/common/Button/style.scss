@@ -1,0 +1,19 @@
+@use '~/comp/_colors' as c;
+
+button {
+  padding: 0.5rem 2rem;
+  border-radius: 0.25rem;
+
+  &.primary {
+    color: c.$white;
+    background-color: c.$blue;
+  }
+
+  &:hover {
+    filter: brightness(90%);
+  }
+
+  &:active {
+    filter: brightness(80%);
+  }
+}

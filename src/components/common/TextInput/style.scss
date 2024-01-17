@@ -1,0 +1,45 @@
+@use '~/comp/_colors' as c;
+@use '~/comp/_dimensions' as d;
+
+div.text-input {
+  display: flex;
+  margin-top: 0.5rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: c.$light-gray;
+  border-radius: 0.25rem;
+
+  &.invalid {
+    border-color: c.$pink;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+
+    @media (min-width: d.$desktop-mini) {
+      font-size: 0.8rem;
+    }
+  }
+
+  & + p {
+    margin: 0.2rem 0;
+    color: c.$pink;
+
+    &::after {
+      white-space: pre;
+      content: ' ';
+    }
+  }
+
+  button {
+    padding: 0 0.75rem;
+
+    svg {
+      fill: c.$blue-gray;
+    }
+  }
+}

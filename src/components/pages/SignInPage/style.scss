@@ -1,0 +1,11 @@
+div#sign-in-page {
+  display: grid;
+  grid-template-columns: 1fr minmax(auto, 25rem) 1fr;
+  grid-template-rows: 1fr auto 4fr;
+
+  form.brand-form {
+    grid-column: 2;
+    grid-row: 2;
+    margin: 1rem;
+  }
+}

@@ -1,0 +1,61 @@
+@use '~/comp/_colors' as c;
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  font-family: Helvetica, sans-serif;
+  outline: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  min-height: 100dvh;
+}
+
+#root {
+  background-color: c.$light;
+}
+
+#root,
+main {
+  min-height: inherit;
+}
+
+.gray {
+  color: c.$gray;
+}
+
+.blue-gray {
+  color: c.$blue-gray;
+}
+
+.fs-1 {
+  font-size: 0.8rem;
+}
+
+.fs-2 {
+  font-size: 1rem;
+}
+
+.fs-3 {
+  font-size: 1.25rem;
+}
+
+.fs-4 {
+  font-size: 1.5rem;
+}
+
+button {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+div.page {
+  min-height: inherit;
+}

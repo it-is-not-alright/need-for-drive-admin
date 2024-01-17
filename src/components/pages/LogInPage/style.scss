@@ -1,0 +1,28 @@
+@use '~/comp/_mixins' as m;
+@use '~/comp/_colors' as c;
+
+div#log-in-page {
+  display: grid;
+  grid-template-columns: 1fr minmax(auto, 25rem) 1fr;
+  grid-template-rows: 1fr auto auto 4fr;
+
+  form.brand-form {
+    grid-column: 2;
+    grid-row: 2;
+    margin: 1rem;
+  }
+
+  div#sign-in-message {
+    @include m.card;
+
+    grid-column: 2;
+    grid-row: 3;
+    margin: 1rem;
+    padding: 1rem;
+    text-align: center;
+
+    p {
+      color: c.$green;
+    }
+  }
+}
