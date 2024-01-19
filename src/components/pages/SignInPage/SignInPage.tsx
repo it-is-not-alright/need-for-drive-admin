@@ -15,7 +15,7 @@ import {
   initPassword,
   passwordConfirmScheme,
   passwordScheme,
-  signInParam,
+  SIGN_IN_PARAM,
 } from '../constants';
 
 function SignInPage() {
@@ -32,7 +32,7 @@ function SignInPage() {
     passwordConfirmScheme.pattern.target = new RegExp(`^${password.value}$`);
     setPasswordConfirm(validator.check(passwordConfirmScheme, passwordConfirm));
     if (validator.ok) {
-      const url = `${AppRoute.LogIn}?${signInParam}=true`;
+      const url = `${AppRoute.LogIn}?${SIGN_IN_PARAM}=true`;
       navigate(url);
     }
   };

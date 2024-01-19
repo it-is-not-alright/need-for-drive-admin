@@ -1,6 +1,6 @@
 import './style.scss';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import BrandForm from '~/comp/common/BrandForm/BrandForm';
@@ -14,18 +14,14 @@ import {
   initEmail,
   initPassword,
   passwordScheme,
-  signInParam,
+  SIGN_IN_PARAM,
 } from '../constants';
 
 function LogInPage() {
   const [params] = useSearchParams();
   const [email, setEmail] = useState<ValueWrapper>(initEmail);
   const [password, setPassword] = useState<ValueWrapper>(initPassword);
-  const [afterSignIn, setAfterSignIn] = useState<boolean>(false);
-
-  useEffect(() => {
-    setAfterSignIn(params.get(signInParam) === 'true');
-  }, [params]);
+  const signInIsSuccess = params.get(SIGN_IN_PARAM) === 'true';
 
   const formOnSubmit = () => {
     const validator = new Validator();
@@ -71,7 +67,7 @@ function LogInPage() {
           onChange={handlePasswordChange}
         />
       </BrandForm>
-      {afterSignIn && (
+      {signInIsSuccess && (
         <div id="log-in-page__sign-in-alert">
           <p className="fs-2">Регистрация пройдена успешно</p>
         </div>
