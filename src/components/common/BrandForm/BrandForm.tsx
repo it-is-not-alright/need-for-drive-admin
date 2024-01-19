@@ -24,9 +24,9 @@ function BrandForm({
         <p className="police-blue fs-4">Need for drive</p>
       </div>
       <div className="brand-form__body">
-        <div className="brand-form__body__header police-blue fs-3">{title}</div>
-        <div className="brand-form__body__main">{children}</div>
-        <div className="brand-form__body__footer">
+        <div className="brand-form__header police-blue fs-3">{title}</div>
+        <div className="brand-form__main">{children}</div>
+        <div className="brand-form__footer">
           <Link to={linkHref}>{linkLabel}</Link>
           <Button text={buttonLabel} onClick={onSubmit} pending={pending} />
         </div>
