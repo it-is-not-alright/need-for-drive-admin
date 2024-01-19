@@ -2,9 +2,9 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 
 import { logIn } from '~/src/api/actions/auth';
 
-import { logInFailure, logInReset, logInSuccess } from '../actions/auth';
+import { logInFailure, logInSuccess, resetAuthState } from '../actions/auth';
 import { LogInRequestAction } from '../actions/types';
-import { LOG_IN_REQUEST, LOG_IN_RESET } from '../constants';
+import { LOG_IN_REQUEST, RESET_AUTH_STATE } from '../constants';
 
 function* logInWorker(action: LogInRequestAction): Generator {
   try {
@@ -17,7 +17,7 @@ function* logInWorker(action: LogInRequestAction): Generator {
 
 function* logInWatcher(): Generator {
   yield takeLatest(LOG_IN_REQUEST, logInWorker);
-  yield takeLatest(LOG_IN_RESET, logInReset);
+  yield takeLatest(RESET_AUTH_STATE, resetAuthState);
 }
 
 export { logInWatcher };

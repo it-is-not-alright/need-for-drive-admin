@@ -7,7 +7,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import BrandForm from '~/comp/common/BrandForm/BrandForm';
 import TextInput from '~/comp/common/TextInput/TextInput';
-import { logInRequest, logInReset } from '~/src/redux/actions/auth';
+import { logInRequest, resetAuthState } from '~/src/redux/actions/auth';
 import { authSelector } from '~/src/redux/selectors/auth';
 import { ValueWrapper } from '~/src/validation/types';
 import Validator from '~/src/validation/validator';
@@ -31,15 +31,15 @@ function LogInPage() {
   const signInIsSuccess = params.get(SIGN_IN_PARAM) === 'true';
 
   useEffect(() => {
-    dispatch(logInReset());
+    dispatch(resetAuthState());
   }, []);
 
   useEffect(() => {
     if (authState.error && authState.error !== '401') {
-      dispatch(logInReset());
+      dispatch(resetAuthState());
       throw new Error(authState.error);
     } else if (authState.data) {
-      dispatch(logInReset());
+      dispatch(resetAuthState());
       navigate(AppRoute.Orders);
     }
   }, [authState]);

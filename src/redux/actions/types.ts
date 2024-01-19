@@ -3,8 +3,8 @@ import { User } from '~/src/api/types';
 import {
   LOG_IN_FAILURE,
   LOG_IN_REQUEST,
-  LOG_IN_RESET,
   LOG_IN_SUCCESS,
+  RESET_AUTH_STATE,
 } from '../constants';
 
 type PayloadAction<T, P> = {
@@ -15,17 +15,17 @@ type PayloadAction<T, P> = {
 type LogInRequestAction = PayloadAction<typeof LOG_IN_REQUEST, User>;
 type LogInSuccessAction = PayloadAction<typeof LOG_IN_SUCCESS, boolean>;
 type LogInFailureAction = PayloadAction<typeof LOG_IN_FAILURE, string>;
-type LogInResetAction = PayloadAction<typeof LOG_IN_RESET, null>;
+type ResetAuthStateAction = PayloadAction<typeof RESET_AUTH_STATE, null>;
 type LogInAction =
   | LogInRequestAction
   | LogInSuccessAction
   | LogInFailureAction
-  | LogInResetAction;
+  | ResetAuthStateAction;
 
 export {
   LogInAction,
   LogInFailureAction,
   LogInRequestAction,
-  LogInResetAction,
   LogInSuccessAction,
+  ResetAuthStateAction,
 };

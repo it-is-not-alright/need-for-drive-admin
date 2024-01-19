@@ -14,9 +14,11 @@
 }
 
 a {
-  color: c.$blue;
-  cursor: pointer;
-  all: unset;
+  text-decoration: none;
+
+  &:link, &:visited, &:hover, &:active {
+    color: c.$blue;
+  }
 }
 
 html,

@@ -3,14 +3,14 @@ import { User } from '~/src/api/types';
 import {
   LOG_IN_FAILURE,
   LOG_IN_REQUEST,
-  LOG_IN_RESET,
   LOG_IN_SUCCESS,
+  RESET_AUTH_STATE,
 } from '../constants';
 import {
   LogInFailureAction,
   LogInRequestAction,
-  LogInResetAction,
   LogInSuccessAction,
+  ResetAuthStateAction,
 } from './types';
 
 const logInRequest = (payload: User): LogInRequestAction => ({
@@ -28,9 +28,9 @@ const logInFailure = (payload: string): LogInFailureAction => ({
   payload,
 });
 
-const logInReset = (): LogInResetAction => ({
-  type: LOG_IN_RESET,
+const resetAuthState = (): ResetAuthStateAction => ({
+  type: RESET_AUTH_STATE,
   payload: null,
 });
 
-export { logInFailure, logInRequest, logInReset, logInSuccess };
+export { logInFailure, logInRequest, logInSuccess, resetAuthState };
