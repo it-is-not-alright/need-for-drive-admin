@@ -1,5 +1,6 @@
 import './style.scss';
 
+import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -30,10 +31,15 @@ function LogInPage() {
   const showSignInAlert = params.get(SIGN_IN_PARAM) === 'true';
 
   useEffect(() => {
-    if (authState.error) {
+    dispatch(logInReset());
+  }, []);
+
+  useEffect(() => {
+    if (authState.error && authState.error !== '401') {
       dispatch(logInReset());
       throw new Error(authState.error);
     } else if (authState.data) {
+      dispatch(logInReset());
       navigate(AppRoute.Orders);
     }
   }, [authState]);
@@ -68,6 +74,7 @@ function LogInPage() {
         linkHref={AppRoute.SignIn}
         buttonLabel="Войти"
         onSubmit={formOnSubmit}
+        pending={authState.pending}
       >
         <TextInput
           title="Почта"
@@ -83,9 +90,16 @@ function LogInPage() {
           onChange={handlePasswordChange}
         />
       </BrandForm>
-      {showSignInAlert && (
-        <div id="log-in-page__sign-in-alert">
-          <p className="fs-2">Регистрация пройдена успешно</p>
+      {(showSignInAlert || authState.error) && (
+        <div
+          id="log-in-page__alert"
+          className={classNames({ error: authState.error })}
+        >
+          <p className="fs-2">
+            {authState.error
+              ? 'Неправильное имя пользователя или пароль. Попробуйте еще раз.'
+              : 'Регистрация пройдена успешно.'}
+          </p>
         </div>
       )}
     </div>

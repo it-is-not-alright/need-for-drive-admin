@@ -5,6 +5,7 @@ type BrandFormProps = {
   linkHref: string;
   buttonLabel: string;
   onSubmit: () => void;
+  pending: boolean;
 };
 
 export { BrandFormProps };

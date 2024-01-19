@@ -1,5 +1,5 @@
 type ErrorPageProps = {
-  code: string;
+  status: string;
   title: string;
   message: string;
   reset?: () => void;

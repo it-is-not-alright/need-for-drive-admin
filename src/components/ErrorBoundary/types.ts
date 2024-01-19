@@ -3,7 +3,7 @@ type ErrorBoundaryProps = {
 };
 
 type ErrorBoundaryState = {
-  errorMessage: string;
+  errorCode: string;
 };
 
 export { ErrorBoundaryProps, ErrorBoundaryState };

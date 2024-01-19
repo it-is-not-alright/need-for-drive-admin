@@ -6,26 +6,28 @@ import { ErrorBoundaryProps, ErrorBoundaryState } from './types';
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
-    this.state = { errorMessage: '' };
+    this.state = { errorCode: '' };
   }
 
   componentDidCatch(error: Error): void {
-    const errorMessage: string = error.message;
-    this.setState({ errorMessage });
+    const errorCode: string = parseInt(error.message, 10)
+      ? error.message
+      : '???';
+    this.setState({ errorCode });
   }
 
   private reset = (): void => {
-    this.setState({ errorMessage: '' });
+    this.setState({ errorCode: '' });
   };
 
   render() {
-    const { errorMessage } = this.state;
-    if (errorMessage) {
+    const { errorCode } = this.state;
+    if (errorCode) {
       return (
         <ErrorPage
-          code="???"
+          status={errorCode}
           title="Что-то пошло не так"
-          message={errorMessage}
+          message="Попробуйте перезагрузить страницу"
           reset={this.reset}
         />
       );

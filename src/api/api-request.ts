@@ -14,7 +14,7 @@ class ApiRequest {
     const response = await fetch(fullUrl, init);
     const result = await response.json();
     if (!response.ok) {
-      throw new Error(result.message);
+      throw new Error(String(response.status));
     }
     return result;
   }

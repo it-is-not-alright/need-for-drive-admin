@@ -5,3 +5,24 @@
   border-radius: 1rem;
   box-shadow: 0 0.25rem 0.5rem c.$black-coral; 
 }
+
+@mixin spinner($color, $size) {
+  width: $size;
+  height: $size;
+  border-width: 0.1rem;
+  border-style: solid;
+  border-color: $color;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,6 +1,8 @@
 @use '~/comp/_colors' as c;
+@use '~/comp/_mixins' as m;
 
 button {
+  position: relative;
   padding: 0.5rem 2rem;
   border-radius: 0.25rem;
 
@@ -15,5 +17,23 @@ button {
 
   &:active {
     filter: brightness(80%);
+  }
+
+  &.pending {
+    cursor: default;
+    opacity: 0.5;
+
+    &::after {
+      position: absolute;
+      margin: auto;
+      content: '';
+      inset: 0;
+
+      @include m.spinner(c.$white, 1em);
+    }
+
+    p {
+      visibility: hidden;
+    }
   }
 }

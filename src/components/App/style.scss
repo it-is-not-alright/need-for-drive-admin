@@ -14,8 +14,9 @@
 }
 
 a {
-  all: unset;
+  color: c.$blue;
   cursor: pointer;
+  all: unset;
 }
 
 html,

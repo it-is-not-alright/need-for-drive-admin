@@ -15,6 +15,7 @@ function BrandForm({
   linkHref,
   buttonLabel,
   onSubmit,
+  pending,
 }: BrandFormProps) {
   return (
     <form className="brand-form">
@@ -27,7 +28,7 @@ function BrandForm({
         <div className="brand-form__body__main">{children}</div>
         <div className="brand-form__body__footer">
           <Link to={linkHref}>{linkLabel}</Link>
-          <Button text={buttonLabel} onClick={onSubmit} />
+          <Button text={buttonLabel} onClick={onSubmit} pending={pending} />
         </div>
       </div>
     </form>
