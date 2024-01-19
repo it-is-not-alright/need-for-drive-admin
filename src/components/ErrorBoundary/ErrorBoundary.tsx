@@ -1,4 +1,4 @@
-import React, { Component, ErrorInfo } from 'react';
+import React, { Component } from 'react';
 
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import { ErrorBoundaryProps, ErrorBoundaryState } from './types';
@@ -9,9 +9,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     this.state = { errorMessage: '' };
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    // eslint-disable-next-line no-console
-    console.error('ErrorBoundary caught an error: ', error, errorInfo);
+  componentDidCatch(error: Error): void {
     const errorMessage: string = error.message;
     this.setState({ errorMessage });
   }

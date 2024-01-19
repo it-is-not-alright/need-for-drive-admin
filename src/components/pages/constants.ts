@@ -1,6 +1,6 @@
 import { Scheme, ValueWrapper } from '~/src/validation/types';
 
-const signInParam = 'sign-in';
+const SIGN_IN_PARAM = 'sign-in';
 
 const initEmail: ValueWrapper = {
   value: '',
@@ -20,10 +20,6 @@ const emailScheme: Scheme = {
   maxLen: {
     target: 150,
     message: 'Превышен лимит символов',
-  },
-  pattern: {
-    target: /^\S+@\S+\.\S+$/,
-    message: 'Некорректный адрес электронной почты',
   },
 };
 
@@ -51,5 +47,5 @@ export {
   initPassword,
   passwordConfirmScheme,
   passwordScheme,
-  signInParam,
+  SIGN_IN_PARAM,
 };

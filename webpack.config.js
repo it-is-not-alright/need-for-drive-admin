@@ -16,6 +16,9 @@ module.exports = {
     static: {
       directory: path.join(__dirname, 'build'),
     },
+    client: {
+      overlay: false,
+    },
     port: 3000,
   },
   module: {

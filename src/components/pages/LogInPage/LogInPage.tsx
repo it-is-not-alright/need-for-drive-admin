@@ -1,10 +1,13 @@
 import './style.scss';
 
 import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import BrandForm from '~/comp/common/BrandForm/BrandForm';
 import TextInput from '~/comp/common/TextInput/TextInput';
+import { logInRequest, logInReset } from '~/src/redux/actions/auth';
+import { authSelector } from '~/src/redux/selectors/auth';
 import { ValueWrapper } from '~/src/validation/types';
 import Validator from '~/src/validation/validator';
 
@@ -14,25 +17,34 @@ import {
   initEmail,
   initPassword,
   passwordScheme,
-  signInParam,
+  SIGN_IN_PARAM,
 } from '../constants';
 
 function LogInPage() {
-  const [params] = useSearchParams();
   const [email, setEmail] = useState<ValueWrapper>(initEmail);
   const [password, setPassword] = useState<ValueWrapper>(initPassword);
-  const [afterSignIn, setAfterSignIn] = useState<boolean>(false);
+  const authState = useSelector(authSelector);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [params] = useSearchParams();
+  const showSignInAlert = params.get(SIGN_IN_PARAM) === 'true';
 
   useEffect(() => {
-    setAfterSignIn(params.get(signInParam) === 'true');
-  }, [params]);
+    if (authState.error) {
+      dispatch(logInReset());
+      throw new Error(authState.error);
+    } else if (authState.data) {
+      navigate(AppRoute.Orders);
+    }
+  }, [authState]);
 
   const formOnSubmit = () => {
     const validator = new Validator();
     setEmail(validator.check(emailScheme, email));
     setPassword(validator.check(passwordScheme, password));
     if (validator.ok) {
-      // Post request
+      const user = { username: email.value, password: password.value };
+      dispatch(logInRequest(user));
     }
   };
 
@@ -71,7 +83,7 @@ function LogInPage() {
           onChange={handlePasswordChange}
         />
       </BrandForm>
-      {afterSignIn && (
+      {showSignInAlert && (
         <div id="log-in-page__sign-in-alert">
           <p className="fs-2">Регистрация пройдена успешно</p>
         </div>
