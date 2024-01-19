@@ -28,7 +28,7 @@ function LogInPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [params] = useSearchParams();
-  const showSignInAlert = params.get(SIGN_IN_PARAM) === 'true';
+  const signInIsSuccess = params.get(SIGN_IN_PARAM) === 'true';
 
   useEffect(() => {
     dispatch(logInReset());
@@ -90,7 +90,7 @@ function LogInPage() {
           onChange={handlePasswordChange}
         />
       </BrandForm>
-      {(showSignInAlert || authState.error) && (
+      {(signInIsSuccess || authState.error) && (
         <div
           id="log-in-page__alert"
           className={classNames({ error: authState.error })}
