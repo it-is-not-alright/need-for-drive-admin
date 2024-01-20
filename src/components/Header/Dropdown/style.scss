@@ -2,41 +2,106 @@
 @use '~/comp/_mixins' as m;
 
 $img-size: 2.5rem;
+$icon-size: 0.75rem;
 
-button.dropdown {
-  @include m.interactive;
+div.dropdown {
+  position: relative;
 
-  display: flex;
-  align-items: center;
-  width: inherit;
-  background-color: c.$white;
+  button.dropdown__toggle {
+    @include m.interactive;
 
-  @include m.only-mobile {
+    display: flex;
+    align-items: center;
+    width: inherit;
     padding: 0.8rem;
-  }
-
-  @include m.non-mobile {
-    padding: 0.8rem 1.5rem;
-  }
-
-  div.dropdown__img-wrapper {
-    position: relative;
+    background-color: c.$white;
+  
+    @include m.on-non-mobile {
+      padding: 0.8rem 1.5rem;
+    }
+  
+    div.dropdown__img-wrapper {
+      position: relative;
+      
+      img {
+        display: block;
+        width: $img-size;
+        height: $img-size;
+        border-radius: 50%;
+      }
+  
+      span.badge {
+        @include m.on-non-mobile {
+          display: none;
+        };
+      }
+    }
+  
+    div.dropdown__additional-content {
+      display: none;
+  
+      @include m.on-non-mobile {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+        margin-left: 1rem;
+      };
     
-    img {
-      display: block;
-      width: $img-size;
-      height: $img-size;
-      border-radius: 50%;
-    }
-
-    span.badge {
-      @include m.show-only-on-mobile;
+      svg {
+        width: $icon-size;
+        height: $icon-size;
+        fill: c.$shadow-blue;
+      }
     }
   }
 
-  p {
-    @include m.show-on-non-mobile;
+  div.dropdown__menu {
+    @include m.card(0.5rem);
 
-    margin-left: 1rem;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    display: block;
+    width: max-content;
+    max-width: calc(100vw - 1rem);
+    margin: 0.5rem;
+    padding: 0.5rem 0;
+    border-width: 1px;
+    border-style: solid;
+    border-color: c.$light-periwinkle;
+
+    button.dropdown__item {
+      @include m.interactive;
+
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      width: 100%;
+      padding: 0.5rem 1rem;
+      background-color: c.$white;
+      user-select: none;
+
+      &:first-child {
+        @include m.on-non-mobile {
+          display: none;
+        };
+      }
+    }
+  }
+
+  &.dropdown-expanded {
+    button.dropdown__toggle {
+      filter: brightness(90%);
+
+      span.badge {
+        display: none;
+      }
+    }
+  }
+
+  &:not(.dropdown-expanded) {
+    div.dropdown__menu {
+      display: none;
+    }
   }
 }

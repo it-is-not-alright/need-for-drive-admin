@@ -6,9 +6,6 @@ $font-size: 0.7rem;
 $height: 1.2rem;
 
 span.badge {
-  position: absolute;
-  top: $offset;
-  left: $offset;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,5 +17,14 @@ span.badge {
   font-family: f.$poppins, sans-serif;
   background-color: c.$pink;
   border-radius: 10rem;
-  filter: none;
+
+  &.badge-notification {
+    position: absolute;
+    top: $offset;
+    left: $offset;
+  }
+
+  &.badge-pill {
+    opacity: 0.75;
+  }
 }

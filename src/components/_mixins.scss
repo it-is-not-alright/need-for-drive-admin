@@ -1,9 +1,9 @@
 @use './colors' as c;
 @use '~/comp/_dimensions' as d;
 
-@mixin card {
+@mixin card($border-radius: 0.75rem) {
   background-color: c.$white;
-  border-radius: 1rem;
+  border-radius: $border-radius;
   box-shadow: 0 0.25rem 0.5rem c.$black-coral; 
 }
 
@@ -44,28 +44,13 @@
   &:active {
     filter: brightness(80%);
   }
+
+  transition-duration: 0.2s;
+  transition-property: filter;
 }
 
-@mixin only-mobile {
-  @media (width <= calc(d.$tablet - 1px)) {
-    @content;
-  }
-}
-
-@mixin non-mobile {
+@mixin on-non-mobile {
   @media (min-width: d.$tablet) {
     @content;
-  }
-}
-
-@mixin show-on-non-mobile {
-  @include only-mobile {
-    display: none;
-  }
-}
-
-@mixin show-only-on-mobile {
-  @include non-mobile {
-    display: none;
   }
 }

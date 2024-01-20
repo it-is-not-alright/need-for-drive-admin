@@ -3,7 +3,7 @@ import './style.scss';
 import React from 'react';
 
 import Dropdown from './Dropdown/Dropdown';
-import NoticeButton from './NoticeButton/NoticeButton';
+import NotificationButton from './NotificationButton/NotificationButton';
 import SearchBar from './SearchBar/SearchBar';
 import { HeaderProps } from './types';
 
@@ -15,7 +15,7 @@ function Header({ isDisplayed }: HeaderProps) {
   return (
     <header>
       <SearchBar />
-      <NoticeButton />
+      <NotificationButton />
       <Dropdown />
     </header>
   );

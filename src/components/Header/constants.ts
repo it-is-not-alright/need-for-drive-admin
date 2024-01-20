@@ -1,1 +1,1 @@
-export const NOTICE_QUANTITY = '5';
+export const NUM_OF_NOTIFICATIONS = 5;

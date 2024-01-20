@@ -12,9 +12,11 @@ header {
     }
   }
 
-  button.notice-btn {
-    @media (width <= calc(d.$tablet - 1px)) {
-      display: none;
-    }
+  button.notification-btn {
+    display: none;
+
+    @include m.on-non-mobile {
+      display: block;
+    };
   }
 }
