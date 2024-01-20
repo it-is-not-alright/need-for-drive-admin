@@ -36,7 +36,7 @@ function TextInput({
             onClick={handleShowButtonClick}
             aria-label="show-button"
           >
-            <Icon id={hidden ? 'show' : 'hide'} width="20" height="16" />
+            <Icon id={hidden ? 'show' : 'hide'} />
           </button>
         )}
       </div>

@@ -1,0 +1,24 @@
+@use '~/comp/_colors' as c;
+@use '~/assets/fonts/_families' as f;
+
+$offset: 60%;
+$font-size: 0.7rem;
+$height: 1.2rem;
+
+span.badge {
+  position: absolute;
+  top: $offset;
+  left: $offset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: $height;
+  height: $height;
+  padding: 0 0.2rem;
+  color: c.$white;
+  font-size: $font-size;
+  font-family: f.$poppins, sans-serif;
+  background-color: c.$pink;
+  border-radius: 10rem;
+  filter: none;
+}

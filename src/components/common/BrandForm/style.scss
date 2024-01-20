@@ -1,5 +1,6 @@
 @use '~/comp/_mixins' as m;
 @use '~/comp/_colors' as c;
+@use '~/comp/_dimensions' as d;
 
 form.brand-form {
   height: fit-content;
@@ -35,7 +36,7 @@ form.brand-form {
   
       a {
         flex: 1;
-        font-size: 0.8rem;
+        font-size: d.$fs-1;
       }
     }
   }

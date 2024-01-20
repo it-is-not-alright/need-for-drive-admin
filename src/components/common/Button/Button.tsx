@@ -11,7 +11,7 @@ function Button({
   type = ButtonType.Primary,
   pending = false,
 }: ButtonProps) {
-  const classList = classNames(type, { pending });
+  const classList = classNames('simple-btn', type, { pending });
 
   const handleClick = () => {
     if (!pending) {

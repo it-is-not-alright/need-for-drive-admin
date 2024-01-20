@@ -1,4 +1,6 @@
 @use '~/comp/_colors' as c;
+@use '~/comp/_dimensions' as d;
+@use '~/assets/fonts/_families' as f;
 
 *,
 *::after,
@@ -8,7 +10,7 @@
   padding: 0;
   font-weight: 400;
   font-size: inherit;
-  font-family: Helvetica, sans-serif;
+  font-family: f.$helvetica, sans-serif;
   outline: 0;
   -webkit-tap-highlight-color: transparent;
 }
@@ -22,7 +24,8 @@ a {
 }
 
 html,
-body {
+body,
+#root {
   min-height: 100dvh;
 }
 
@@ -32,9 +35,9 @@ body {
   background-color: c.$light;
 }
 
-#root,
 main {
-  min-height: inherit;
+  grid-row: 2;
+  min-height: 100%;
 }
 
 .gray {
@@ -46,19 +49,19 @@ main {
 }
 
 .fs-1 {
-  font-size: 0.8rem;
+  font-size: d.$fs-1;
 }
 
 .fs-2 {
-  font-size: 1rem;
+  font-size: d.$fs-2;
 }
 
 .fs-3 {
-  font-size: 1.25rem;
+  font-size: d.$fs-3;
 }
 
 .fs-4 {
-  font-size: 1.5rem;
+  font-size: d.$fs-4;
 }
 
 button {
@@ -69,4 +72,9 @@ button {
 
 div.page {
   min-height: inherit;
+}
+
+img {
+  user-select: none;
+  pointer-events: none;
 }

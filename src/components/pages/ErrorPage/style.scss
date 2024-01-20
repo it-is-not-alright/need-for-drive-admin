@@ -1,4 +1,5 @@
 @use '~/comp/_colors' as c;
+@use '~/assets/fonts/_families' as f;
 
 div.error-page {
   display: grid;
@@ -15,7 +16,7 @@ div.error-page {
       color: c.$light-periwinkle;
       font-weight: 500;
       font-size: 3.5rem;
-      font-family: Roboto, sans-serif;
+      font-family: f.$roboto, sans-serif;
     }
 
     h2 {

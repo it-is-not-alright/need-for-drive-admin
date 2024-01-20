@@ -1,0 +1,42 @@
+@use '~/comp/_colors' as c;
+@use '~/comp/_mixins' as m;
+
+$img-size: 2.5rem;
+
+button.dropdown {
+  @include m.interactive;
+
+  display: flex;
+  align-items: center;
+  width: inherit;
+  background-color: c.$white;
+
+  @include m.only-mobile {
+    padding: 0.8rem;
+  }
+
+  @include m.non-mobile {
+    padding: 0.8rem 1.5rem;
+  }
+
+  div.dropdown__img-wrapper {
+    position: relative;
+    
+    img {
+      display: block;
+      width: $img-size;
+      height: $img-size;
+      border-radius: 50%;
+    }
+
+    span.badge {
+      @include m.show-only-on-mobile;
+    }
+  }
+
+  p {
+    @include m.show-on-non-mobile;
+
+    margin-left: 1rem;
+  }
+}

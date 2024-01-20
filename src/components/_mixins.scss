@@ -1,4 +1,5 @@
 @use './colors' as c;
+@use '~/comp/_dimensions' as d;
 
 @mixin card {
   background-color: c.$white;
@@ -24,5 +25,47 @@
 
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@mixin safe-font-size($size: d.$fs-1) {
+  font-size: max(1rem, $size);
+
+  @media (min-width: d.$desktop-mini) {
+    font-size: $size;
+  }
+}
+
+@mixin interactive {
+  &:hover {
+    filter: brightness(90%);
+  }
+
+  &:active {
+    filter: brightness(80%);
+  }
+}
+
+@mixin only-mobile {
+  @media (width <= calc(d.$tablet - 1px)) {
+    @content;
+  }
+}
+
+@mixin non-mobile {
+  @media (min-width: d.$tablet) {
+    @content;
+  }
+}
+
+@mixin show-on-non-mobile {
+  @include only-mobile {
+    display: none;
+  }
+}
+
+@mixin show-only-on-mobile {
+  @include non-mobile {
+    display: none;
   }
 }

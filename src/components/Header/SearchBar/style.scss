@@ -1,0 +1,31 @@
+@use '~/comp/_colors' as c;
+@use '~/comp/_mixins' as m;
+
+$icon-size: 1rem;
+
+button.search-bar {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  width: 100%;
+  padding: 0 1rem;
+  background-color: c.$white;
+
+  svg {
+    width: $icon-size;
+    height: $icon-size;
+    fill: c.$light-periwinkle;
+  }
+
+  input {
+    @include m.safe-font-size;
+    
+    width: 100%;
+    color: c.$davys-grey;
+    border: 0;
+
+    &::placeholder {
+      color: c.$shadow-blue;
+    }
+  }
+}

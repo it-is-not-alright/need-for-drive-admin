@@ -1,23 +1,28 @@
 import './style.scss';
-import '../../assets/fonts/helvetica/style.scss';
-import '../../assets/fonts/roboto/style.scss';
+import '~/assets/fonts/helvetica/style.scss';
+import '~/assets/fonts/roboto/style.scss';
+import '~/assets/fonts/poppins/style.scss';
 
 import React, { lazy, Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import Header from '../Header/Header';
 import LogInPage from '../pages/LogInPage/LogInPage';
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
 import { AppRoute } from './types';
+import { isPublicRoute } from './util';
 
 const SignInPage = lazy(() => import('../pages/SignInPage/SignInPage'));
 const OrdersPage = lazy(() => import('../pages/OrdersPage/OrdersPage'));
 
 function App() {
+  const location = useLocation();
+  const routeIsPublic: boolean = isPublicRoute(location.pathname);
+
   return (
     <>
-      <Header />
+      <Header isDisplayed={!routeIsPublic} />
       <main>
         <ErrorBoundary>
           <Suspense>

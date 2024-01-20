@@ -2,12 +2,12 @@
 @use '../families' as f;
 @use 'sass:string';
 
-$font-family: f.$roboto;
+$font-family: f.$poppins;
 $family: string.to-lower-case($font-family);
 
 @font-face {
   font-weight: 500;
   font-family: $font-family;
   font-style: normal;
-  src: url('#{$family}-#{w.$fw-500}.ttf') format('truetype');
+  src: url('#{$family}-#{w.$fw-600}.ttf') format('truetype');
 }
