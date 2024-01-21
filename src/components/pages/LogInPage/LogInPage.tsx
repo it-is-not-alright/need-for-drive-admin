@@ -7,8 +7,8 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import BrandForm from '~/comp/common/BrandForm/BrandForm';
 import TextInput from '~/comp/common/TextInput/TextInput';
-import { logInRequest, resetAuthState } from '~/src/redux/actions/auth';
-import { authSelector } from '~/src/redux/selectors/auth';
+import { logInRequest, logInReset } from '~/src/redux/actions/log-in';
+import { logInSelector } from '~/src/redux/selectors/log-in';
 import { ValueWrapper } from '~/src/validation/types';
 import Validator from '~/src/validation/validator';
 
@@ -24,25 +24,21 @@ import {
 function LogInPage() {
   const [email, setEmail] = useState<ValueWrapper>(initEmail);
   const [password, setPassword] = useState<ValueWrapper>(initPassword);
-  const authState = useSelector(authSelector);
+  const logInState = useSelector(logInSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const signInIsSuccess = params.get(SIGN_IN_PARAM) === 'true';
 
   useEffect(() => {
-    dispatch(resetAuthState());
-  }, []);
-
-  useEffect(() => {
-    if (authState.error && authState.error !== '401') {
-      dispatch(resetAuthState());
-      throw new Error(authState.error);
-    } else if (authState.data) {
-      dispatch(resetAuthState());
-      navigate(AppRoute.Orders);
+    if (logInState.error && logInState.error !== '401') {
+      dispatch(logInReset());
+      throw new Error(logInState.error);
+    } else if (logInState.data) {
+      dispatch(logInReset());
+      navigate(AppRoute.Main);
     }
-  }, [authState]);
+  }, [logInState]);
 
   const formOnSubmit = () => {
     const validator = new Validator();
@@ -74,7 +70,7 @@ function LogInPage() {
         linkHref={AppRoute.SignIn}
         buttonLabel="Войти"
         onSubmit={formOnSubmit}
-        pending={authState.pending}
+        pending={logInState.pending}
       >
         <TextInput
           title="Почта"
@@ -90,13 +86,13 @@ function LogInPage() {
           onChange={handlePasswordChange}
         />
       </BrandForm>
-      {(signInIsSuccess || authState.error) && (
+      {(signInIsSuccess || logInState.error) && (
         <div
           id="log-in-page__alert"
-          className={classNames({ error: authState.error })}
+          className={classNames({ error: logInState.error })}
         >
           <p className="fs-2">
-            {authState.error
+            {logInState.error
               ? 'Неправильное имя пользователя или пароль. Попробуйте еще раз.'
               : 'Регистрация пройдена успешно.'}
           </p>

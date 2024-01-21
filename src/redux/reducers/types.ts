@@ -4,4 +4,12 @@ type RequestState<T> = {
   error: string | null;
 };
 
-export { RequestState };
+type AuthState = {
+  logIn: boolean;
+  logOut: boolean;
+  authorized: boolean;
+  pending: boolean;
+  error: string | null;
+};
+
+export { AuthState, RequestState };

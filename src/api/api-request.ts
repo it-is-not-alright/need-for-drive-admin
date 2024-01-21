@@ -1,6 +1,6 @@
-import { getTokenData, setTokenData } from '../local-storage/accessors';
-import { AUTH_PREFIX } from './constants';
-import { ApiUrl, AuthData, Refresh } from './types';
+import { InitUtil } from './init-util';
+import { getRefreshToken, saveTokenData } from './storage-util';
+import { ApiUrl, AuthData, RefreshBody } from './types';
 
 class ApiRequest {
   public baseUrl: string;
@@ -10,7 +10,7 @@ class ApiRequest {
   }
 
   private async request<T>(url: string, init: RequestInit): Promise<T> {
-    const fullUrl = this.baseUrl + url;
+    const fullUrl = `${this.baseUrl}/${url}`;
     const response = await fetch(fullUrl, init);
     const result = await response.json();
     if (!response.ok) {
@@ -20,52 +20,48 @@ class ApiRequest {
   }
 
   private async authRequest<T>(url: string, init: RequestInit): Promise<T> {
-    if (url.startsWith(AUTH_PREFIX)) {
-      return this.request<T>(url, init);
+    try {
+      return this.request<T>(url, InitUtil.authorize(init));
+    } catch (error) {
+      if (error.message === '401') {
+        await this.refreshToken();
+        return this.request<T>(url, InitUtil.authorize(init));
+      }
+      throw error;
     }
-    let tokenData = getTokenData();
-    if (tokenData === null) {
-      throw new Error('Incorrect token data');
-    }
-    if (new Date().getTime() >= tokenData.expiresTime) {
-      const refresh: Refresh = { refresh_token: tokenData.refresh };
-      const newTokenData = await this.post<Refresh, AuthData>(
-        ApiUrl.Refresh,
-        refresh,
-      );
-      tokenData = setTokenData(newTokenData);
-    }
-    const authInit: RequestInit = {
-      ...init,
-      headers: {
-        ...init.headers,
-        Authorization: `${tokenData.type} ${tokenData.access}`,
-      },
-    };
-    return this.request<T>(url, authInit);
+  }
+
+  public async refreshToken() {
+    const authData = await this.post<RefreshBody, AuthData>(
+      ApiUrl.Refresh,
+      { refresh_token: getRefreshToken() },
+      false,
+    );
+    saveTokenData(authData);
   }
 
   public async get<T>(url: string): Promise<T> {
-    return this.authRequest<T>(url, { method: 'GET' });
+    return this.authRequest<T>(url, InitUtil.get);
   }
 
-  public async post<T, U>(url: string, body: T): Promise<U> {
-    const init: RequestInit = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    };
+  public async post<T, U>(
+    url: string,
+    body: T,
+    isAuthorized: boolean = true,
+  ): Promise<U> {
+    const init = InitUtil.setBody(InitUtil.post, body);
+    return isAuthorized
+      ? this.authRequest<U>(url, init)
+      : this.request<U>(url, init);
+  }
+
+  public async put<T, U>(url: string, body: T): Promise<U> {
+    const init = InitUtil.setBody(InitUtil.put, body);
     return this.authRequest<U>(url, init);
   }
 
-  public async put(url: string) {
-    this.authRequest(url, { method: 'PUT' });
-  }
-
-  public async remove(url: string) {
-    this.authRequest(url, { method: 'REMOVE' });
+  public async delete(url: string) {
+    this.authRequest(url, InitUtil.delete);
   }
 }
 

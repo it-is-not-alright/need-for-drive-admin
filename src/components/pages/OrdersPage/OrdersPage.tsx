@@ -1,7 +1,9 @@
 import React from 'react';
 
+import Button from '../../common/Button/Button';
+
 function OrdersPage() {
-  return <p>orders</p>;
+  return <Button text="Выйти" onClick={() => {}} />;
 }
 
 export default OrdersPage;

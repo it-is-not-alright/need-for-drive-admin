@@ -1,9 +1,8 @@
-import { AUTH_PREFIX } from './constants';
-
 enum ApiUrl {
-  Base = 'https://frontend-study.simbirsoft.dev/api/',
-  LogIn = `${AUTH_PREFIX}/login`,
-  Refresh = `${AUTH_PREFIX}/refresh`,
+  Base = 'https://frontend-study.simbirsoft.dev/api',
+  LogIn = 'auth/login',
+  Refresh = 'auth/refresh',
+  LogOut = 'auth/logout',
 }
 
 type AuthData = {
@@ -19,8 +18,8 @@ type User = {
   password: string;
 };
 
-type Refresh = {
+type RefreshBody = {
   refresh_token: string;
 };
 
-export { ApiUrl, AuthData, Refresh, User };
+export { ApiUrl, AuthData, RefreshBody, User };
