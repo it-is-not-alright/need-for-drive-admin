@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunkneed_for_drive_admin=self.webpackChunkneed_for_drive_admin||[]).push([[248],{9248:(e,r,n)=>{n.r(r),n.d(r,{default:()=>s}),n(7294);var d=n(5893);const s=function(){return(0,d.jsx)("p",{children:"orders"})}}}]);
+"use strict";(self.webpackChunkneed_for_drive_admin=self.webpackChunkneed_for_drive_admin||[]).push([[248],{9248:(e,n,r)=>{r.r(n),r.d(n,{default:()=>a}),r(7294);var d=r(5998),t=r(9317),i=r(9763),u=r(5893);const a=function(){var e=(0,d.I0)();return(0,u.jsx)(i.Z,{text:"Выйти",onClick:function(){e((0,t.yd)())}})}}}]);
