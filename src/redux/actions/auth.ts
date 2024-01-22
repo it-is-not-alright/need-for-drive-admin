@@ -1,17 +1,32 @@
 import { User } from '~/src/api/types';
 
 import {
-  LOG_IN_FAILURE,
+  AUTH_CLEAR,
+  AUTH_FAILURE,
+  CHECK_AUTH_REQUEST,
+  CHECK_AUTH_SUCCESS,
   LOG_IN_REQUEST,
   LOG_IN_SUCCESS,
-  RESET_AUTH_STATE,
+  LOG_OUT_REQUEST,
+  LOG_OUT_SUCCESS,
+  SIGN_IN_SUCCESS,
 } from '../constants';
 import {
-  LogInFailureAction,
+  AuthClearAction,
+  AuthFailureAction,
+  CheckAuthRequestAction,
+  CheckAuthSuccessAction,
   LogInRequestAction,
   LogInSuccessAction,
-  ResetAuthStateAction,
+  LogOutRequestAction,
+  LogOutSuccessAction,
+  SignInSuccessAction,
 } from './types';
+
+const signInSuccess = (): SignInSuccessAction => ({
+  type: SIGN_IN_SUCCESS,
+  payload: null,
+});
 
 const logInRequest = (payload: User): LogInRequestAction => ({
   type: LOG_IN_REQUEST,
@@ -20,17 +35,47 @@ const logInRequest = (payload: User): LogInRequestAction => ({
 
 const logInSuccess = (): LogInSuccessAction => ({
   type: LOG_IN_SUCCESS,
-  payload: true,
-});
-
-const logInFailure = (payload: string): LogInFailureAction => ({
-  type: LOG_IN_FAILURE,
-  payload,
-});
-
-const resetAuthState = (): ResetAuthStateAction => ({
-  type: RESET_AUTH_STATE,
   payload: null,
 });
 
-export { logInFailure, logInRequest, logInSuccess, resetAuthState };
+const logOutRequest = (): LogOutRequestAction => ({
+  type: LOG_OUT_REQUEST,
+  payload: null,
+});
+
+const logOutSuccess = (): LogOutSuccessAction => ({
+  type: LOG_OUT_SUCCESS,
+  payload: null,
+});
+
+const checkAuthRequest = (): CheckAuthRequestAction => ({
+  type: CHECK_AUTH_REQUEST,
+  payload: null,
+});
+
+const checkAuthSuccess = (payload: boolean): CheckAuthSuccessAction => ({
+  type: CHECK_AUTH_SUCCESS,
+  payload,
+});
+
+const authFailure = (payload: string): AuthFailureAction => ({
+  type: AUTH_FAILURE,
+  payload,
+});
+
+const authClear = (): AuthClearAction => ({
+  type: AUTH_CLEAR,
+  payload: null,
+});
+
+export {
+  authClear,
+  authFailure,
+  checkAuthRequest,
+  checkAuthSuccess,
+  logInRequest,
+  logInSuccess,
+  logOutRequest,
+  logOutSuccess,
+  signInSuccess,
+};

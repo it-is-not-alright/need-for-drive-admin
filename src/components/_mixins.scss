@@ -7,10 +7,10 @@
   box-shadow: 0 0.25rem 0.5rem c.$black-coral; 
 }
 
-@mixin spinner($color, $size) {
+@mixin spinner($color, $size, $width) {
   width: $size;
   height: $size;
-  border-width: 0.1rem;
+  border-width: $width;
   border-style: solid;
   border-color: $color;
   border-bottom-color: transparent;

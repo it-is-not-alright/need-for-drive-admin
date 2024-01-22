@@ -1,23 +1,57 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { logIn } from '~/src/api/actions/auth';
+import { AuthService } from '~/src/api/services/auth';
 
-import { logInFailure, logInSuccess, resetAuthState } from '../actions/auth';
+import {
+  authClear,
+  authFailure,
+  checkAuthSuccess,
+  logInSuccess,
+  logOutSuccess,
+  signInSuccess,
+} from '../actions/auth';
 import { LogInRequestAction } from '../actions/types';
-import { LOG_IN_REQUEST, RESET_AUTH_STATE } from '../constants';
+import {
+  AUTH_CLEAR,
+  CHECK_AUTH_REQUEST,
+  LOG_IN_REQUEST,
+  LOG_OUT_REQUEST,
+  SIGN_IN_SUCCESS,
+} from '../constants';
 
 function* logInWorker(action: LogInRequestAction): Generator {
   try {
-    yield call(logIn, action.payload);
+    yield call(AuthService.logIn, action.payload);
     yield put(logInSuccess());
   } catch (error) {
-    yield put(logInFailure(error.message));
+    yield put(authFailure(error.message));
   }
 }
 
-function* logInWatcher(): Generator {
-  yield takeLatest(LOG_IN_REQUEST, logInWorker);
-  yield takeLatest(RESET_AUTH_STATE, resetAuthState);
+function* logOutWorker(): Generator {
+  try {
+    yield call(AuthService.logOut);
+    yield put(logOutSuccess());
+  } catch (error) {
+    yield put(authFailure(error.message));
+  }
 }
 
-export { logInWatcher };
+function* checkAuthWorker(): Generator {
+  try {
+    const result = (yield call(AuthService.checkAuth)) as boolean;
+    yield put(checkAuthSuccess(result));
+  } catch (error) {
+    yield put(authFailure(error.message));
+  }
+}
+
+function* authWatcher(): Generator {
+  yield takeLatest(SIGN_IN_SUCCESS, signInSuccess);
+  yield takeLatest(LOG_IN_REQUEST, logInWorker);
+  yield takeLatest(LOG_OUT_REQUEST, logOutWorker);
+  yield takeLatest(CHECK_AUTH_REQUEST, checkAuthWorker);
+  yield takeLatest(AUTH_CLEAR, authClear);
+}
+
+export { authWatcher };

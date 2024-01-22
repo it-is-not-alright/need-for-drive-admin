@@ -2,8 +2,10 @@ import './style.scss';
 
 import classNames from 'classnames';
 import React, { useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import AccountImage from '~/assets/images/account.png';
+import { logOutRequest } from '~/src/redux/actions/auth';
 
 import Badge from '../../common/Badge/Badge';
 import { BadgeType } from '../../common/Badge/types';
@@ -11,6 +13,7 @@ import Icon from '../../common/Icon/Icon';
 import { NUM_OF_NOTIFICATIONS } from '../constants';
 
 function Dropdown() {
+  const dispatch = useDispatch();
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const dropdown = useRef<HTMLDivElement>();
   const classList = classNames('dropdown', { 'dropdown-expanded': isExpanded });
@@ -35,6 +38,10 @@ function Dropdown() {
     window.addEventListener('click', collapse);
   };
 
+  const handleLogOutItemClick = () => {
+    dispatch(logOutRequest());
+  };
+
   return (
     <div className={classList} ref={dropdown}>
       <button
@@ -56,7 +63,11 @@ function Dropdown() {
           Уведомления
           <Badge value={NUM_OF_NOTIFICATIONS} type={BadgeType.Pill} />
         </button>
-        <button type="button" className="dropdown__item fs-1">
+        <button
+          type="button"
+          className="dropdown__item fs-1"
+          onClick={handleLogOutItemClick}
+        >
           Выход
         </button>
       </div>

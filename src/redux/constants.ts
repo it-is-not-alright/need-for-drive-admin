@@ -1,11 +1,13 @@
-const REQUEST = 'REQUEST';
-const SUCCESS = 'SUCCESS';
-const FAILURE = 'FAILURE';
-const RESET = 'RESET';
+export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
 
-const LOG_IN = 'LOG_IN';
+export const LOG_IN_REQUEST = 'LOG_IN_REQUEST';
+export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
 
-export const LOG_IN_REQUEST = `${LOG_IN}_${REQUEST}`;
-export const LOG_IN_SUCCESS = `${LOG_IN}_${SUCCESS}`;
-export const LOG_IN_FAILURE = `${LOG_IN}_${FAILURE}`;
-export const RESET_AUTH_STATE = `$${RESET}_AUTH_STATE`;
+export const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST';
+export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
+
+export const CHECK_AUTH_REQUEST = 'CHECK_AUTH_REQUEST';
+export const CHECK_AUTH_SUCCESS = 'CHECK_AUTH_SUCCESS';
+
+export const AUTH_FAILURE = 'AUTH_FAILURE';
+export const AUTH_CLEAR = 'AUTH_CLEAR';

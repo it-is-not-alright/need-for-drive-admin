@@ -5,13 +5,8 @@ import React from 'react';
 import Dropdown from './Dropdown/Dropdown';
 import NotificationButton from './NotificationButton/NotificationButton';
 import SearchBar from './SearchBar/SearchBar';
-import { HeaderProps } from './types';
 
-function Header({ isDisplayed }: HeaderProps) {
-  if (!isDisplayed) {
-    return null;
-  }
-
+function Header() {
   return (
     <header>
       <SearchBar />

@@ -1,34 +1,49 @@
-import { LogInAction } from '../actions/types';
+import { AuthAction } from '../actions/types';
 import {
-  LOG_IN_FAILURE,
+  AUTH_CLEAR,
+  AUTH_FAILURE,
+  CHECK_AUTH_REQUEST,
+  CHECK_AUTH_SUCCESS,
   LOG_IN_REQUEST,
   LOG_IN_SUCCESS,
-  RESET_AUTH_STATE,
+  LOG_OUT_REQUEST,
+  LOG_OUT_SUCCESS,
+  SIGN_IN_SUCCESS,
 } from '../constants';
-import { RequestState } from './types';
+import { AuthState } from './types';
 
-const initialState: RequestState<boolean> = {
-  data: null,
+const initialState: AuthState = {
+  logInSuccess: false,
+  signInSuccess: false,
+  authorized: null,
   pending: false,
   error: null,
 };
 
-const authReducer = (
-  state: RequestState<boolean> = initialState,
-  action: LogInAction = null,
-): RequestState<boolean> => {
+const checkAuthReducer = (
+  state: AuthState = initialState,
+  action: AuthAction = null,
+): AuthState => {
   switch (action.type) {
+    case SIGN_IN_SUCCESS:
+      return { ...initialState, signInSuccess: true };
     case LOG_IN_REQUEST:
+    case LOG_OUT_REQUEST:
+    case CHECK_AUTH_REQUEST:
       return { ...state, pending: true };
     case LOG_IN_SUCCESS:
-      return { ...state, data: action.payload, pending: false };
-    case LOG_IN_FAILURE:
+      return { ...state, logInSuccess: true, authorized: true, pending: false };
+    case LOG_OUT_SUCCESS:
+      return { ...state, authorized: false, pending: false };
+    case CHECK_AUTH_SUCCESS:
+      return { ...state, authorized: action.payload, pending: false };
+    case AUTH_FAILURE:
       return { ...state, pending: false, error: action.payload };
-    case RESET_AUTH_STATE:
-      return initialState;
+    case AUTH_CLEAR:
+      return { ...initialState, authorized: state.authorized };
     default:
       return state;
   }
 };
 
-export default authReducer;
+export default checkAuthReducer;

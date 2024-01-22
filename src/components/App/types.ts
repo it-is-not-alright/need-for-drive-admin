@@ -1,9 +1,9 @@
 enum AppRoute {
-  Main = '/',
   LogIn = '/login',
   SignIn = '/signin',
-  Orders = '/order',
   Any = '*',
+  Main = '/',
+  Orders = '/orders',
 }
 
 export { AppRoute };

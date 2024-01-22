@@ -3,11 +3,11 @@ import './style.scss';
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import BrandForm from '~/comp/common/BrandForm/BrandForm';
 import TextInput from '~/comp/common/TextInput/TextInput';
-import { logInRequest, resetAuthState } from '~/src/redux/actions/auth';
+import { authClear, logInRequest } from '~/src/redux/actions/auth';
 import { authSelector } from '~/src/redux/selectors/auth';
 import { ValueWrapper } from '~/src/validation/types';
 import Validator from '~/src/validation/validator';
@@ -18,7 +18,6 @@ import {
   initEmail,
   initPassword,
   passwordScheme,
-  SIGN_IN_PARAM,
 } from '../constants';
 
 function LogInPage() {
@@ -27,20 +26,11 @@ function LogInPage() {
   const authState = useSelector(authSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [params] = useSearchParams();
-  const signInIsSuccess = params.get(SIGN_IN_PARAM) === 'true';
 
   useEffect(() => {
-    dispatch(resetAuthState());
-  }, []);
-
-  useEffect(() => {
-    if (authState.error && authState.error !== '401') {
-      dispatch(resetAuthState());
-      throw new Error(authState.error);
-    } else if (authState.data) {
-      dispatch(resetAuthState());
-      navigate(AppRoute.Orders);
+    if (authState.logInSuccess) {
+      dispatch(authClear());
+      navigate(AppRoute.Main);
     }
   }, [authState]);
 
@@ -90,7 +80,7 @@ function LogInPage() {
           onChange={handlePasswordChange}
         />
       </BrandForm>
-      {(signInIsSuccess || authState.error) && (
+      {(authState.signInSuccess || authState.error) && (
         <div
           id="log-in-page__alert"
           className={classNames({ error: authState.error })}

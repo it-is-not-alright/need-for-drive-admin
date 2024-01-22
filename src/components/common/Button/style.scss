@@ -23,7 +23,7 @@ button.simple-btn {
       content: '';
       inset: 0;
 
-      @include m.spinner(c.$white, 1em);
+      @include m.spinner(c.$white, 1em, 0.1em);
     }
 
     p {
