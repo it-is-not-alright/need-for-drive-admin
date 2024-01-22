@@ -1,10 +1,17 @@
-import { clearTokenData, saveTokenData } from '~/src/api/storage-util';
+import {
+  clearTokenData,
+  getAccessToken,
+  saveTokenData,
+} from '~/src/api/storage-util';
 
 import { apiRequest } from '..';
 import { ApiUrl, AuthData, User } from '../types';
 
 class AuthService {
   static async logIn(user: User) {
+    if (getAccessToken() !== '') {
+      AuthService.logOut();
+    }
     const authData = await apiRequest.post<User, AuthData>(
       ApiUrl.LogIn,
       user,
@@ -26,8 +33,7 @@ class AuthService {
   }
 
   static async logOut() {
-    const data = await apiRequest.post<null, unknown>(ApiUrl.LogOut, null);
-    console.log(data);
+    await apiRequest.post<null, unknown>(ApiUrl.LogOut, null);
     clearTokenData();
   }
 }

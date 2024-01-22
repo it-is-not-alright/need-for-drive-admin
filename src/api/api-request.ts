@@ -12,11 +12,14 @@ class ApiRequest {
   private async request<T>(url: string, init: RequestInit): Promise<T> {
     const fullUrl = `${this.baseUrl}/${url}`;
     const response = await fetch(fullUrl, init);
-    const result = await response.json();
     if (!response.ok) {
       throw new Error(String(response.status));
     }
-    return result;
+    const contentType = response.headers.get('content-type');
+    if (contentType?.includes('application/json')) {
+      return response.json();
+    }
+    return null;
   }
 
   private async authRequest<T>(url: string, init: RequestInit): Promise<T> {

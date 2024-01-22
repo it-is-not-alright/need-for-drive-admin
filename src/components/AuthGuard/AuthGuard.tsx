@@ -2,13 +2,11 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import {
-  checkAuthRequest,
-  checkAuthReset,
-} from '~/src/redux/actions/check-auth';
-import { checkAuthSelector } from '~/src/redux/selectors/check-auth';
+import { authClear, checkAuthRequest } from '~/src/redux/actions/auth';
+import { authSelector } from '~/src/redux/selectors/auth';
 
 import { AppRoute } from '../App/types';
+import Spinner from '../common/Spinner/Spinner';
 import { AuthGuardProps } from './types';
 import { isPrivateRoute } from './util';
 
@@ -16,28 +14,34 @@ function AuthGuard({ children }: AuthGuardProps) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const checkAuthState = useSelector(checkAuthSelector);
+  const authState = useSelector(authSelector);
+  const routeIsPrivate = isPrivateRoute(location.pathname);
+
+  const checkAuth = () => {
+    dispatch(checkAuthRequest());
+  };
 
   useEffect(() => {
-    dispatch(checkAuthRequest());
+    checkAuth();
+    window.addEventListener('storage', checkAuth);
+    return () => window.removeEventListener('storage', checkAuth);
   }, []);
 
   useEffect(() => {
-    if (checkAuthState.error) {
-      dispatch(checkAuthReset());
-      throw new Error(checkAuthState.error);
-    } else if (checkAuthState.data === false) {
-      dispatch(checkAuthReset());
+    if (authState.error && authState.error !== '401') {
+      dispatch(authClear());
+      throw new Error(authState.error);
+    } else if (authState.authorized === false && routeIsPrivate) {
       navigate(AppRoute.LogIn);
     }
-  }, [checkAuthState]);
+  }, [authState, routeIsPrivate]);
 
-  if (checkAuthState.pending) {
-    return <p>loading...</p>;
+  if (!routeIsPrivate) {
+    return children;
   }
 
-  if (!isPrivateRoute(location.pathname)) {
-    return children;
+  if (authState.pending) {
+    return <Spinner />;
   }
 
   return children;

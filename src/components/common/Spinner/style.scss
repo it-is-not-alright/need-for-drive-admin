@@ -1,0 +1,15 @@
+@use '~/comp/_colors' as c;
+@use '~/comp/_mixins' as m;
+
+div.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: inherit;
+
+  span.spinner-core {
+    @include m.spinner(c.$green, 3rem, 0.2rem);
+
+    display: block;
+  }
+}

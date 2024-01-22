@@ -1,15 +1,9 @@
-type RequestState<T> = {
-  data: T | null;
-  pending: boolean;
-  error: string | null;
-};
-
 type AuthState = {
-  logIn: boolean;
-  logOut: boolean;
-  authorized: boolean;
+  logInSuccess: boolean;
+  signInSuccess: boolean;
+  authorized: boolean | null;
   pending: boolean;
   error: string | null;
 };
 
-export { AuthState, RequestState };
+export { AuthState };

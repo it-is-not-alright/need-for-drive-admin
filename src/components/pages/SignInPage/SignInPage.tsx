@@ -1,8 +1,10 @@
 import './style.scss';
 
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import { signInSuccess } from '~/src/redux/actions/auth';
 import { ValueWrapper } from '~/src/validation/types';
 import Validator from '~/src/validation/validator';
 
@@ -15,15 +17,15 @@ import {
   initPassword,
   passwordConfirmScheme,
   passwordScheme,
-  SIGN_IN_PARAM,
 } from '../constants';
 
 function SignInPage() {
-  const navigate = useNavigate();
   const [email, setEmail] = useState<ValueWrapper>(initEmail);
   const [password, setPassword] = useState<ValueWrapper>(initPassword);
   const [passwordConfirm, setPasswordConfirm] =
     useState<ValueWrapper>(initPassword);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const formOnSubmit = () => {
     const validator = new Validator();
@@ -32,8 +34,8 @@ function SignInPage() {
     passwordConfirmScheme.pattern.target = new RegExp(`^${password.value}$`);
     setPasswordConfirm(validator.check(passwordConfirmScheme, passwordConfirm));
     if (validator.ok) {
-      const url = `${AppRoute.LogIn}?${SIGN_IN_PARAM}=true`;
-      navigate(url);
+      dispatch(signInSuccess());
+      navigate(AppRoute.LogIn);
     }
   };
 
@@ -63,6 +65,7 @@ function SignInPage() {
         linkHref={AppRoute.LogIn}
         buttonLabel="Отправить"
         onSubmit={formOnSubmit}
+        pending={false}
       >
         <TextInput
           title="Почта"

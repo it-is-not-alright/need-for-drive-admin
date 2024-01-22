@@ -1,10 +1,9 @@
 import { all, fork } from 'redux-saga/effects';
 
-import { checkAuthWatcher } from './check-auth';
-import { logInWatcher } from './log-in';
+import { authWatcher } from './auth';
 
 function* rootSaga(): Generator {
-  yield all([fork(logInWatcher), fork(checkAuthWatcher)]);
+  yield all([fork(authWatcher)]);
 }
 
 export default rootSaga;

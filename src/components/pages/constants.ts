@@ -1,7 +1,5 @@
 import { Scheme, ValueWrapper } from '~/src/validation/types';
 
-const SIGN_IN_PARAM = 'sign-in';
-
 const initEmail: ValueWrapper = {
   value: '',
   error: '',
@@ -47,5 +45,4 @@ export {
   initPassword,
   passwordConfirmScheme,
   passwordScheme,
-  SIGN_IN_PARAM,
 };
