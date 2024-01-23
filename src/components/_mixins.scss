@@ -1,4 +1,4 @@
-@use './colors' as c;
+@use '~/comp/_colors' as c;
 @use '~/comp/_dimensions' as d;
 
 @mixin card($border-radius: 0.75rem) {
@@ -36,7 +36,12 @@
   }
 }
 
-@mixin interactive {
+@mixin interactive($background-color: c.$white) {
+  background-color: $background-color;
+  transition-duration: 0.2s;
+  transition-property: filter;
+  user-select: none;
+
   &:hover {
     filter: brightness(90%);
   }
@@ -44,13 +49,16 @@
   &:active {
     filter: brightness(80%);
   }
-
-  transition-duration: 0.2s;
-  transition-property: filter;
 }
 
 @mixin on-non-mobile {
   @media (min-width: d.$tablet) {
+    @content;
+  }
+}
+
+@mixin on-non-tablet {
+  @media (min-width: d.$desktop-mini) {
     @content;
   }
 }

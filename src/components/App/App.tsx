@@ -1,5 +1,4 @@
 import './style.scss';
-import '~/assets/fonts/helvetica/style.scss';
 import '~/assets/fonts/roboto/style.scss';
 import '~/assets/fonts/poppins/style.scss';
 
@@ -10,10 +9,13 @@ import AuthGuard from '../AuthGuard/AuthGuard';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import LogInPage from '../pages/LogInPage/LogInPage';
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
-import { AppRoute } from './types';
+import RouteUtil from './route-util';
 
 const SignInPage = lazy(() => import('../pages/SignInPage/SignInPage'));
-const OrdersPage = lazy(() => import('../pages/OrdersPage/OrdersPage'));
+const OrderListPage = lazy(
+  () => import('../pages/OrderListPage/OrderListPage'),
+);
+const CarListPage = lazy(() => import('../pages/CarListPage/CarListPage'));
 
 function App() {
   return (
@@ -22,11 +24,12 @@ function App() {
         <main>
           <Suspense>
             <Routes>
-              <Route path={AppRoute.Main} element={<OrdersPage />} />
-              <Route path={AppRoute.LogIn} element={<LogInPage />} />
-              <Route path={AppRoute.SignIn} element={<SignInPage />} />
-              <Route path={AppRoute.Orders} element={<OrdersPage />} />
-              <Route path={AppRoute.Any} element={<NotFoundPage />} />
+              <Route path={RouteUtil.main.path} element={<OrderListPage />} />
+              <Route path={RouteUtil.logIn.path} element={<LogInPage />} />
+              <Route path={RouteUtil.signIn.path} element={<SignInPage />} />
+              <Route path={RouteUtil.orders.path} element={<OrderListPage />} />
+              <Route path={RouteUtil.cars.path} element={<CarListPage />} />
+              <Route path={RouteUtil.any.path} element={<NotFoundPage />} />
             </Routes>
           </Suspense>
         </main>

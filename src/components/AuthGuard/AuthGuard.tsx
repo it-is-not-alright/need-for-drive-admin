@@ -5,18 +5,19 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { authClear, checkAuthRequest } from '~/src/redux/actions/auth';
 import { authSelector } from '~/src/redux/selectors/auth';
 
-import { AppRoute } from '../App/types';
+import RouteUtil from '../App/route-util';
 import Spinner from '../common/Spinner/Spinner';
+import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
+import SideBar from '../SideBar/SideBar';
 import { AuthGuardProps } from './types';
-import { isPrivateRoute } from './util';
 
 function AuthGuard({ children }: AuthGuardProps) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const authState = useSelector(authSelector);
-  const routeIsPrivate = isPrivateRoute(location.pathname);
+  const routeIsPrivate = RouteUtil.isPrivate(location.pathname);
 
   const checkAuth = () => {
     dispatch(checkAuthRequest());
@@ -33,7 +34,7 @@ function AuthGuard({ children }: AuthGuardProps) {
       dispatch(authClear());
       throw new Error(authState.error);
     } else if (authState.authorized === false && routeIsPrivate) {
-      navigate(AppRoute.LogIn);
+      navigate(RouteUtil.logIn.path);
     }
   }, [authState, routeIsPrivate]);
 
@@ -51,8 +52,10 @@ function AuthGuard({ children }: AuthGuardProps) {
 
   return (
     <>
+      <SideBar />
       <Header />
       {children}
+      <Footer />
     </>
   );
 }

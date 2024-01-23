@@ -1,9 +1,7 @@
-enum AppRoute {
-  LogIn = '/login',
-  SignIn = '/signin',
-  Any = '*',
-  Main = '/',
-  Orders = '/orders',
-}
+type AppRoute = {
+  path: string;
+  private: boolean;
+  proxy?: string;
+};
 
 export { AppRoute };

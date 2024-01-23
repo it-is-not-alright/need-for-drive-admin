@@ -12,7 +12,7 @@ import { authSelector } from '~/src/redux/selectors/auth';
 import { ValueWrapper } from '~/src/validation/types';
 import Validator from '~/src/validation/validator';
 
-import { AppRoute } from '../../App/types';
+import RouteUtil from '../../App/route-util';
 import {
   emailScheme,
   initEmail,
@@ -30,7 +30,7 @@ function LogInPage() {
   useEffect(() => {
     if (authState.logInSuccess) {
       dispatch(authClear());
-      navigate(AppRoute.Main);
+      navigate(RouteUtil.main.path);
     }
   }, [authState]);
 
@@ -61,7 +61,7 @@ function LogInPage() {
       <BrandForm
         title="Вход"
         linkLabel="Регистрация"
-        linkHref={AppRoute.SignIn}
+        linkHref={RouteUtil.signIn.path}
         buttonLabel="Войти"
         onSubmit={formOnSubmit}
         pending={authState.pending}
@@ -85,7 +85,7 @@ function LogInPage() {
           id="log-in-page__alert"
           className={classNames({ error: authState.error })}
         >
-          <p className="fs-2">
+          <p className="fs-3">
             {authState.error
               ? 'Неправильное имя пользователя или пароль. Попробуйте еще раз.'
               : 'Регистрация пройдена успешно.'}

@@ -1,0 +1,78 @@
+@use '~/comp/_colors' as c;
+@use '~/comp/_mixins' as m;
+@use '~/comp/_dimensions' as d;
+
+$icon-size: 1.4rem;
+
+div.side-bar {
+  position: relative;
+  background-color: c.$white;
+  border-right: 1px solid c.$light-periwinkle;
+  box-shadow: 0 0.25rem 0.5rem c.$black-coral;
+
+  @include m.on-non-mobile {
+    z-index: 1;
+    border-right: 0;
+    box-shadow: 0.3rem 0 0.5rem c.$black-coral;
+  };
+
+  button.side-bar__toggle {
+    @include m.interactive;
+
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+    padding: 1.1rem;
+
+    @include m.on-non-mobile {
+      padding: 1.35rem;
+    };
+
+    div {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+
+      p {
+        display: none;
+      }
+  
+      svg {
+        width: $icon-size;
+        height: $icon-size;
+      }
+    }
+  }
+
+  div.side-bar__menu {
+    position: absolute;
+    display: none;
+    width: 100vw;
+    background-color: inherit;
+    box-shadow: 0 0.25rem 0.5rem c.$black-coral;
+
+    @include m.on-non-mobile {
+      position: static;
+      width: 16rem;
+      height: auto;
+      box-shadow: none;
+    };
+  }
+
+  &.side-bar-expanded {
+    button.side-bar__toggle {
+      height: auto;
+
+      p {
+        @include m.on-non-mobile {
+          display: block;
+        };
+      }
+    }
+
+    div.side-bar__menu {
+      display: block;
+    }
+  }
+}

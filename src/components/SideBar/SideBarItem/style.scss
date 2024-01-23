@@ -1,0 +1,43 @@
+@use '~/comp/_colors' as c;
+@use '~/comp/_mixins' as m;
+@use '~/comp/_dimensions' as d;
+
+$icon-size: 0.9rem;
+
+a.side-bar__item {
+  @include m.interactive;
+
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  font-size: d.$fs-2;
+  border-top: solid 1px c.$dark-blue-gray;
+  border-left: solid 0.3rem transparent;
+
+  &:last-child {
+    border-bottom: solid 1px c.$dark-blue-gray;
+  }
+
+  svg {
+    width: $icon-size;
+    height: $icon-size;
+    fill: c.$light-periwinkle;
+  }
+
+  p {
+    color: c.$police-blue;
+  }
+
+  &.side-bar__item-active {
+    border-left-color: c.$blue;
+
+    svg {
+      fill: c.$blue;
+    }
+
+    p {
+      color: c.$blue;
+    }
+  }
+}

@@ -16,7 +16,7 @@ function Dropdown() {
   const dispatch = useDispatch();
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const dropdown = useRef<HTMLDivElement>();
-  const classList = classNames('dropdown', { 'dropdown-expanded': isExpanded });
+  const classes = classNames('dropdown', { 'dropdown-expanded': isExpanded });
 
   const handleToggleClick = () => {
     if (isExpanded) {
@@ -43,7 +43,7 @@ function Dropdown() {
   };
 
   return (
-    <div className={classList} ref={dropdown}>
+    <div className={classes} ref={dropdown}>
       <button
         className="dropdown__toggle"
         type="button"

@@ -1,0 +1,26 @@
+@use '~/comp/_colors' as c;
+@use '~/comp/_mixins' as m;
+@use '~/comp/_dimensions' as d;
+@use '~/assets/fonts/_families' as f;
+
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: c.$white;
+
+  @include m.on-non-mobile {
+    padding: 1.5rem;
+  };
+
+  a, p {
+    font-size: d.$fs-1;
+  }
+
+  p {
+    color: c.$shadow-blue;
+    font-weight: 500;
+  }
+}

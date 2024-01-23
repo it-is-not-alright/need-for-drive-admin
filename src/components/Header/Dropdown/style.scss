@@ -1,8 +1,7 @@
 @use '~/comp/_colors' as c;
 @use '~/comp/_mixins' as m;
 
-$img-size: 2.5rem;
-$icon-size: 0.75rem;
+$icon-size: 0.7rem;
 
 div.dropdown {
   position: relative;
@@ -11,10 +10,10 @@ div.dropdown {
     @include m.interactive;
 
     display: flex;
+    gap: 1rem;
     align-items: center;
     width: inherit;
     padding: 0.8rem;
-    background-color: c.$white;
   
     @include m.on-non-mobile {
       padding: 0.8rem 1.5rem;
@@ -25,9 +24,14 @@ div.dropdown {
       
       img {
         display: block;
-        width: $img-size;
-        height: $img-size;
+        width: 2rem;
+        height: 2rem;
         border-radius: 50%;
+
+        @include m.on-non-mobile {
+          width: 2.5rem;
+          height: 2.5rem;
+        }
       }
   
       span.badge {
@@ -44,13 +48,12 @@ div.dropdown {
         display: flex;
         gap: 2rem;
         align-items: center;
-        margin-left: 1rem;
       };
     
       svg {
         width: $icon-size;
         height: $icon-size;
-        fill: c.$shadow-blue;
+        fill: c.$cadet-blue;
       }
     }
   }
@@ -61,8 +64,10 @@ div.dropdown {
     position: absolute;
     top: 100%;
     right: 0;
+    z-index: 2;
     display: block;
     width: max-content;
+    min-width: calc(100% - 1rem);
     max-width: calc(100vw - 1rem);
     margin: 0.5rem;
     padding: 0.5rem 0;
@@ -79,7 +84,6 @@ div.dropdown {
       width: 100%;
       padding: 0.5rem 1rem;
       background-color: c.$white;
-      user-select: none;
 
       &:first-child {
         @include m.on-non-mobile {

@@ -24,12 +24,14 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     const { errorCode } = this.state;
     if (errorCode) {
       return (
-        <ErrorPage
-          status={errorCode}
-          title="Что-то пошло не так"
-          message="Попробуйте перезагрузить страницу"
-          reset={this.reset}
-        />
+        <main>
+          <ErrorPage
+            status={errorCode}
+            title="Что-то пошло не так"
+            message="Попробуйте перезагрузить страницу"
+            reset={this.reset}
+          />
+        </main>
       );
     }
     const { children } = this.props;

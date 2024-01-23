@@ -8,7 +8,7 @@ import { signInSuccess } from '~/src/redux/actions/auth';
 import { ValueWrapper } from '~/src/validation/types';
 import Validator from '~/src/validation/validator';
 
-import { AppRoute } from '../../App/types';
+import RouteUtil from '../../App/route-util';
 import BrandForm from '../../common/BrandForm/BrandForm';
 import TextInput from '../../common/TextInput/TextInput';
 import {
@@ -35,7 +35,7 @@ function SignInPage() {
     setPasswordConfirm(validator.check(passwordConfirmScheme, passwordConfirm));
     if (validator.ok) {
       dispatch(signInSuccess());
-      navigate(AppRoute.LogIn);
+      navigate(RouteUtil.logIn.path);
     }
   };
 
@@ -62,7 +62,7 @@ function SignInPage() {
       <BrandForm
         title="Регистрация"
         linkLabel="Вход"
-        linkHref={AppRoute.LogIn}
+        linkHref={RouteUtil.logIn.path}
         buttonLabel="Отправить"
         onSubmit={formOnSubmit}
         pending={false}

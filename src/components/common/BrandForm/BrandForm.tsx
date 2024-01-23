@@ -21,10 +21,10 @@ function BrandForm({
     <form className="brand-form">
       <div className="brand-form__logo">
         <Icon id="logo" width="45" height="45" />
-        <p className="police-blue fs-4">Need for drive</p>
+        <p className="police-blue fs-5">Need for drive</p>
       </div>
       <div className="brand-form__body">
-        <div className="brand-form__header police-blue fs-3">{title}</div>
+        <div className="brand-form__header police-blue fs-4">{title}</div>
         <div className="brand-form__main">{children}</div>
         <div className="brand-form__footer">
           <Link to={linkHref}>{linkLabel}</Link>
