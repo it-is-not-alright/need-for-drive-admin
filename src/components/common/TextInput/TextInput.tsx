@@ -21,8 +21,7 @@ function TextInput({
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = event.target.value.slice(0, maxLength);
-    onChange(newValue);
+    onChange(event.target.value);
   };
 
   return (
@@ -34,6 +33,7 @@ function TextInput({
           className="police-blue"
           value={value}
           onChange={(event) => handleChange(event)}
+          maxLength={maxLength}
         />
         {isSecure && (
           <button
