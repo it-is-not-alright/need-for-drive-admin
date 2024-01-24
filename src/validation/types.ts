@@ -1,25 +1,47 @@
-type ValueWrapper = {
-  value: string;
-  error: string;
-};
-
-type Restriction<T> = {
+type Rule<T> = {
   target: T;
   message: string;
 };
 
-type Scheme = {
-  minLen?: Restriction<number>;
-  maxLen?: Restriction<number>;
-  pattern?: Restriction<RegExp>;
+type RuleSet = {
+  minLen?: Rule<number>;
+  pattern?: Rule<RegExp>;
 };
 
-type Inspector<T> = (value: string, target: T) => boolean;
+type RuleTarget = RuleSet[keyof RuleSet]['target'];
 
-type InspectorMap = {
-  minLen: Inspector<number>;
-  maxLen: Inspector<number>;
-  pattern: Inspector<RegExp>;
+type Checker<T extends RuleTarget> = (value: unknown, target: T) => boolean;
+
+type CheckerSet = {
+  [K in keyof RuleSet]-?: Checker<RuleSet[K]['target']>;
 };
 
-export { Inspector, InspectorMap, Restriction, Scheme, ValueWrapper };
+type Scheme<T extends object> = {
+  [K in keyof T]?: RuleSet;
+};
+
+type ValidatableProp<T> = {
+  value: T;
+  error: string;
+};
+
+type Validatable<T extends object> = {
+  [K in keyof T]: ValidatableProp<T[K]>;
+};
+
+type ValidationResult<T extends object> = {
+  data: Validatable<T>;
+  failure: boolean;
+};
+
+export {
+  Checker,
+  CheckerSet,
+  Rule,
+  RuleSet,
+  RuleTarget,
+  Scheme,
+  Validatable,
+  ValidatableProp,
+  ValidationResult,
+};

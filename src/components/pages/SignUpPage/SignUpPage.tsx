@@ -1,25 +1,28 @@
 import './style.scss';
 
 import React, { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
+import { AppRoute } from '~/comp/App/types';
 import validate from '~/src/validation/validate';
 
 import AuthForm from '../../common/AuthForm/AuthForm';
 import { SIGN_UP_PARAM } from '../constants';
-import { initLogInFormData, logInDataScheme } from './constants';
+import { initSignUpFormData, signUpDataScheme } from './constants';
 
-function LogInPage() {
-  const [formData, setFormData] = useState(initLogInFormData);
-  const [params] = useSearchParams();
-  const signUpIsSuccess = params.get(SIGN_UP_PARAM) === 'true';
+function SignUpPage() {
+  const [formData, setFormData] = useState(initSignUpFormData);
+  const navigate = useNavigate();
 
   const handleFormSubmit = () => {
-    const { data, failure } = validate(formData, logInDataScheme);
+    const confirmPattern = new RegExp(`^${formData.password.value}$`);
+    signUpDataScheme.passwordConfirm.pattern.target = confirmPattern;
+    const { data, failure } = validate(formData, signUpDataScheme);
     if (failure) {
       setFormData(data);
     } else {
-      // post request
+      const url = `${AppRoute.LogIn}?${SIGN_UP_PARAM}=true`;
+      navigate(url);
     }
   };
 
@@ -34,20 +37,16 @@ function LogInPage() {
   };
 
   return (
-    <div id="log-in-page" className="page">
+    <div id="sign-up-page" className="page">
       <AuthForm
         onSubmit={handleFormSubmit}
         email={formData.email}
         password={formData.password}
+        passwordConfirm={formData.passwordConfirm}
         onInputChange={handleInputChange}
       />
-      {signUpIsSuccess && (
-        <div id="log-in-page__sign-up-alert">
-          <p className="fs-2">Регистрация пройдена успешно</p>
-        </div>
-      )}
     </div>
   );
 }
 
-export default LogInPage;
+export default SignUpPage;

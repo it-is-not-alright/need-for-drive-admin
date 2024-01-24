@@ -8,10 +8,11 @@ import { TextInputProps } from './types';
 
 function TextInput({
   title,
-  isSecure = false,
   value,
   error,
   onChange,
+  isSecure = false,
+  maxLength,
 }: TextInputProps) {
   const [hidden, setHidden] = useState<boolean>(isSecure);
 
@@ -28,7 +29,7 @@ function TextInput({
           className="police-blue"
           value={value}
           onChange={onChange}
-          tabIndex={0}
+          maxLength={maxLength}
         />
         {isSecure && (
           <button
