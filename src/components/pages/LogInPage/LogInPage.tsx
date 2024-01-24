@@ -23,13 +23,10 @@ function LogInPage() {
     }
   };
 
-  const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    prop: string,
-  ) => {
+  const handleInputChange = (value: string, prop: string) => {
     setFormData({
       ...formData,
-      [prop]: { value: event.target.value, error: '' },
+      [prop]: { value, error: '' },
     });
   };
 

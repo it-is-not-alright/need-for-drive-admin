@@ -2,7 +2,7 @@ type TextInputProps = {
   title: string;
   value: string;
   error: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (value: string) => void;
   isSecure?: boolean;
   maxLength?: number;
 };

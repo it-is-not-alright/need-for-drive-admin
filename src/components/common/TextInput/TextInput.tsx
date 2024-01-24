@@ -20,6 +20,11 @@ function TextInput({
     setHidden(!hidden);
   };
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = event.target.value.slice(0, maxLength);
+    onChange(newValue);
+  };
+
   return (
     <>
       <p className="fs-1 gray">{title}</p>
@@ -28,8 +33,7 @@ function TextInput({
           type={hidden ? 'password' : 'text'}
           className="police-blue"
           value={value}
-          onChange={onChange}
-          maxLength={maxLength}
+          onChange={(event) => handleChange(event)}
         />
         {isSecure && (
           <button

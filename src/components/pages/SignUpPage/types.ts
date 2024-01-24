@@ -8,6 +8,6 @@ type SignUpFormFields = {
 
 type SignUpFormData = Validatable<SignUpFormFields>;
 
-type SignUpFormScheme = Scheme<SignUpFormFields>;
+type SignUpFormDataScheme = Scheme<SignUpFormFields>;
 
-export { SignUpFormData, SignUpFormFields, SignUpFormScheme };
+export { SignUpFormData, SignUpFormDataScheme, SignUpFormFields };

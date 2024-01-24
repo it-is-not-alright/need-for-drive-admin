@@ -1,4 +1,4 @@
-import { LogInFormData, LogInFormScheme } from './types';
+import { LogInFormData, LogInFormDataScheme } from './types';
 
 const initLogInFormData: LogInFormData = {
   email: {
@@ -11,7 +11,7 @@ const initLogInFormData: LogInFormData = {
   },
 };
 
-const logInDataScheme: LogInFormScheme = {
+const logInDataScheme: LogInFormDataScheme = {
   email: {
     minLen: {
       target: 1,

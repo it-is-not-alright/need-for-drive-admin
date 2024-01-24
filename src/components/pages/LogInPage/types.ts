@@ -7,6 +7,6 @@ type LogInFormFields = {
 
 type LogInFormData = Validatable<LogInFormFields>;
 
-type LogInFormScheme = Scheme<LogInFormData>;
+type LogInFormDataScheme = Scheme<LogInFormFields>;
 
-export { LogInFormData, LogInFormFields, LogInFormScheme };
+export { LogInFormData, LogInFormDataScheme, LogInFormFields };

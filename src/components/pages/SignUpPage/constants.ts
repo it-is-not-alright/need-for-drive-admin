@@ -1,4 +1,4 @@
-import { SignUpFormData, SignUpFormScheme } from './types';
+import { SignUpFormData, SignUpFormDataScheme } from './types';
 
 const initSignUpFormData: SignUpFormData = {
   email: {
@@ -15,7 +15,7 @@ const initSignUpFormData: SignUpFormData = {
   },
 };
 
-const signUpDataScheme: SignUpFormScheme = {
+const signUpDataScheme: SignUpFormDataScheme = {
   email: {
     minLen: {
       target: 1,

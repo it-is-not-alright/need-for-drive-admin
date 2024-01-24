@@ -33,22 +33,25 @@ function AuthForm({
             title="Почта"
             value={email.value}
             error={email.error}
-            onChange={(event) => onInputChange(event, 'email')}
+            onChange={(value) => onInputChange(value, 'email')}
+            maxLength={150}
           />
           <TextInput
             title="Пароль"
             value={password.value}
             error={password.error}
-            onChange={(event) => onInputChange(event, 'password')}
+            onChange={(value) => onInputChange(value, 'password')}
             isSecure
+            maxLength={150}
           />
           {isSignUp && (
             <TextInput
               title="Подтвердите пароль"
               value={passwordConfirm.value}
               error={passwordConfirm.error}
-              onChange={(event) => onInputChange(event, 'passwordConfirm')}
+              onChange={(value) => onInputChange(value, 'passwordConfirm')}
               isSecure
+              maxLength={150}
             />
           )}
         </div>
