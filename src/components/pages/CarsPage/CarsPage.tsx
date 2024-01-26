@@ -2,7 +2,7 @@ import React from 'react';
 
 import { cars } from './constants';
 
-function CarListPage() {
+function CarsPage() {
   return (
     <div className="page">
       {cars.map((car) => (
@@ -12,4 +12,4 @@ function CarListPage() {
   );
 }
 
-export default CarListPage;
+export default CarsPage;

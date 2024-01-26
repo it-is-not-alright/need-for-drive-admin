@@ -9,7 +9,7 @@ import {
   LOG_IN_SUCCESS,
   LOG_OUT_REQUEST,
   LOG_OUT_SUCCESS,
-  SIGN_IN_SUCCESS,
+  SIGN_UP_SUCCESS,
 } from '../constants';
 import {
   AuthClearAction,
@@ -20,11 +20,11 @@ import {
   LogInSuccessAction,
   LogOutRequestAction,
   LogOutSuccessAction,
-  SignInSuccessAction,
+  SignUpSuccessAction,
 } from './types';
 
-const signInSuccess = (): SignInSuccessAction => ({
-  type: SIGN_IN_SUCCESS,
+const signUpSuccess = (): SignUpSuccessAction => ({
+  type: SIGN_UP_SUCCESS,
   payload: null,
 });
 
@@ -77,5 +77,5 @@ export {
   logInSuccess,
   logOutRequest,
   logOutSuccess,
-  signInSuccess,
+  signUpSuccess,
 };

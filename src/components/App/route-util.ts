@@ -3,40 +3,20 @@ import { matchPath } from 'react-router-dom';
 import { AppRoute } from './types';
 
 class RouteUtil {
-  static logIn: AppRoute = {
-    path: '/login',
-    private: false,
-  };
+  static logIn: AppRoute = { path: '/login' };
 
-  static signIn: AppRoute = {
-    path: '/signin',
-    private: false,
-  };
+  static signUp: AppRoute = { path: '/signup' };
 
-  static any: AppRoute = {
-    path: '*',
-    private: false,
-  };
+  static any: AppRoute = { path: '*' };
 
-  static main: AppRoute = {
-    path: '/',
-    private: false,
-    proxy: '/main',
-  };
+  static main: AppRoute = { path: '/', mirror: '/main' };
 
-  static orders: AppRoute = {
-    path: '/orders',
-    private: false,
-    proxy: '/',
-  };
+  static orders: AppRoute = { path: '/orders', mirror: '/' };
 
-  static cars: AppRoute = {
-    path: '/cars',
-    private: false,
-  };
+  static cars: AppRoute = { path: '/cars' };
 
   static match(route: AppRoute, path: string) {
-    if (route.proxy && matchPath(route.proxy, path)) {
+    if (route.mirror && matchPath(route.mirror, path)) {
       return true;
     }
     return matchPath(route.path, path);

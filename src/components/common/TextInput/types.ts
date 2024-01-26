@@ -1,9 +1,10 @@
 type TextInputProps = {
   title: string;
-  isSecure?: boolean;
   value: string;
   error: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (value: string) => void;
+  isSecure?: boolean;
+  maxLength?: number;
 };
 
 export { TextInputProps };

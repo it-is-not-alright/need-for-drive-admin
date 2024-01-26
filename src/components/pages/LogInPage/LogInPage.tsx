@@ -5,24 +5,16 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import BrandForm from '~/comp/common/BrandForm/BrandForm';
-import TextInput from '~/comp/common/TextInput/TextInput';
+import AuthForm from '~/comp/common/AuthForm/AuthForm';
 import { authClear, logInRequest } from '~/src/redux/actions/auth';
 import { authSelector } from '~/src/redux/selectors/auth';
-import { ValueWrapper } from '~/src/validation/types';
 import Validator from '~/src/validation/validator';
 
 import RouteUtil from '../../App/route-util';
-import {
-  emailScheme,
-  initEmail,
-  initPassword,
-  passwordScheme,
-} from '../constants';
+import { initLogInFormData, logInDataScheme } from './constants';
 
 function LogInPage() {
-  const [email, setEmail] = useState<ValueWrapper>(initEmail);
-  const [password, setPassword] = useState<ValueWrapper>(initPassword);
+  const [formData, setFormData] = useState(initLogInFormData);
   const authState = useSelector(authSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -34,53 +26,36 @@ function LogInPage() {
     }
   }, [authState]);
 
-  const formOnSubmit = () => {
-    const validator = new Validator();
-    setEmail(validator.check(emailScheme, email));
-    setPassword(validator.check(passwordScheme, password));
-    if (validator.ok) {
-      const user = { username: email.value, password: password.value };
+  const handleFormSubmit = () => {
+    const { data, failure } = Validator.check(formData, logInDataScheme);
+    if (failure) {
+      setFormData(data);
+    } else {
+      const user = {
+        username: formData.email.value,
+        password: formData.password.value,
+      };
       dispatch(logInRequest(user));
     }
   };
 
-  const prepare = (value: string): ValueWrapper => {
-    return { value: value.trim(), error: '' };
-  };
-
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(prepare(event.target.value));
-  };
-
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(prepare(event.target.value));
+  const handleInputChange = (value: string, prop: string) => {
+    setFormData({
+      ...formData,
+      [prop]: { value: value.trim(), error: '' },
+    });
   };
 
   return (
     <div id="log-in-page" className="page">
-      <BrandForm
-        title="Вход"
-        linkLabel="Регистрация"
-        linkHref={RouteUtil.signIn.path}
-        buttonLabel="Войти"
-        onSubmit={formOnSubmit}
+      <AuthForm
+        onSubmit={handleFormSubmit}
+        email={formData.email}
+        password={formData.password}
+        onInputChange={handleInputChange}
         pending={authState.pending}
-      >
-        <TextInput
-          title="Почта"
-          value={email.value}
-          error={email.error}
-          onChange={handleEmailChange}
-        />
-        <TextInput
-          title="Пароль"
-          isSecure
-          value={password.value}
-          error={password.error}
-          onChange={handlePasswordChange}
-        />
-      </BrandForm>
-      {(authState.signInSuccess || authState.error) && (
+      />
+      {(authState.signUpSuccess || authState.error) && (
         <div
           id="log-in-page__alert"
           className={classNames({ error: authState.error })}

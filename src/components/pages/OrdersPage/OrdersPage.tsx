@@ -1,7 +1,7 @@
 import React from 'react';
 
-function OrderListPage() {
+function OrdersPage() {
   return <div className="page">orders</div>;
 }
 
-export default OrderListPage;
+export default OrdersPage;

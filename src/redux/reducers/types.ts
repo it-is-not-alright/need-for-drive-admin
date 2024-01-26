@@ -1,6 +1,6 @@
 type AuthState = {
   logInSuccess: boolean;
-  signInSuccess: boolean;
+  signUpSuccess: boolean;
   authorized: boolean | null;
   pending: boolean;
   error: string | null;

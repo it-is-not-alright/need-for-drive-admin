@@ -1,41 +1,32 @@
-import { Inspector, InspectorMap, Scheme, ValueWrapper } from './types';
-
-const checkMinLen = (value: string, target: number) => {
-  return value.length >= target;
-};
-
-const checkMaxLen = (value: string, target: number) => {
-  return value.length <= target;
-};
-
-const checkPattern = (value: string, target: RegExp) => {
-  return target.test(value);
-};
-
-const inspectors: InspectorMap = {
-  minLen: checkMinLen,
-  maxLen: checkMaxLen,
-  pattern: checkPattern,
-};
-
-function findInspector(name: string) {
-  const inspector = inspectors[name as keyof InspectorMap];
-  return inspector as Inspector<unknown>;
-}
+import StringInspector from './inspectors/string';
+import { Inspector } from './inspectors/types';
+import { AbstractScheme, Validatable, ValidationResult } from './types';
 
 class Validator {
-  ok: boolean = true;
+  public static string(): StringInspector {
+    return new StringInspector();
+  }
 
-  check(scheme: Scheme, wrapper: ValueWrapper): ValueWrapper {
-    const restrictions = Object.entries(scheme);
-    for (let i = 0; i < restrictions.length; i += 1) {
-      const inspector = findInspector(restrictions[i][0]);
-      if (!inspector(wrapper.value, restrictions[i][1].target)) {
-        this.ok = false;
-        return { ...wrapper, error: restrictions[i][1].message };
+  public static check<T extends object>(
+    object: Validatable<T>,
+    scheme: AbstractScheme<T>,
+  ): ValidationResult<T> {
+    const result: ValidationResult<T> = {
+      data: { ...object },
+      failure: false,
+    };
+    const schemeKeys = Object.keys(scheme);
+    for (let i = 0; i < schemeKeys.length; i += 1) {
+      const prop = schemeKeys[i] as keyof T;
+      const { value } = object[prop];
+      const inspector: Inspector<typeof value> = scheme[prop];
+      const message: string | null = inspector.check(value);
+      if (message !== null) {
+        result.data[prop].error = message;
+        result.failure = true;
       }
     }
-    return wrapper;
+    return result;
   }
 }
 

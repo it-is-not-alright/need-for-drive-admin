@@ -11,11 +11,9 @@ import LogInPage from '../pages/LogInPage/LogInPage';
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
 import RouteUtil from './route-util';
 
-const SignInPage = lazy(() => import('../pages/SignInPage/SignInPage'));
-const OrderListPage = lazy(
-  () => import('../pages/OrderListPage/OrderListPage'),
-);
-const CarListPage = lazy(() => import('../pages/CarListPage/CarListPage'));
+const SignUpPage = lazy(() => import('../pages/SignUpPage/SignUpPage'));
+const OrdersPage = lazy(() => import('../pages/OrdersPage/OrdersPage'));
+const CarsPage = lazy(() => import('../pages/CarsPage/CarsPage'));
 
 function App() {
   return (
@@ -24,11 +22,11 @@ function App() {
         <main>
           <Suspense>
             <Routes>
-              <Route path={RouteUtil.main.path} element={<OrderListPage />} />
+              <Route path={RouteUtil.main.path} element={<OrdersPage />} />
               <Route path={RouteUtil.logIn.path} element={<LogInPage />} />
-              <Route path={RouteUtil.signIn.path} element={<SignInPage />} />
-              <Route path={RouteUtil.orders.path} element={<OrderListPage />} />
-              <Route path={RouteUtil.cars.path} element={<CarListPage />} />
+              <Route path={RouteUtil.signUp.path} element={<SignUpPage />} />
+              <Route path={RouteUtil.orders.path} element={<OrdersPage />} />
+              <Route path={RouteUtil.cars.path} element={<CarsPage />} />
               <Route path={RouteUtil.any.path} element={<NotFoundPage />} />
             </Routes>
           </Suspense>

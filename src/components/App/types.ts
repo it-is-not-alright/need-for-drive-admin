@@ -1,7 +1,6 @@
 type AppRoute = {
   path: string;
-  private: boolean;
-  proxy?: string;
+  mirror?: string;
 };
 
 export { AppRoute };
