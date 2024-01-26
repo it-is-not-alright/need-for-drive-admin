@@ -8,13 +8,13 @@ import {
   LOG_IN_SUCCESS,
   LOG_OUT_REQUEST,
   LOG_OUT_SUCCESS,
-  SIGN_IN_SUCCESS,
+  SIGN_UP_SUCCESS,
 } from '../constants';
 import { AuthState } from './types';
 
 const initialState: AuthState = {
   logInSuccess: false,
-  signInSuccess: false,
+  signUpSuccess: false,
   authorized: null,
   pending: false,
   error: null,
@@ -25,8 +25,8 @@ const checkAuthReducer = (
   action: AuthAction = null,
 ): AuthState => {
   switch (action.type) {
-    case SIGN_IN_SUCCESS:
-      return { ...initialState, signInSuccess: true };
+    case SIGN_UP_SUCCESS:
+      return { ...initialState, signUpSuccess: true };
     case LOG_IN_REQUEST:
     case LOG_OUT_REQUEST:
     case CHECK_AUTH_REQUEST:

@@ -9,7 +9,7 @@ import {
   LOG_IN_SUCCESS,
   LOG_OUT_REQUEST,
   LOG_OUT_SUCCESS,
-  SIGN_IN_SUCCESS,
+  SIGN_UP_SUCCESS,
 } from '../constants';
 
 type PayloadAction<T, P> = {
@@ -17,7 +17,7 @@ type PayloadAction<T, P> = {
   payload: P;
 };
 
-type SignInSuccessAction = PayloadAction<typeof SIGN_IN_SUCCESS, null>;
+type SignUpSuccessAction = PayloadAction<typeof SIGN_UP_SUCCESS, null>;
 
 type LogInRequestAction = PayloadAction<typeof LOG_IN_REQUEST, User>;
 type LogInSuccessAction = PayloadAction<typeof LOG_IN_SUCCESS, null>;
@@ -32,7 +32,7 @@ type AuthFailureAction = PayloadAction<typeof AUTH_FAILURE, string>;
 type AuthClearAction = PayloadAction<typeof AUTH_CLEAR, null>;
 
 type AuthAction =
-  | SignInSuccessAction
+  | SignUpSuccessAction
   | LogInRequestAction
   | LogInSuccessAction
   | LogOutRequestAction
@@ -52,5 +52,5 @@ export {
   LogInSuccessAction,
   LogOutRequestAction,
   LogOutSuccessAction,
-  SignInSuccessAction,
+  SignUpSuccessAction,
 };

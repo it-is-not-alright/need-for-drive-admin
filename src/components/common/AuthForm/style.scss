@@ -1,10 +1,10 @@
 @use '~/comp/_mixins' as m;
 @use '~/comp/_colors' as c;
 
-form.brand-form {
+form.auth-form {
   height: fit-content;
   
-  div.brand-form__logo {
+  div.auth-form__logo {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
@@ -12,21 +12,21 @@ form.brand-form {
     align-items: center;
   }
 
-  div.brand-form__body {
+  div.auth-form__body {
     @include m.card;
 
     margin-top: 1rem;
     
-    div.brand-form__header {
+    div.auth-form__header {
       padding: 1.5rem;
       text-align: center;
     }
   
-    div.brand-form__main {
+    div.auth-form__main {
       padding: 1rem 1rem 0;
     }
   
-    div.brand-form__footer {
+    div.auth-form__footer {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;

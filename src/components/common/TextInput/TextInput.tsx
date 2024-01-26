@@ -8,15 +8,20 @@ import { TextInputProps } from './types';
 
 function TextInput({
   title,
-  isSecure = false,
   value,
   error,
   onChange,
+  isSecure = false,
+  maxLength,
 }: TextInputProps) {
   const [hidden, setHidden] = useState<boolean>(isSecure);
 
   const handleShowButtonClick = () => {
     setHidden(!hidden);
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(event.target.value);
   };
 
   return (
@@ -27,8 +32,8 @@ function TextInput({
           type={hidden ? 'password' : 'text'}
           className="police-blue"
           value={value}
-          onChange={onChange}
-          tabIndex={0}
+          onChange={(event) => handleChange(event)}
+          maxLength={maxLength}
         />
         {isSecure && (
           <button

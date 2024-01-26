@@ -8,7 +8,7 @@ import {
   checkAuthSuccess,
   logInSuccess,
   logOutSuccess,
-  signInSuccess,
+  signUpSuccess,
 } from '../actions/auth';
 import { LogInRequestAction } from '../actions/types';
 import {
@@ -16,7 +16,7 @@ import {
   CHECK_AUTH_REQUEST,
   LOG_IN_REQUEST,
   LOG_OUT_REQUEST,
-  SIGN_IN_SUCCESS,
+  SIGN_UP_SUCCESS,
 } from '../constants';
 
 function* logInWorker(action: LogInRequestAction): Generator {
@@ -47,7 +47,7 @@ function* checkAuthWorker(): Generator {
 }
 
 function* authWatcher(): Generator {
-  yield takeLatest(SIGN_IN_SUCCESS, signInSuccess);
+  yield takeLatest(SIGN_UP_SUCCESS, signUpSuccess);
   yield takeLatest(LOG_IN_REQUEST, logInWorker);
   yield takeLatest(LOG_OUT_REQUEST, logOutWorker);
   yield takeLatest(CHECK_AUTH_REQUEST, checkAuthWorker);

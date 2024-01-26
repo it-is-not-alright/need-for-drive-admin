@@ -11,7 +11,7 @@ import LogInPage from '../pages/LogInPage/LogInPage';
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
 import { AppRoute } from './types';
 
-const SignInPage = lazy(() => import('../pages/SignInPage/SignInPage'));
+const SignUpPage = lazy(() => import('../pages/SignUpPage/SignUpPage'));
 const OrdersPage = lazy(() => import('../pages/OrdersPage/OrdersPage'));
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
             <Routes>
               <Route path={AppRoute.Main} element={<OrdersPage />} />
               <Route path={AppRoute.LogIn} element={<LogInPage />} />
-              <Route path={AppRoute.SignIn} element={<SignInPage />} />
+              <Route path={AppRoute.SignUp} element={<SignUpPage />} />
               <Route path={AppRoute.Orders} element={<OrdersPage />} />
               <Route path={AppRoute.Any} element={<NotFoundPage />} />
             </Routes>

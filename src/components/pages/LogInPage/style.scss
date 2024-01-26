@@ -6,7 +6,7 @@ div#log-in-page {
   grid-template-columns: 1fr minmax(auto, 25rem) 1fr;
   grid-template-rows: 1fr auto auto 4fr;
 
-  form.brand-form {
+  form.auth-form {
     grid-column: 2;
     grid-row: 2;
     margin: 1rem;

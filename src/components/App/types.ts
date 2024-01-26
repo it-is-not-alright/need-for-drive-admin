@@ -1,6 +1,6 @@
 enum AppRoute {
   LogIn = '/login',
-  SignIn = '/signin',
+  SignUp = '/signup',
   Any = '*',
   Main = '/',
   Orders = '/orders',
