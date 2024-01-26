@@ -1,11 +1,11 @@
-import { ValidatableProp } from '~/src/validation/types';
+import { ValidatablePropetry } from '~/src/validation/types';
 
 type AuthFormProps = {
   onSubmit: () => void;
-  email: ValidatableProp<string>;
-  password: ValidatableProp<string>;
+  email: ValidatablePropetry<string>;
+  password: ValidatablePropetry<string>;
   onInputChange: (value: string, prop: string) => void;
-  passwordConfirm?: ValidatableProp<string>;
+  passwordConfirm?: ValidatablePropetry<string>;
 };
 
 export { AuthFormProps };

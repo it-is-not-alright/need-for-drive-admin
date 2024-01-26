@@ -18,4 +18,4 @@ type ValidationResult<T extends object> = {
   failure: boolean;
 };
 
-export { Scheme, Validatable, ValidationResult };
+export { Scheme, Validatable, ValidatablePropetry, ValidationResult };
