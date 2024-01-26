@@ -1,0 +1,8 @@
+$font-family: 'Roboto';
+
+@font-face {
+  font-weight: 500;
+  font-family: $font-family;
+  font-style: normal;
+  src: url('roboto-medium.ttf') format('truetype');
+}
