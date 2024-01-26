@@ -1,32 +1,16 @@
-type Rule<T> = {
-  target: T;
-  message: string;
-};
-
-type RuleSet = {
-  minLen?: Rule<number>;
-  pattern?: Rule<RegExp>;
-};
-
-type RuleTarget = RuleSet[keyof RuleSet]['target'];
-
-type Checker<T extends RuleTarget> = (value: unknown, target: T) => boolean;
-
-type CheckerSet = {
-  [K in keyof RuleSet]-?: Checker<RuleSet[K]['target']>;
-};
+import { Inspector } from './inspectors/types';
 
 type Scheme<T extends object> = {
-  [K in keyof T]?: RuleSet;
+  [K in keyof T]?: Inspector<T[K]>;
 };
 
-type ValidatableProp<T> = {
+type ValidatablePropetry<T> = {
   value: T;
   error: string;
 };
 
 type Validatable<T extends object> = {
-  [K in keyof T]: ValidatableProp<T[K]>;
+  [K in keyof T]: ValidatablePropetry<T[K]>;
 };
 
 type ValidationResult<T extends object> = {
@@ -34,14 +18,4 @@ type ValidationResult<T extends object> = {
   failure: boolean;
 };
 
-export {
-  Checker,
-  CheckerSet,
-  Rule,
-  RuleSet,
-  RuleTarget,
-  Scheme,
-  Validatable,
-  ValidatableProp,
-  ValidationResult,
-};
+export { Scheme, Validatable, ValidationResult };

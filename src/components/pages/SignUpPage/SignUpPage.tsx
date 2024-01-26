@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { AppRoute } from '~/comp/App/types';
-import validate from '~/src/validation/validate';
+import Validator from '~/src/validation/validator';
 
 import AuthForm from '../../common/AuthForm/AuthForm';
 import { SIGN_UP_PARAM } from '../constants';
@@ -15,21 +15,22 @@ function SignUpPage() {
   const navigate = useNavigate();
 
   const handleFormSubmit = () => {
-    const confirmPattern = new RegExp(`^${formData.password.value}$`);
-    signUpDataScheme.passwordConfirm.pattern.target = confirmPattern;
-    const { data, failure } = validate(formData, signUpDataScheme);
+    signUpDataScheme.passwordConfirm.equals(
+      formData.password.value,
+      'Пароли не совпадают',
+    );
+    const { data, failure } = Validator.check(formData, signUpDataScheme);
     if (failure) {
       setFormData(data);
     } else {
-      const url = `${AppRoute.LogIn}?${SIGN_UP_PARAM}=true`;
-      navigate(url);
+      navigate(`${AppRoute.LogIn}?${SIGN_UP_PARAM}=true`);
     }
   };
 
   const handleInputChange = (value: string, prop: string) => {
     setFormData({
       ...formData,
-      [prop]: { value, error: '' },
+      [prop]: { value: value.trim(), error: '' },
     });
   };
 

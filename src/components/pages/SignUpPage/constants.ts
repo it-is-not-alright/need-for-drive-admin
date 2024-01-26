@@ -1,3 +1,5 @@
+import Validator from '~/src/validation/validator';
+
 import { SignUpFormData, SignUpFormDataScheme } from './types';
 
 const initSignUpFormData: SignUpFormData = {
@@ -16,28 +18,11 @@ const initSignUpFormData: SignUpFormData = {
 };
 
 const signUpDataScheme: SignUpFormDataScheme = {
-  email: {
-    minLen: {
-      target: 1,
-      message: 'Поле обязательно для заполнения',
-    },
-    pattern: {
-      target: /^\S+@\S+\.\S+$/,
-      message: 'Некорректный адрес электронной почты',
-    },
-  },
-  password: {
-    minLen: {
-      target: 1,
-      message: 'Поле обязательно для заполнения',
-    },
-  },
-  passwordConfirm: {
-    pattern: {
-      target: /(?:)/,
-      message: 'Пароли не совпадают',
-    },
-  },
+  email: Validator.string()
+    .min(1, 'Поле обязательно для заполнения')
+    .matches(/^\S+@\S+\.\S+$/, 'Некорректный адрес электронной почты'),
+  password: Validator.string().min(1, 'Поле обязательно для заполнения'),
+  passwordConfirm: Validator.string(),
 };
 
 export { initSignUpFormData, signUpDataScheme };

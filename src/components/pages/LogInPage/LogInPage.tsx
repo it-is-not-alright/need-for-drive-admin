@@ -3,7 +3,7 @@ import './style.scss';
 import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import validate from '~/src/validation/validate';
+import Validator from '~/src/validation/validator';
 
 import AuthForm from '../../common/AuthForm/AuthForm';
 import { SIGN_UP_PARAM } from '../constants';
@@ -15,7 +15,7 @@ function LogInPage() {
   const signUpIsSuccess = params.get(SIGN_UP_PARAM) === 'true';
 
   const handleFormSubmit = () => {
-    const { data, failure } = validate(formData, logInDataScheme);
+    const { data, failure } = Validator.check(formData, logInDataScheme);
     if (failure) {
       setFormData(data);
     } else {
@@ -26,7 +26,7 @@ function LogInPage() {
   const handleInputChange = (value: string, prop: string) => {
     setFormData({
       ...formData,
-      [prop]: { value, error: '' },
+      [prop]: { value: value.trim(), error: '' },
     });
   };
 
