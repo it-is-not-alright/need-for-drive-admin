@@ -1,15 +1,15 @@
 import StringInspector from './inspectors/string';
 import { Inspector } from './inspectors/types';
-import { Scheme, Validatable, ValidationResult } from './types';
+import { AbstractScheme, Validatable, ValidationResult } from './types';
 
 class Validator {
-  static string(): Inspector<string> {
+  public static string(): StringInspector {
     return new StringInspector();
   }
 
-  static check<T extends object>(
+  public static check<T extends object>(
     object: Validatable<T>,
-    scheme: Scheme<T>,
+    scheme: AbstractScheme<T>,
   ): ValidationResult<T> {
     const result: ValidationResult<T> = {
       data: { ...object },

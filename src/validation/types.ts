@@ -1,7 +1,12 @@
+import StringInspector from './inspectors/string';
 import { Inspector } from './inspectors/types';
 
-type Scheme<T extends object> = {
+type AbstractScheme<T extends object> = {
   [K in keyof T]?: Inspector<T[K]>;
+};
+
+type Scheme<T extends object> = {
+  [K in keyof T]?: T[K] extends string ? StringInspector : Inspector<T[K]>;
 };
 
 type ValidatablePropetry<T> = {
@@ -18,4 +23,10 @@ type ValidationResult<T extends object> = {
   failure: boolean;
 };
 
-export { Scheme, Validatable, ValidatablePropetry, ValidationResult };
+export {
+  AbstractScheme,
+  Scheme,
+  Validatable,
+  ValidatablePropetry,
+  ValidationResult,
+};
