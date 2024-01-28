@@ -1,81 +1,32 @@
 import { User } from '~/src/api/types';
 
+import { LOG_IN, LOG_OUT, SET_AUTH_STATUS, VERIFY_TOKEN } from '../constants';
+import { AuthStatus } from '../types';
 import {
-  AUTH_CLEAR,
-  AUTH_FAILURE,
-  CHECK_AUTH_REQUEST,
-  CHECK_AUTH_SUCCESS,
-  LOG_IN_REQUEST,
-  LOG_IN_SUCCESS,
-  LOG_OUT_REQUEST,
-  LOG_OUT_SUCCESS,
-  SIGN_UP_SUCCESS,
-} from '../constants';
-import {
-  AuthClearAction,
-  AuthFailureAction,
-  CheckAuthRequestAction,
-  CheckAuthSuccessAction,
-  LogInRequestAction,
-  LogInSuccessAction,
-  LogOutRequestAction,
-  LogOutSuccessAction,
-  SignUpSuccessAction,
+  LogInAction,
+  LogOutAction,
+  SetAuthStatusAction,
+  VerifyTokenAction,
 } from './types';
 
-const signUpSuccess = (): SignUpSuccessAction => ({
-  type: SIGN_UP_SUCCESS,
-  payload: null,
-});
-
-const logInRequest = (payload: User): LogInRequestAction => ({
-  type: LOG_IN_REQUEST,
+const logIn = (payload: User): LogInAction => ({
+  type: LOG_IN,
   payload,
 });
 
-const logInSuccess = (): LogInSuccessAction => ({
-  type: LOG_IN_SUCCESS,
+const verifyToken = (): VerifyTokenAction => ({
+  type: VERIFY_TOKEN,
   payload: null,
 });
 
-const logOutRequest = (): LogOutRequestAction => ({
-  type: LOG_OUT_REQUEST,
+const logOut = (): LogOutAction => ({
+  type: LOG_OUT,
   payload: null,
 });
 
-const logOutSuccess = (): LogOutSuccessAction => ({
-  type: LOG_OUT_SUCCESS,
-  payload: null,
-});
-
-const checkAuthRequest = (): CheckAuthRequestAction => ({
-  type: CHECK_AUTH_REQUEST,
-  payload: null,
-});
-
-const checkAuthSuccess = (payload: boolean): CheckAuthSuccessAction => ({
-  type: CHECK_AUTH_SUCCESS,
+const setAuthStatus = (payload: AuthStatus): SetAuthStatusAction => ({
+  type: SET_AUTH_STATUS,
   payload,
 });
 
-const authFailure = (payload: string): AuthFailureAction => ({
-  type: AUTH_FAILURE,
-  payload,
-});
-
-const authClear = (): AuthClearAction => ({
-  type: AUTH_CLEAR,
-  payload: null,
-});
-
-export {
-  authClear,
-  authFailure,
-  checkAuthRequest,
-  checkAuthSuccess,
-  logInRequest,
-  logInSuccess,
-  logOutRequest,
-  logOutSuccess,
-  signUpSuccess,
-};
+export { logIn, logOut, setAuthStatus, verifyToken };

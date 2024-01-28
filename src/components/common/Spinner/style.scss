@@ -7,7 +7,7 @@ div.spinner {
   align-items: center;
   min-height: inherit;
 
-  span.spinner-core {
+  span.spinner__kernel {
     @include m.spinner(c.$green, 3rem, 0.2rem);
 
     display: block;

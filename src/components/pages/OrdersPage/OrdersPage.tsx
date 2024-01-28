@@ -1,15 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { logOutRequest } from '~/src/redux/actions/auth';
-
-import Button from '../../common/Button/Button';
+import Button from '~/comp/common/Button/Button';
+import { logOut } from '~/src/redux/actions/auth';
 
 function OrdersPage() {
   const dispatch = useDispatch();
 
   const handleLogOutButtonClick = () => {
-    dispatch(logOutRequest());
+    dispatch(logOut());
   };
 
   return <Button text="Выйти" onClick={handleLogOutButtonClick} />;

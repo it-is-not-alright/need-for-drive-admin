@@ -1,40 +1,45 @@
-import {
-  clearTokenData,
-  getAccessToken,
-  saveTokenData,
-} from '~/src/api/storage-util';
+import { getAccessToken, removeToken, saveToken } from '~/src/api/storage-util';
 
-import { apiRequest } from '..';
-import { ApiUrl, AuthData, User } from '../types';
+import { client } from '..';
+import { HTTPStatus } from '../http-util/types';
+import { APIEndpoint, AuthData, User } from '../types';
 
 class AuthService {
-  static async logIn(user: User) {
+  public static async logIn(user: User): Promise<boolean> {
     if (getAccessToken() !== '') {
       AuthService.logOut();
     }
-    const authData = await apiRequest.post<User, AuthData>(
-      ApiUrl.LogIn,
-      user,
-      false,
-    );
-    saveTokenData(authData);
-  }
-
-  static async checkAuth(): Promise<boolean> {
     try {
-      await apiRequest.refreshToken();
+      const authData = await client.post<AuthData>(
+        APIEndpoint.LogIn,
+        user,
+        false,
+      );
+      saveToken(authData);
       return true;
     } catch (error) {
-      if (error.message === '500') {
+      if (error.message === HTTPStatus.Unauthorized) {
         return false;
       }
       throw error;
     }
   }
 
-  static async logOut() {
-    await apiRequest.post<null, unknown>(ApiUrl.LogOut, null);
-    clearTokenData();
+  public static async verifyToken(): Promise<boolean> {
+    try {
+      await client.refreshToken();
+      return true;
+    } catch (error) {
+      if (error.message === HTTPStatus.InternalServerError) {
+        return false;
+      }
+      throw error;
+    }
+  }
+
+  public static async logOut() {
+    await client.post<null>(APIEndpoint.LogOut, null);
+    removeToken();
   }
 }
 
