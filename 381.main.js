@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkneed_for_drive_admin=self.webpackChunkneed_for_drive_admin||[]).push([[381],{8381:(e,r,d)=>{d.r(r),d.d(r,{default:()=>s}),d(7294);var n=d(5893);const s=function(){return(0,n.jsx)("div",{className:"page",children:"orders"})}}}]);
