@@ -9,7 +9,7 @@ class RouteUtil {
 
   static any: AppRoute = { path: '*' };
 
-  static main: AppRoute = { path: '/', mirror: '/main' };
+  static main: AppRoute = { path: '/', mirror: '/orders' };
 
   static orders: AppRoute = { path: '/orders', mirror: '/' };
 
@@ -24,14 +24,6 @@ class RouteUtil {
 
   static isActive(route: AppRoute, location: string) {
     return RouteUtil.match(route, location) !== null;
-  }
-
-  static isPrivate(location: string) {
-    return (
-      location === RouteUtil.main.path ||
-      location === RouteUtil.orders.path ||
-      location === RouteUtil.cars.path
-    );
   }
 }
 

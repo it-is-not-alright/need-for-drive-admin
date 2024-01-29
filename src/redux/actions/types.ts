@@ -1,56 +1,43 @@
 import { User } from '~/src/api/types';
 
 import {
-  AUTH_CLEAR,
-  AUTH_FAILURE,
-  CHECK_AUTH_REQUEST,
-  CHECK_AUTH_SUCCESS,
-  LOG_IN_REQUEST,
-  LOG_IN_SUCCESS,
-  LOG_OUT_REQUEST,
-  LOG_OUT_SUCCESS,
-  SIGN_UP_SUCCESS,
+  LOG_IN,
+  LOG_OUT,
+  RESET_REQUEST_ERROR,
+  SET_AUTH_STATUS,
+  SET_REQUEST_ERROR,
+  VERIFY_TOKEN,
 } from '../constants';
+import { AuthStatus } from '../types';
 
 type PayloadAction<T, P> = {
   type: T;
   payload: P;
 };
 
-type SignUpSuccessAction = PayloadAction<typeof SIGN_UP_SUCCESS, null>;
-
-type LogInRequestAction = PayloadAction<typeof LOG_IN_REQUEST, User>;
-type LogInSuccessAction = PayloadAction<typeof LOG_IN_SUCCESS, null>;
-
-type LogOutRequestAction = PayloadAction<typeof LOG_OUT_REQUEST, null>;
-type LogOutSuccessAction = PayloadAction<typeof LOG_OUT_SUCCESS, null>;
-
-type CheckAuthRequestAction = PayloadAction<typeof CHECK_AUTH_REQUEST, null>;
-type CheckAuthSuccessAction = PayloadAction<typeof CHECK_AUTH_SUCCESS, boolean>;
-
-type AuthFailureAction = PayloadAction<typeof AUTH_FAILURE, string>;
-type AuthClearAction = PayloadAction<typeof AUTH_CLEAR, null>;
+type VerifyTokenAction = PayloadAction<typeof VERIFY_TOKEN, null>;
+type LogInAction = PayloadAction<typeof LOG_IN, User>;
+type LogOutAction = PayloadAction<typeof LOG_OUT, null>;
+type SetAuthStatusAction = PayloadAction<typeof SET_AUTH_STATUS, AuthStatus>;
 
 type AuthAction =
-  | SignUpSuccessAction
-  | LogInRequestAction
-  | LogInSuccessAction
-  | LogOutRequestAction
-  | LogOutSuccessAction
-  | CheckAuthRequestAction
-  | CheckAuthSuccessAction
-  | AuthFailureAction
-  | AuthClearAction;
+  | VerifyTokenAction
+  | LogInAction
+  | LogOutAction
+  | SetAuthStatusAction;
+
+type SetRequestErrorAction = PayloadAction<typeof SET_REQUEST_ERROR, string>;
+type ResetRequestErrorAction = PayloadAction<typeof RESET_REQUEST_ERROR, null>;
+
+type RequestErrorAction = SetRequestErrorAction | ResetRequestErrorAction;
 
 export {
   AuthAction,
-  AuthClearAction,
-  AuthFailureAction,
-  CheckAuthRequestAction,
-  CheckAuthSuccessAction,
-  LogInRequestAction,
-  LogInSuccessAction,
-  LogOutRequestAction,
-  LogOutSuccessAction,
-  SignUpSuccessAction,
+  LogInAction,
+  LogOutAction,
+  RequestErrorAction,
+  ResetRequestErrorAction,
+  SetAuthStatusAction,
+  SetRequestErrorAction,
+  VerifyTokenAction,
 };

@@ -1,9 +1,27 @@
-type ErrorBoundaryProps = {
+import { RequestError } from '~/src/redux/types';
+
+type ErrorBoundaryOwnProps = {
   children: React.ReactNode;
 };
 
-type ErrorBoundaryState = {
-  errorCode: string;
+type ErrorBoundaryDispatchProps = {
+  reset: () => void;
 };
 
-export { ErrorBoundaryProps, ErrorBoundaryState };
+type ErrorBoundaryStateProps = RequestError;
+
+type ErrorBoundaryProps = ErrorBoundaryOwnProps &
+  ErrorBoundaryDispatchProps &
+  ErrorBoundaryStateProps;
+
+type ErrorBoundaryState = {
+  unhandledError: boolean;
+};
+
+export {
+  ErrorBoundaryDispatchProps,
+  ErrorBoundaryOwnProps,
+  ErrorBoundaryProps,
+  ErrorBoundaryState,
+  ErrorBoundaryStateProps,
+};

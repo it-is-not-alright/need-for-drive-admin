@@ -1,13 +1,7 @@
-export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
+export const VERIFY_TOKEN = 'VERIFY_TOKEN';
+export const LOG_IN = 'LOG_IN';
+export const LOG_OUT = 'LOG_OUT';
+export const SET_AUTH_STATUS = 'SET_AUTH_STATUS';
 
-export const LOG_IN_REQUEST = 'LOG_IN_REQUEST';
-export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
-
-export const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST';
-export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
-
-export const CHECK_AUTH_REQUEST = 'CHECK_AUTH_REQUEST';
-export const CHECK_AUTH_SUCCESS = 'CHECK_AUTH_SUCCESS';
-
-export const AUTH_FAILURE = 'AUTH_FAILURE';
-export const AUTH_CLEAR = 'AUTH_CLEAR';
+export const SET_REQUEST_ERROR = 'SET_REQUEST_ERROR';
+export const RESET_REQUEST_ERROR = 'RESET_REQUEST_ERROR';

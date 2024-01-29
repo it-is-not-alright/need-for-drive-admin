@@ -5,7 +5,7 @@ import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import AccountImage from '~/assets/images/account.png';
-import { logOutRequest } from '~/src/redux/actions/auth';
+import { logOut } from '~/src/redux/actions/auth';
 
 import Badge from '../../common/Badge/Badge';
 import { BadgeType } from '../../common/Badge/types';
@@ -39,7 +39,7 @@ function Dropdown() {
   };
 
   const handleLogOutItemClick = () => {
-    dispatch(logOutRequest());
+    dispatch(logOut());
   };
 
   return (

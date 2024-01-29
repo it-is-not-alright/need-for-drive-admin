@@ -3,7 +3,7 @@
 
 div#log-in-page {
   display: grid;
-  grid-template-columns: 1fr minmax(auto, 25rem) 1fr;
+  grid-template-columns: 1fr minmax(auto, 24rem) 1fr;
   grid-template-rows: 1fr auto auto 4fr;
 
   form.auth-form {
@@ -11,7 +11,7 @@ div#log-in-page {
     grid-row: 2;
   }
 
-  div#log-in-page__alert {
+  div#log-in-page__sign-in-alert {
     @include m.card;
 
     grid-column: 2;
@@ -22,10 +22,6 @@ div#log-in-page {
 
     p {
       color: c.$green;
-    }
-
-    &.error > p {
-      color: c.$pink;
     }
   }
 }

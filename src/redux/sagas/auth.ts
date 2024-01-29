@@ -2,56 +2,52 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 
 import { AuthService } from '~/src/api/services/auth';
 
-import {
-  authClear,
-  authFailure,
-  checkAuthSuccess,
-  logInSuccess,
-  logOutSuccess,
-  signUpSuccess,
-} from '../actions/auth';
-import { LogInRequestAction } from '../actions/types';
-import {
-  AUTH_CLEAR,
-  CHECK_AUTH_REQUEST,
-  LOG_IN_REQUEST,
-  LOG_OUT_REQUEST,
-  SIGN_UP_SUCCESS,
-} from '../constants';
+import { setAuthStatus } from '../actions/auth';
+import { setRequestError } from '../actions/request-error';
+import { LogInAction } from '../actions/types';
+import { LOG_IN, LOG_OUT, VERIFY_TOKEN } from '../constants';
+import { AuthStatus } from '../types';
 
-function* logInWorker(action: LogInRequestAction): Generator {
+function* logInWorker(action: LogInAction): Generator {
   try {
-    yield call(AuthService.logIn, action.payload);
-    yield put(logInSuccess());
+    const success = yield call(AuthService.logIn, action.payload);
+    const status = (success as boolean)
+      ? AuthStatus.LogInSuccess
+      : AuthStatus.LogInFailure;
+    yield put(setAuthStatus(status));
   } catch (error) {
-    yield put(authFailure(error.message));
+    yield put(setRequestError(error.message));
+    yield put(setAuthStatus(AuthStatus.Unknown));
   }
 }
 
 function* logOutWorker(): Generator {
   try {
     yield call(AuthService.logOut);
-    yield put(logOutSuccess());
+    yield put(setAuthStatus(AuthStatus.Unauthorized));
   } catch (error) {
-    yield put(authFailure(error.message));
+    yield put(setRequestError(error.message));
+    yield put(setAuthStatus(AuthStatus.Unknown));
   }
 }
 
-function* checkAuthWorker(): Generator {
+function* verifyTokenWorker(): Generator {
   try {
-    const result = (yield call(AuthService.checkAuth)) as boolean;
-    yield put(checkAuthSuccess(result));
+    const success = yield call(AuthService.verifyToken);
+    const status = (success as boolean)
+      ? AuthStatus.Authorized
+      : AuthStatus.Unauthorized;
+    yield put(setAuthStatus(status));
   } catch (error) {
-    yield put(authFailure(error.message));
+    yield put(setRequestError(error.message));
+    yield put(setAuthStatus(AuthStatus.Unknown));
   }
 }
 
 function* authWatcher(): Generator {
-  yield takeLatest(SIGN_UP_SUCCESS, signUpSuccess);
-  yield takeLatest(LOG_IN_REQUEST, logInWorker);
-  yield takeLatest(LOG_OUT_REQUEST, logOutWorker);
-  yield takeLatest(CHECK_AUTH_REQUEST, checkAuthWorker);
-  yield takeLatest(AUTH_CLEAR, authClear);
+  yield takeLatest(VERIFY_TOKEN, verifyTokenWorker);
+  yield takeLatest(LOG_IN, logInWorker);
+  yield takeLatest(LOG_OUT, logOutWorker);
 }
 
 export { authWatcher };

@@ -1,6 +1,6 @@
-import ApiRequest from './api-request';
-import { ApiUrl } from './types';
+import APIClient from './api-client';
+import { API_BASE_URL } from './constants';
 
-const apiRequest = new ApiRequest(ApiUrl.Base);
+const client = new APIClient(API_BASE_URL);
 
-export { apiRequest };
+export { client };

@@ -1,6 +1,6 @@
 import { RootState } from '../reducers';
-import { AuthState } from '../reducers/types';
+import { AuthState } from '../types';
 
-const authSelector = (state: RootState): AuthState => state.auth;
+const authSelector = (state: RootState): AuthState => state.authState;
 
 export { authSelector };

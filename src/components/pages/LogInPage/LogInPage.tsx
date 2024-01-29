@@ -1,13 +1,13 @@
 import './style.scss';
 
-import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import AuthForm from '~/comp/common/AuthForm/AuthForm';
-import { authClear, logInRequest } from '~/src/redux/actions/auth';
+import { logIn, setAuthStatus } from '~/src/redux/actions/auth';
 import { authSelector } from '~/src/redux/selectors/auth';
+import { AuthStatus } from '~/src/redux/types';
 import Validator from '~/src/validation/validator';
 
 import RouteUtil from '../../App/route-util';
@@ -15,16 +15,28 @@ import { initLogInFormData, logInDataScheme } from './constants';
 
 function LogInPage() {
   const [formData, setFormData] = useState(initLogInFormData);
-  const authState = useSelector(authSelector);
+  const { status } = useSelector(authSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const handleLogInFailure = () => {
+    setFormData({
+      ...formData,
+      password: {
+        value: formData.password.value,
+        error: 'Неправильное имя пользователя или пароль',
+      },
+    });
+  };
+
   useEffect(() => {
-    if (authState.logInSuccess) {
-      dispatch(authClear());
+    if (status === AuthStatus.LogInFailure) {
+      handleLogInFailure();
+    } else if (status === AuthStatus.LogInSuccess) {
+      dispatch(setAuthStatus(AuthStatus.Authorized));
       navigate(RouteUtil.main.path);
     }
-  }, [authState]);
+  }, [status]);
 
   const handleFormSubmit = () => {
     const { data, failure } = Validator.check(formData, logInDataScheme);
@@ -35,7 +47,7 @@ function LogInPage() {
         username: formData.email.value,
         password: formData.password.value,
       };
-      dispatch(logInRequest(user));
+      dispatch(logIn(user));
     }
   };
 
@@ -53,18 +65,11 @@ function LogInPage() {
         email={formData.email}
         password={formData.password}
         onInputChange={handleInputChange}
-        pending={authState.pending}
+        pending={status === AuthStatus.Pending}
       />
-      {(authState.signUpSuccess || authState.error) && (
-        <div
-          id="log-in-page__alert"
-          className={classNames({ error: authState.error })}
-        >
-          <p className="fs-3">
-            {authState.error
-              ? 'Неправильное имя пользователя или пароль. Попробуйте еще раз.'
-              : 'Регистрация пройдена успешно.'}
-          </p>
+      {status === AuthStatus.SignUpSuccess && (
+        <div id="log-in-page__sign-in-alert">
+          <p className="fs-2">Регистрация пройдена успешно</p>
         </div>
       )}
     </div>

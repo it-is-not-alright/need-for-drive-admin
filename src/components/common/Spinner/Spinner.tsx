@@ -5,7 +5,7 @@ import React from 'react';
 function Spinner() {
   return (
     <div className="spinner">
-      <span className="spinner-core" />
+      <span className="spinner__kernel" />
     </div>
   );
 }

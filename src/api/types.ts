@@ -1,5 +1,4 @@
-enum ApiUrl {
-  Base = 'https://frontend-study.simbirsoft.dev/api',
+enum APIEndpoint {
   LogIn = 'auth/login',
   Refresh = 'auth/refresh',
   LogOut = 'auth/logout',
@@ -22,4 +21,4 @@ type RefreshBody = {
   refresh_token: string;
 };
 
-export { ApiUrl, AuthData, RefreshBody, User };
+export { APIEndpoint, AuthData, RefreshBody, User };
