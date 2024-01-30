@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkneed_for_drive_admin=self.webpackChunkneed_for_drive_admin||[]).push([[412],{6412:(e,n,r)=>{r.r(n),r.d(n,{default:()=>t}),r(7294);var a=Array.from({length:100},(function(e,n){return"car ".concat(n+1)})),c=r(5893);const t=function(){return(0,c.jsx)("div",{className:"page",children:a.map((function(e){return(0,c.jsx)("p",{children:e},e)}))})}}}]);
