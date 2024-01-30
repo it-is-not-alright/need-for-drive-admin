@@ -1,9 +1,9 @@
 import { ACCESS_TOKEN_ITEM, REFRESH_TOKEN_ITEM } from './constants';
-import { AuthData } from './types';
+import { AuthRaw } from './types';
 
-const saveToken = (authData: AuthData) => {
-  localStorage.setItem(ACCESS_TOKEN_ITEM, authData.access_token);
-  localStorage.setItem(REFRESH_TOKEN_ITEM, authData.refresh_token);
+const saveToken = (authRaw: AuthRaw) => {
+  localStorage.setItem(ACCESS_TOKEN_ITEM, authRaw.access_token);
+  localStorage.setItem(REFRESH_TOKEN_ITEM, authRaw.refresh_token);
 };
 
 const getAccessToken = (): string => {

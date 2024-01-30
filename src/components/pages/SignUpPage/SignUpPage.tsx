@@ -6,9 +6,9 @@ import { useNavigate } from 'react-router-dom';
 
 import { setAuthStatus } from '~/src/redux/actions/auth';
 import { AuthStatus } from '~/src/redux/types';
+import RouteUtil from '~/src/route/util';
 import Validator from '~/src/validation/validator';
 
-import RouteUtil from '../../App/route-util';
 import AuthForm from '../../common/AuthForm/AuthForm';
 import { initSignUpFormData, signUpDataScheme } from './constants';
 

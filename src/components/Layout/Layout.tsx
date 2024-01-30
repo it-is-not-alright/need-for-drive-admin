@@ -1,0 +1,41 @@
+import './style.scss';
+import '~/assets/fonts/roboto/style.scss';
+import '~/assets/fonts/poppins/style.scss';
+
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Outlet } from 'react-router-dom';
+
+import { verifyToken } from '~/src/redux/actions/auth';
+import { authSelector } from '~/src/redux/selectors/auth';
+import { AuthStatus } from '~/src/redux/types';
+
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
+import SideBar from '../SideBar/SideBar';
+
+function Layout() {
+  const { status } = useSelector(authSelector);
+  const dispatch = useDispatch();
+  const isAuthorized = status === AuthStatus.Authorized;
+
+  useEffect(() => {
+    dispatch(verifyToken());
+  }, []);
+
+  return (
+    <>
+      <SideBar isDisplayed={isAuthorized} />
+      <Header isDisplayed={isAuthorized} />
+      <main>
+        <ErrorBoundary>
+          <Outlet />
+        </ErrorBoundary>
+        <Footer isDisplayed={isAuthorized} />
+      </main>
+    </>
+  );
+}
+
+export default Layout;

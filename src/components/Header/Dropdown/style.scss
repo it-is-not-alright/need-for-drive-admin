@@ -1,5 +1,6 @@
 @use '~/comp/_colors' as c;
 @use '~/comp/_mixins' as m;
+@use '~/comp/_dimensions' as d;
 
 $icon-size: 0.7rem;
 
@@ -64,13 +65,14 @@ div.dropdown {
     position: absolute;
     top: 100%;
     right: 0;
-    z-index: 2;
+    z-index: 3;
     display: block;
     width: max-content;
     min-width: calc(100% - 1rem);
     max-width: calc(100vw - 1rem);
     margin: 0.5rem;
     padding: 0.5rem 0;
+    font-size: d.$fs-1;
     border-width: 1px;
     border-style: solid;
     border-color: c.$light-periwinkle;
@@ -83,6 +85,7 @@ div.dropdown {
       align-items: center;
       width: 100%;
       padding: 0.5rem 1rem;
+      color: c.$police-blue;
       background-color: c.$white;
 
       &:first-child {

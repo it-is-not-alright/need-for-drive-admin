@@ -2,7 +2,7 @@ import { getAccessToken, removeToken, saveToken } from '~/src/api/storage-util';
 
 import { client } from '..';
 import { HTTPStatus } from '../http-util/types';
-import { APIEndpoint, AuthData, User } from '../types';
+import { APIEndpoint, AuthRaw, User } from '../types';
 
 class AuthService {
   public static async logIn(user: User): Promise<boolean> {
@@ -10,12 +10,12 @@ class AuthService {
       AuthService.logOut();
     }
     try {
-      const authData = await client.post<AuthData>(
+      const authRaw = await client.post<AuthRaw>(
         APIEndpoint.LogIn,
         user,
         false,
       );
-      saveToken(authData);
+      saveToken(authRaw);
       return true;
     } catch (error) {
       if (error.message === HTTPStatus.Unauthorized) {

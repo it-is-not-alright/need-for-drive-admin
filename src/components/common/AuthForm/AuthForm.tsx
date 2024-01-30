@@ -3,7 +3,8 @@ import './style.scss';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import RouteUtil from '../../App/route-util';
+import RouteUtil from '~/src/route/util';
+
 import Button from '../Button/Button';
 import Icon from '../Icon/Icon';
 import TextInput from '../TextInput/TextInput';
@@ -23,30 +24,35 @@ function AuthForm({
     <form className="auth-form">
       <div className="auth-form__logo">
         <Icon id="logo" width="45" height="45" />
-        <p className="police-blue fs-4">Need for drive</p>
+        <p className="police-blue">Need for drive</p>
       </div>
       <div className="auth-form__body">
-        <div className="auth-form__header police-blue fs-3">
+        <div className="auth-form__header police-blue">
           {isSignUp ? 'Регистрация' : 'Вход'}
         </div>
         <div className="auth-form__main">
           <TextInput
+            id="email"
             title="Почта"
             value={email.value}
             error={email.error}
             onChange={(value) => onInputChange(value, 'email')}
             maxLength={150}
+            autoComplete={isSignUp ? 'off' : 'email'}
           />
           <TextInput
+            id={isSignUp ? 'new-password' : 'current-password'}
             title="Пароль"
             value={password.value}
             error={password.error}
             onChange={(value) => onInputChange(value, 'password')}
             isSecure
             maxLength={150}
+            autoComplete={isSignUp ? 'off' : 'current-password'}
           />
           {isSignUp && (
             <TextInput
+              id="password-confirm"
               title="Подтвердите пароль"
               value={passwordConfirm.value}
               error={passwordConfirm.error}

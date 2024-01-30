@@ -1,0 +1,37 @@
+@use '~/comp/_colors' as c;
+@use '~/comp/_mixins' as m;
+
+div.data-grid {
+  @include m.card;
+
+  & > div {
+    padding: 1rem 1.5rem;
+  }
+
+  div.data-grid__header,
+  div.data-grid__select-area,
+  div.data-grid__button-area {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  div.data-grid__header {
+    justify-content: space-between;
+  }
+
+  div.data-grid__main {
+    border-width: 1px 0;
+    border-style: solid;
+    border-color: c.$dark-blue-gray;
+  }
+
+  div.data-grid__footer {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+
+    div.pagination {
+      grid-column: 2;
+    }
+  }
+}

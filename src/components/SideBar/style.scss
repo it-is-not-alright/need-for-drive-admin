@@ -6,13 +6,13 @@ $icon-size: 1.4rem;
 
 div.side-bar {
   position: relative;
+  z-index: 2;
   background-color: c.$white;
   border-right: 1px solid c.$light-periwinkle;
   box-shadow: 0 0.25rem 0.5rem c.$black-coral;
 
   @include m.on-non-mobile {
-    z-index: 1;
-    border-right: 0;
+    border-right: none;
     box-shadow: 0.3rem 0 0.5rem c.$black-coral;
   };
 

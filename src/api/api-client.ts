@@ -2,7 +2,7 @@ import RequestUtil from './http-util/request';
 import ResponseUtil from './http-util/response';
 import { HTTPStatus } from './http-util/types';
 import { getRefreshToken, saveToken } from './storage-util';
-import { APIEndpoint, AuthData } from './types';
+import { APIEndpoint, AuthRaw } from './types';
 
 class APIClient {
   private baseURL: string;
@@ -21,12 +21,12 @@ class APIClient {
   }
 
   public async refreshToken() {
-    const authData = await this.post<AuthData>(
+    const authRaw = await this.post<AuthRaw>(
       APIEndpoint.Refresh,
       { refresh_token: getRefreshToken() },
       false,
     );
-    saveToken(authData);
+    saveToken(authRaw);
   }
 
   private async interceptor<T>(

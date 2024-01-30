@@ -8,6 +8,7 @@ type ButtonProps = {
   onClick: () => void;
   type?: ButtonType;
   pending?: boolean;
+  isDisabled?: boolean;
 };
 
 export { ButtonProps, ButtonType };

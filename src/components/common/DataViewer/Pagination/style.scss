@@ -1,0 +1,15 @@
+@use '~/comp/_colors' as c;
+@use '~/comp/_mixins' as m;
+
+div.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    color: c.$blue;
+    user-select: none;
+  }
+}

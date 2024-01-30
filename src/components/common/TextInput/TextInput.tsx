@@ -7,12 +7,14 @@ import Icon from '../Icon/Icon';
 import { TextInputProps } from './types';
 
 function TextInput({
+  id,
   title,
   value,
   error,
   onChange,
   isSecure = false,
   maxLength,
+  autoComplete = 'off',
 }: TextInputProps) {
   const [hidden, setHidden] = useState<boolean>(isSecure);
 
@@ -26,14 +28,18 @@ function TextInput({
 
   return (
     <>
-      <p className="fs-1 gray">{title}</p>
+      <label className="gray" htmlFor={id}>
+        {title}
+      </label>
       <div className={classNames('text-input', { invalid: error })}>
         <input
+          id={id}
           type={hidden ? 'password' : 'text'}
           className="police-blue"
           value={value}
           onChange={(event) => handleChange(event)}
           maxLength={maxLength}
+          autoComplete={autoComplete}
         />
         {isSecure && (
           <button
@@ -45,7 +51,7 @@ function TextInput({
           </button>
         )}
       </div>
-      <p className="fs-1">{error}</p>
+      <p>{error}</p>
     </>
   );
 }

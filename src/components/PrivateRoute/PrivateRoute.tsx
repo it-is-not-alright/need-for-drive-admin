@@ -1,13 +1,16 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Navigate, Outlet } from 'react-router-dom';
 
+import { authSelector } from '~/src/redux/selectors/auth';
 import { AuthStatus } from '~/src/redux/types';
 
-import RouteUtil from '../App/route-util';
+import RouteUtil from '../../route/util';
 import Spinner from '../common/Spinner/Spinner';
-import { AuthWrapperProps } from './types';
 
-function AuthWrapper({ status }: AuthWrapperProps) {
+function PrivateRoute() {
+  const { status } = useSelector(authSelector);
+
   if (status === AuthStatus.Pending) {
     return <Spinner />;
   }
@@ -19,4 +22,4 @@ function AuthWrapper({ status }: AuthWrapperProps) {
   return <Navigate to={RouteUtil.logIn.path} replace />;
 }
 
-export default AuthWrapper;
+export default PrivateRoute;

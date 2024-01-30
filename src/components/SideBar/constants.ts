@@ -1,4 +1,4 @@
-import RouteUtil from '../App/route-util';
+import RouteUtil from '../../route/util';
 import { SideBarLink } from './types';
 
 const links: SideBarLink[] = [

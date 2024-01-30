@@ -8,9 +8,9 @@ import AuthForm from '~/comp/common/AuthForm/AuthForm';
 import { logIn, setAuthStatus } from '~/src/redux/actions/auth';
 import { authSelector } from '~/src/redux/selectors/auth';
 import { AuthStatus } from '~/src/redux/types';
+import RouteUtil from '~/src/route/util';
 import Validator from '~/src/validation/validator';
 
-import RouteUtil from '../../App/route-util';
 import { initLogInFormData, logInDataScheme } from './constants';
 
 function LogInPage() {

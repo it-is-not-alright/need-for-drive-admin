@@ -59,13 +59,13 @@ function Dropdown() {
         </div>
       </button>
       <div className="dropdown__menu">
-        <button type="button" className="dropdown__item fs-1">
+        <button type="button" className="dropdown__item">
           Уведомления
           <Badge value={NUM_OF_NOTIFICATIONS} type={BadgeType.Pill} />
         </button>
         <button
           type="button"
-          className="dropdown__item fs-1"
+          className="dropdown__item"
           onClick={handleLogOutItemClick}
         >
           Выход

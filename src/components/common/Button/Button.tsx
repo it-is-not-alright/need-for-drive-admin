@@ -10,6 +10,7 @@ function Button({
   onClick,
   type = ButtonType.Primary,
   pending = false,
+  isDisabled = false,
 }: ButtonProps) {
   const classList = classNames('simple-btn', type, { pending });
 
@@ -20,8 +21,13 @@ function Button({
   };
 
   return (
-    <button type="button" className={classList} onClick={handleClick}>
-      <p className="fs-1">{text}</p>
+    <button
+      type="button"
+      className={classList}
+      onClick={handleClick}
+      disabled={isDisabled}
+    >
+      <p>{text}</p>
     </button>
   );
 }

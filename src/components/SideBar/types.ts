@@ -1,4 +1,4 @@
-import { AppRoute } from '../App/types';
+import { AppRoute } from '../../route/types';
 
 type SideBarProps = {
   isDisplayed: boolean;

@@ -1,8 +1,12 @@
 @use '~/comp/_colors' as c;
-@use '~/comp/_dimensions' as d;
 @use '~/comp/_mixins' as m;
+@use '~/comp/_dimensions' as d;
 
 $icon-size: 1.25rem;
+
+label {
+  font-size: d.$fs-1;
+}
 
 div.text-input {
   display: flex;
@@ -17,7 +21,7 @@ div.text-input {
   }
 
   input {
-    @include m.safe-font-size;
+    @include m.protected-font-size;
 
     width: 100%;
     padding: 0.5rem 0.75rem;
@@ -29,6 +33,7 @@ div.text-input {
   & + p {
     margin: 0.2rem 0;
     color: c.$pink;
+    font-size: d.$fs-1;
 
     &::after {
       white-space: pre;

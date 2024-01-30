@@ -3,7 +3,7 @@ import './style.scss';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import RouteUtil from '../App/route-util';
+import RouteUtil from '../../route/util';
 import { FooterProps } from './types';
 
 function Footer({ isDisplayed }: FooterProps) {

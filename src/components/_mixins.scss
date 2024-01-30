@@ -28,7 +28,13 @@
   }
 }
 
-@mixin safe-font-size($size: d.$fs-1) {
+@mixin on-non-mobile {
+  @media (min-width: d.$tablet) {
+    @content;
+  }
+}
+
+@mixin protected-font-size($size: d.$fs-1) {
   font-size: max(1rem, $size);
 
   @media (min-width: d.$desktop-mini) {
@@ -39,26 +45,20 @@
 @mixin interactive($background-color: c.$white) {
   background-color: $background-color;
   transition-duration: 0.2s;
-  transition-property: filter;
+  transition-property: filter, background-color;
   user-select: none;
 
-  &:hover {
+  &:not(:disabled):hover {
     filter: brightness(90%);
   }
 
-  &:active {
+  &:not(:disabled):active {
     filter: brightness(80%);
   }
 }
 
-@mixin on-non-mobile {
-  @media (min-width: d.$tablet) {
-    @content;
-  }
-}
-
-@mixin on-non-tablet {
-  @media (min-width: d.$desktop-mini) {
-    @content;
-  }
+@mixin protected-width {
+  max-width: 100%;
+  text-align: left;
+  word-break: break-all;
 }

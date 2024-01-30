@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import RouteUtil from '../App/route-util';
+import RouteUtil from '../../route/util';
 import Icon from '../common/Icon/Icon';
 import { links } from './constants';
 import SideBarItem from './SideBarItem/SideBarItem';

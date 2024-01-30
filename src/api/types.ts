@@ -4,7 +4,7 @@ enum APIEndpoint {
   LogOut = 'auth/logout',
 }
 
-type AuthData = {
+type AuthRaw = {
   access_token: string;
   expires_in: number;
   refresh_token: string;
@@ -21,4 +21,9 @@ type RefreshBody = {
   refresh_token: string;
 };
 
-export { APIEndpoint, AuthData, RefreshBody, User };
+interface Entity {
+  id: number;
+  label: string;
+}
+
+export { APIEndpoint, AuthRaw, Entity, RefreshBody, User };

@@ -1,0 +1,71 @@
+@use '~/comp/_colors' as c;
+@use '~/comp/_mixins' as m;
+@use '~/comp/_dimensions' as d;
+
+$icon-size: 0.6rem;
+
+div.select {
+  position: relative;
+  width: 8rem;
+  font-size: d.$fs-1;
+
+  button.select__toggle {
+    @include m.interactive;
+    @include m.protected-width;
+
+    display: flex;
+    gap: 0.5rem;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border-width: 1px;
+    border-style: solid;
+    border-color: c.$lavender-gray;
+    border-radius: 0.25rem;
+
+    p {
+      color: c.$roman-silver;
+    }
+
+    svg {
+      min-width: $icon-size;
+      max-width: $icon-size;
+      min-height: $icon-size;
+      max-height: $icon-size;
+    }
+  }
+
+  div.select__menu {
+    @include m.card(0.25rem);
+
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    margin-top: 0.2rem;
+    padding: 0.5rem 0;
+    border-width: 1px;
+    border-style: solid;
+    border-color: c.$lavender-gray;
+
+    button.select__item {
+      @include m.interactive;
+      @include m.protected-width;
+
+      display: block;
+      width: 100%;
+      padding: 0.4rem 0.75rem;
+      color: c.$police-blue;
+
+      &.select__item-active {
+        color: c.$blue;
+      }
+    }
+  }
+
+  &:not(.select-expanded) {
+    div.select__menu {
+      display: none;
+    }
+  }
+}

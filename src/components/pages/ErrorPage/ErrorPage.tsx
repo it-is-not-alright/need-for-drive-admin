@@ -3,7 +3,7 @@ import './style.scss';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import RouteUtil from '../../App/route-util';
+import RouteUtil from '../../../route/util';
 import Button from '../../common/Button/Button';
 import { ErrorPageProps } from './types';
 
