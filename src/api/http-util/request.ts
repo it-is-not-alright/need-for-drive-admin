@@ -1,4 +1,5 @@
-import { getAccessToken } from '../storage-util';
+import { getAccessToken } from '~/src/cookie/auth';
+
 import HeaderUtil from './header';
 
 class RequestUtil {
