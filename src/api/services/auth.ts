@@ -1,4 +1,4 @@
-import { getAccessToken, removeToken, saveToken } from '~/src/api/storage-util';
+import { getAccessToken, removeToken, saveToken } from '~/src/cookie/auth';
 
 import { client } from '..';
 import { HTTPStatus } from '../http-util/types';

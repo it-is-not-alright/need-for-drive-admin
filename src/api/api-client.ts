@@ -1,7 +1,7 @@
+import { getRefreshToken, saveToken } from '../cookie/auth';
 import RequestUtil from './http-util/request';
 import ResponseUtil from './http-util/response';
 import { HTTPStatus } from './http-util/types';
-import { getRefreshToken, saveToken } from './storage-util';
 import { APIEndpoint, AuthRaw } from './types';
 
 class APIClient {
