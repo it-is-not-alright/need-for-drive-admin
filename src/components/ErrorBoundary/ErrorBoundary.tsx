@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { resetRequestError } from '~/src/redux/actions/request-error';
-import { requestErrorSelector } from '~/src/redux/selectors/request-error';
+import { resetRequestError } from '~/src/redux/request-error/actions';
+import { requestErrorSelector } from '~/src/redux/request-error/selectors';
 
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
 import { initState } from './constants';

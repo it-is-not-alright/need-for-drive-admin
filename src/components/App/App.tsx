@@ -6,7 +6,7 @@ import React, { lazy, Suspense, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 
-import { verifyToken } from '~/src/redux/actions/auth';
+import { verifyToken } from '~/src/redux/auth/actions';
 
 import AuthWrapper from '../AuthWrapper/AuthWrapper';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';

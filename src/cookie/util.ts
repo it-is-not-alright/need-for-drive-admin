@@ -2,9 +2,8 @@ import { CookieOptions } from './types';
 
 class CookieUtil {
   public static get(name: string): string | null {
-    const regex = new RegExp(`(^| )${name}=([^;]+)`);
-    const match = document.cookie.match(regex);
-    return match ? match[2] : null;
+    const entry = `; ${document.cookie}`.split(`; ${name}=`)[1];
+    return entry ? entry.split(';')[0] : null;
   }
 
   public static set(name: string, value: string, options: CookieOptions = {}) {

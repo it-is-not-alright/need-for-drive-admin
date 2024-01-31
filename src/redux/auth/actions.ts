@@ -1,8 +1,8 @@
 import { User } from '~/src/api/types';
 
-import { LOG_IN, LOG_OUT, SET_AUTH_STATUS, VERIFY_TOKEN } from '../constants';
-import { AuthStatus } from '../types';
+import { LOG_IN, LOG_OUT, SET_AUTH_STATUS, VERIFY_TOKEN } from './constants';
 import {
+  AuthStatus,
   LogInAction,
   LogOutAction,
   SetAuthStatusAction,

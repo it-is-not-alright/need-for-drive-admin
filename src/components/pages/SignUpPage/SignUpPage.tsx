@@ -5,8 +5,8 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { AppRoute } from '~/comp/App/types';
-import { setAuthStatus } from '~/src/redux/actions/auth';
-import { AuthStatus } from '~/src/redux/types';
+import { setAuthStatus } from '~/src/redux/auth/actions';
+import { AuthStatus } from '~/src/redux/auth/types';
 import Validator from '~/src/validation/validator';
 
 import AuthForm from '../../common/AuthForm/AuthForm';

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import authReducer from './auth';
-import requestErrorReducer from './request-error';
+import authReducer from './auth/reducer';
+import requestErrorReducer from './request-error/reducer';
 
 const rootReducer = combineReducers({
   authState: authReducer,

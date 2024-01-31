@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import Button from '~/comp/common/Button/Button';
-import { logOut } from '~/src/redux/actions/auth';
+import { logOut } from '~/src/redux/auth/actions';
 
 function OrdersPage() {
   const dispatch = useDispatch();

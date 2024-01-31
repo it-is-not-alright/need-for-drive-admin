@@ -1,6 +1,5 @@
-import { RequestErrorAction } from '../actions/types';
-import { RESET_REQUEST_ERROR, SET_REQUEST_ERROR } from '../constants';
-import { RequestError } from '../types';
+import { RESET_REQUEST_ERROR, SET_REQUEST_ERROR } from './constants';
+import { RequestError, RequestErrorAction } from './types';
 
 const initialState: RequestError = {
   badStatus: null,
