@@ -1,0 +1,15 @@
+@use '~/comp/_colors' as c;
+@use '~/comp/_mixins' as m;
+@use '~/comp/_dimensions' as d;
+
+div.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  &:not(.checkbox-group-readonly) {
+    input {
+      cursor: pointer;
+    }
+  }
+}

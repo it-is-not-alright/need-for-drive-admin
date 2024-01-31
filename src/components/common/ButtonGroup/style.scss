@@ -1,0 +1,43 @@
+@use '~/comp/_colors' as c;
+@use '~/comp/_mixins' as m;
+@use '~/comp/_dimensions' as d;
+
+$icon-size: 0.6rem;
+
+div.button-group {
+  display: flex;
+
+  button {
+    @include m.interactive;
+    @include m.protected-width;
+
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+    padding: 0.3rem 0.5rem;
+    color: c.$police-blue;
+    font-size: d.$fs-1;
+    border-width: 1px;
+    border-style: solid;
+    border-color: c.$lavender-gray;
+
+    &:not(:first-child) {
+      border-left-style: none;
+    }
+
+    &:first-child {
+      border-top-left-radius: 0.25rem;
+      border-bottom-left-radius: 0.25rem;
+    }
+
+    &:last-child {
+      border-top-right-radius: 0.25rem;
+      border-bottom-right-radius: 0.25rem;
+    }
+
+    svg {
+      width: $icon-size;
+      height: $icon-size;
+    }
+  }
+}

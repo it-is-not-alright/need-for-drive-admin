@@ -12,6 +12,10 @@ button.simple-btn {
   font-size: d.$fs-1;
   border-radius: 0.25rem;
 
+  p {
+    text-align: center;
+  }
+
   &.primary {
     background-color: c.$blue;
   }

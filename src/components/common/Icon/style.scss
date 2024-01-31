@@ -1,3 +1,17 @@
+@use '~/comp/_colors' as c;
+
 svg {
   display: block;
+
+  &.green {
+    fill: c.$green;
+  }
+
+  &.pink {
+    fill: c.$pink;
+  }
+
+  &.shadow-blue {
+    fill: c.$shadow-blue;
+  }
 }

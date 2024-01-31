@@ -1,25 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { client } from '~/src/api';
-
 import DataViewer from '../../common/DataViewer/DataViewer';
-import { filterConfig, initFilter } from './constants';
+import { filterConfig, initFilter, orders } from './constants';
+import OrderRow from './OrderRow/OrderRow';
 import { OrderFilter } from './types';
 
 function OrdersPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = parseInt(searchParams.get('page'), 10) || 1;
-
-  const test = async () => {
-    const testTime = '2023-01-15T08:27:23.611Z';
-    const data = await client.get(`db/order?createdAt=${testTime}`);
-    console.log(data);
-  };
-
-  useEffect(() => {
-    test();
-  }, []);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleFilterApply = (filter: OrderFilter) => {
@@ -41,8 +30,9 @@ function OrdersPage() {
         filterConfig={filterConfig}
         onFilterApply={handleFilterApply}
       >
-        <p>order 1</p>
-        <p>order 2</p>
+        {orders.map((raw) => (
+          <OrderRow raw={raw} key={raw.id} />
+        ))}
       </DataViewer>
     </div>
   );

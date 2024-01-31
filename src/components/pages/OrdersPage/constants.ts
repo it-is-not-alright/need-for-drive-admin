@@ -1,4 +1,5 @@
-import { Entity } from '~/src/api/types';
+import i30Image from '~/assets/images/hyundai_i30-n.png';
+import { Entity, OrderRaw } from '~/src/api/types';
 
 import { OrderFilter, OrderFilterConfig } from './types';
 
@@ -29,4 +30,33 @@ const filterConfig: OrderFilterConfig = {
   },
 };
 
-export { filterConfig, initFilter };
+const orders: OrderRaw[] = [
+  {
+    id: 1,
+    color: 'Голубой',
+    dateFrom: '1661288400916',
+    dateTo: '1661590800916',
+    isFullTank: true,
+    isNeedChildChair: false,
+    isRightWheel: false,
+    price: 4300,
+    carId: {
+      id: 1,
+      name: 'i30 N',
+      thumbnail: {
+        path: i30Image,
+      },
+    },
+    cityId: {
+      id: 1,
+      name: 'Ульяновск',
+    },
+    pointId: {
+      id: 1,
+      name: '',
+      address: 'Нариманова 42',
+    },
+  },
+];
+
+export { filterConfig, initFilter, orders };

@@ -18,6 +18,14 @@ div.data-grid {
 
   div.data-grid__header {
     justify-content: space-between;
+
+    div.data-grid__select-area {
+      max-width: 100%;
+
+      div.select {
+        width: 9rem;
+      }
+    }
   }
 
   div.data-grid__main {

@@ -17,13 +17,42 @@ type User = {
   password: string;
 };
 
-type RefreshBody = {
-  refresh_token: string;
-};
-
-interface Entity {
+type Entity = {
   id: number;
   label: string;
-}
+};
 
-export { APIEndpoint, AuthRaw, Entity, RefreshBody, User };
+type CarRaw = {
+  id: number;
+  name: string;
+  thumbnail: {
+    path: string;
+  };
+};
+
+type CityRaw = {
+  id: number;
+  name: string;
+};
+
+type PointRaw = {
+  id: number;
+  name: string;
+  address: string;
+};
+
+type OrderRaw = {
+  id: number;
+  color: string;
+  dateFrom: string;
+  dateTo: string;
+  isFullTank: boolean;
+  isNeedChildChair: boolean;
+  isRightWheel: boolean;
+  price: number;
+  carId: CarRaw;
+  cityId: CityRaw;
+  pointId: PointRaw;
+};
+
+export { APIEndpoint, AuthRaw, Entity, OrderRaw, User };

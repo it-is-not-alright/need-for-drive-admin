@@ -5,13 +5,13 @@
 $icon-size: 0.6rem;
 
 div.select {
+  @include m.protected-width;
+
   position: relative;
-  width: 8rem;
   font-size: d.$fs-1;
 
   button.select__toggle {
     @include m.interactive;
-    @include m.protected-width;
 
     display: flex;
     gap: 0.5rem;

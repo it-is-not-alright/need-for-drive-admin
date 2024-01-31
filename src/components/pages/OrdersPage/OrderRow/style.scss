@@ -1,0 +1,30 @@
+@use '~/comp/_colors' as c;
+@use '~/comp/_mixins' as m;
+@use '~/comp/_dimensions' as d;
+
+div.order-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-around;
+  align-items: center;
+
+  p.order-row__text-block {
+    color: c.$roman-silver;
+    font-size: d.$fs-2;
+    line-height: 1.5rem;
+
+    span {
+      color: c.$dark;
+    }
+  }
+
+  img {
+    max-width: min(9rem, 100%);
+  }
+
+  p.order-row__price {
+    color: c.$dark;
+    font-size: 1.5rem;
+  }
+}

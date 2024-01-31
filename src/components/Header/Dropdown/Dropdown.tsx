@@ -5,7 +5,7 @@ import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import AccountImage from '~/assets/images/account.png';
-import { logOut } from '~/src/redux/actions/auth';
+import { logOut } from '~/src/redux/auth/actions';
 
 import Badge from '../../common/Badge/Badge';
 import { BadgeType } from '../../common/Badge/types';
