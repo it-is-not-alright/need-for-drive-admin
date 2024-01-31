@@ -1,6 +1,5 @@
-import { AuthAction } from '../actions/types';
-import { LOG_IN, LOG_OUT, SET_AUTH_STATUS, VERIFY_TOKEN } from '../constants';
-import { AuthState, AuthStatus } from '../types';
+import { LOG_IN, LOG_OUT, SET_AUTH_STATUS, VERIFY_TOKEN } from './constants';
+import { AuthAction, AuthState, AuthStatus } from './types';
 
 const initialState: AuthState = {
   status: AuthStatus.Pending,

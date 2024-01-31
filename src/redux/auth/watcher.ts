@@ -2,11 +2,10 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 
 import { AuthService } from '~/src/api/services/auth';
 
-import { setAuthStatus } from '../actions/auth';
-import { setRequestError } from '../actions/request-error';
-import { LogInAction } from '../actions/types';
-import { LOG_IN, LOG_OUT, VERIFY_TOKEN } from '../constants';
-import { AuthStatus } from '../types';
+import { setRequestError } from '../request-error/actions';
+import { setAuthStatus } from './actions';
+import { LOG_IN, LOG_OUT, VERIFY_TOKEN } from './constants';
+import { AuthStatus, LogInAction } from './types';
 
 function* logInWorker(action: LogInAction): Generator {
   try {

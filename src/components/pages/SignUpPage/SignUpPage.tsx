@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { setAuthStatus } from '~/src/redux/actions/auth';
-import { AuthStatus } from '~/src/redux/types';
+import { setAuthStatus } from '~/src/redux/auth/actions';
+import { AuthStatus } from '~/src/redux/auth/types';
 import RouteUtil from '~/src/route/util';
 import Validator from '~/src/validation/validator';
 
