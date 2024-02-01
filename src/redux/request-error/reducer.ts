@@ -1,8 +1,11 @@
+import { RequestError } from '~/src/api/types';
+
 import { RESET_REQUEST_ERROR, SET_REQUEST_ERROR } from './constants';
-import { RequestError, RequestErrorAction } from './types';
+import { RequestErrorAction } from './types';
 
 const initialState: RequestError = {
-  badStatus: null,
+  status: null,
+  message: null,
 };
 
 const requestErrorReducer = (
@@ -11,7 +14,7 @@ const requestErrorReducer = (
 ): RequestError => {
   switch (action.type) {
     case SET_REQUEST_ERROR:
-      return { badStatus: action.payload };
+      return action.payload;
     case RESET_REQUEST_ERROR:
       return initialState;
     default:

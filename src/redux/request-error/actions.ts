@@ -1,7 +1,9 @@
+import { RequestError } from '~/src/api/types';
+
 import { RESET_REQUEST_ERROR, SET_REQUEST_ERROR } from './constants';
 import { ResetRequestErrorAction, SetRequestErrorAction } from './types';
 
-const setRequestError = (payload: string): SetRequestErrorAction => ({
+const setRequestError = (payload: RequestError): SetRequestErrorAction => ({
   type: SET_REQUEST_ERROR,
   payload,
 });

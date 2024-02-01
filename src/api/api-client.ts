@@ -1,8 +1,6 @@
-import { getRefreshToken, saveToken } from '../cookie/auth';
-import RequestUtil from './http-util/request';
-import ResponseUtil from './http-util/response';
-import { HTTPStatus } from './http-util/types';
-import { APIEndpoint, AuthRaw } from './types';
+import { getRefreshToken, removeToken, saveToken } from '../cookie/auth';
+import { AuthRaw, Endpoint, RequestOptions, RequestResult } from './types';
+import { setHeaders, unpack } from './utils';
 
 class APIClient {
   private baseURL: string;
@@ -11,67 +9,56 @@ class APIClient {
     this.baseURL = baseURL;
   }
 
-  private async request<T>(url: string, init: RequestInit): Promise<T> {
-    const fullURL = `${this.baseURL}/${url}`;
-    const response = await fetch(fullURL, init);
-    if (!response.ok) {
-      throw new Error(String(response.status));
+  public async get<T>(url: string, options: RequestOptions = {}) {
+    return this.request<T>(url, { method: 'GET' }, options);
+  }
+
+  public async post<T>(url: string, options: RequestOptions = {}) {
+    return this.request<T>(url, { method: 'POST' }, options);
+  }
+
+  public async put<T>(url: string, options: RequestOptions = {}) {
+    return this.request<T>(url, { method: 'PUT' }, options);
+  }
+
+  public async delete(url: string, options: RequestOptions = {}) {
+    this.request(url, { method: 'DELETE' }, options);
+  }
+
+  public async refreshToken(): Promise<RequestResult<boolean>> {
+    const raw = await this.post<AuthRaw>(Endpoint.Refresh, {
+      body: { refresh_token: getRefreshToken() },
+    });
+    if (raw.content) {
+      saveToken(raw.content);
+      return { content: true };
     }
-    return ResponseUtil.getContent<T>(response);
+    removeToken();
+    if (raw.error.status === 500) {
+      return { content: false };
+    }
+    return { error: raw.error };
   }
 
-  public async refreshToken() {
-    const authRaw = await this.post<AuthRaw>(
-      APIEndpoint.Refresh,
-      { refresh_token: getRefreshToken() },
-      false,
-    );
-    saveToken(authRaw);
-  }
-
-  private async interceptor<T>(
+  private async request<T>(
     url: string,
     init: RequestInit,
-    isAuthorized: boolean,
-  ): Promise<T> {
-    if (!isAuthorized) {
-      return this.request<T>(url, init);
+    options: RequestOptions,
+  ): Promise<RequestResult<T>> {
+    const fullURL = `${this.baseURL}/${url}`;
+    let fullInit = setHeaders(init, options);
+    if (options.body) {
+      fullInit.body = JSON.stringify(options.body);
     }
-    try {
-      return this.request<T>(url, RequestUtil.authorize(init));
-    } catch (error) {
-      if (error.message === HTTPStatus.Unauthorized) {
-        await this.refreshToken();
-        return this.request<T>(url, RequestUtil.authorize(init));
+    let response = await fetch(fullURL, fullInit);
+    if (response.status === 401 && getRefreshToken() !== null) {
+      const { content } = await this.refreshToken();
+      if (content === true) {
+        fullInit = setHeaders(init, options);
+        response = await fetch(fullURL, fullInit);
       }
-      throw error;
     }
-  }
-
-  public async get<T>(url: string, isAuthorized: boolean = true): Promise<T> {
-    return this.interceptor<T>(url, RequestUtil.get, isAuthorized);
-  }
-
-  public async post<T>(
-    url: string,
-    body: unknown,
-    isAuthorized: boolean = true,
-  ): Promise<T> {
-    const init = RequestUtil.setJSONBody(RequestUtil.post, body);
-    return this.interceptor<T>(url, init, isAuthorized);
-  }
-
-  public async put<T>(
-    url: string,
-    body: unknown,
-    isAuthorized: boolean = true,
-  ): Promise<T> {
-    const init = RequestUtil.setJSONBody(RequestUtil.put, body);
-    return this.interceptor<T>(url, init, isAuthorized);
-  }
-
-  public async delete(url: string, isAuthorized: boolean = true) {
-    this.interceptor(url, RequestUtil.delete, isAuthorized);
+    return unpack<T>(response);
   }
 }
 

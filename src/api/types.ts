@@ -1,4 +1,4 @@
-enum APIEndpoint {
+enum Endpoint {
   LogIn = 'auth/login',
   Refresh = 'auth/refresh',
   LogOut = 'auth/logout',
@@ -15,6 +15,21 @@ type AuthRaw = {
 type User = {
   username: string;
   password: string;
+};
+
+type RequestOptions = {
+  headers?: HeadersInit;
+  body?: unknown;
+};
+
+type RequestError = {
+  status: number;
+  message: string;
+};
+
+type RequestResult<T> = {
+  error?: RequestError;
+  content?: T;
 };
 
 type Entity = {
@@ -55,4 +70,13 @@ type OrderRaw = {
   pointId: PointRaw;
 };
 
-export { APIEndpoint, AuthRaw, Entity, OrderRaw, User };
+export {
+  AuthRaw,
+  Endpoint,
+  Entity,
+  OrderRaw,
+  RequestError,
+  RequestOptions,
+  RequestResult,
+  User,
+};
