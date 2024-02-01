@@ -1,4 +1,4 @@
-enum APIEndpoint {
+enum Endpoint {
   LogIn = 'auth/login',
   Refresh = 'auth/refresh',
   LogOut = 'auth/logout',
@@ -17,8 +17,26 @@ type User = {
   password: string;
 };
 
-type RefreshBody = {
-  refresh_token: string;
+type RequestOptions = {
+  headers?: HeadersInit;
+  body?: unknown;
 };
 
-export { APIEndpoint, AuthData, RefreshBody, User };
+type RequestError = {
+  status: number;
+  message: string;
+};
+
+type RequestResult<T> = {
+  error?: RequestError;
+  content?: T;
+};
+
+export {
+  AuthData,
+  Endpoint,
+  RequestError,
+  RequestOptions,
+  RequestResult,
+  User,
+};

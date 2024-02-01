@@ -1,45 +1,42 @@
 import { getAccessToken, removeToken, saveToken } from '~/src/cookie/auth';
+import { AuthStatus } from '~/src/redux/auth/types';
 
 import { client } from '..';
-import { HTTPStatus } from '../http-util/types';
-import { APIEndpoint, AuthData, User } from '../types';
+import { AuthData, Endpoint, RequestResult, User } from '../types';
 
 class AuthService {
-  public static async logIn(user: User): Promise<boolean> {
-    if (getAccessToken() !== '') {
+  public static async logIn(user: User): Promise<RequestResult<AuthStatus>> {
+    if (getAccessToken() !== null) {
       AuthService.logOut();
     }
-    try {
-      const authData = await client.post<AuthData>(
-        APIEndpoint.LogIn,
-        user,
-        false,
-      );
-      saveToken(authData);
-      return true;
-    } catch (error) {
-      if (error.message === HTTPStatus.Unauthorized) {
-        return false;
-      }
-      throw error;
+    const raw = await client.post<AuthData>(Endpoint.LogIn, {
+      body: user,
+    });
+    if (raw.content) {
+      saveToken(raw.content);
+      return { content: AuthStatus.LogInSuccess };
     }
+    if (raw.error.status === 401) {
+      return { content: AuthStatus.LogInFailure };
+    }
+    return { error: raw.error };
   }
 
-  public static async verifyToken(): Promise<boolean> {
-    try {
-      await client.refreshToken();
-      return true;
-    } catch (error) {
-      if (error.message === HTTPStatus.InternalServerError) {
-        return false;
-      }
-      throw error;
+  public static async verifyToken(): Promise<RequestResult<AuthStatus>> {
+    const result = await client.refreshToken();
+    if (result.content === true) {
+      return { content: AuthStatus.Authorized };
     }
+    if (result.content === false) {
+      return { content: AuthStatus.Unauthorized };
+    }
+    return { error: result.error };
   }
 
-  public static async logOut() {
-    await client.post<null>(APIEndpoint.LogOut, null);
+  public static async logOut(): Promise<RequestResult<null>> {
+    const raw = await client.post<null>(Endpoint.LogOut);
     removeToken();
+    return raw;
   }
 }
 

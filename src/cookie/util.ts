@@ -1,9 +1,9 @@
 import { CookieOptions } from './types';
 
-class CookieUtil {
+class Cookie {
   public static get(name: string): string | null {
-    const entry = `; ${document.cookie}`.split(`; ${name}=`)[1];
-    return entry ? entry.split(';')[0] : null;
+    const overlap = `; ${document.cookie}`.split(`; ${name}=`)[1];
+    return overlap ? overlap.split(';')[0] : null;
   }
 
   public static set(name: string, value: string, options: CookieOptions = {}) {
@@ -19,8 +19,8 @@ class CookieUtil {
   }
 
   public static delete(name: string) {
-    CookieUtil.set(name, '', { 'max-age': '-1' });
+    Cookie.set(name, '', { 'max-age': '-1' });
   }
 }
 
-export default CookieUtil;
+export default Cookie;

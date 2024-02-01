@@ -1,18 +1,14 @@
+import { RequestError } from '~/src/api/types';
+
 import { PayloadAction } from '../types';
 import { RESET_REQUEST_ERROR, SET_REQUEST_ERROR } from './constants';
 
-type RequestError = {
-  badStatus: string | null;
-};
-
-type SetRequestErrorAction = PayloadAction<typeof SET_REQUEST_ERROR, string>;
+type SetRequestErrorAction = PayloadAction<
+  typeof SET_REQUEST_ERROR,
+  RequestError
+>;
 type ResetRequestErrorAction = PayloadAction<typeof RESET_REQUEST_ERROR, null>;
 
 type RequestErrorAction = SetRequestErrorAction | ResetRequestErrorAction;
 
-export {
-  RequestError,
-  RequestErrorAction,
-  ResetRequestErrorAction,
-  SetRequestErrorAction,
-};
+export { RequestErrorAction, ResetRequestErrorAction, SetRequestErrorAction };

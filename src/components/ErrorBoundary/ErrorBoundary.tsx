@@ -32,14 +32,13 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
   render() {
     const { unhandledError } = this.state;
-    const { badStatus, children } = this.props;
-    const status = unhandledError ? '???' : badStatus;
-    if (status !== null) {
+    const { status, message, children } = this.props;
+    if (unhandledError || message) {
       return (
         <ErrorPage
-          status={status}
-          title="Что-то пошло не так"
-          message="Попробуйте перезагрузить страницу"
+          status={message ? status : '???'}
+          message={message ?? 'Что-то пошло не так'}
+          tip="Попробуйте перезагрузить страницу"
           reset={this.reset}
         />
       );

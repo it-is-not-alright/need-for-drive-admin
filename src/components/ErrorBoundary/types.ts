@@ -1,4 +1,4 @@
-import { RequestError } from '~/src/redux/types';
+import { RequestError } from '~/src/api/types';
 
 type ErrorBoundaryOwnProps = {
   children: React.ReactNode;
