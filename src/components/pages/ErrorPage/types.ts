@@ -1,7 +1,7 @@
 type ErrorPageProps = {
-  code: string;
-  title: string;
+  status: number | string;
   message: string;
+  tip: string;
   reset?: () => void;
 };
 

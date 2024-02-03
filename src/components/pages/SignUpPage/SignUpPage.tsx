@@ -1,17 +1,20 @@
 import './style.scss';
 
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { AppRoute } from '~/comp/App/types';
+import { setAuthStatus } from '~/src/redux/auth/actions';
+import { AuthStatus } from '~/src/redux/auth/types';
 import Validator from '~/src/validation/validator';
 
 import AuthForm from '../../common/AuthForm/AuthForm';
-import { SIGN_UP_PARAM } from '../constants';
 import { initSignUpFormData, signUpDataScheme } from './constants';
 
 function SignUpPage() {
   const [formData, setFormData] = useState(initSignUpFormData);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleFormSubmit = () => {
@@ -23,7 +26,8 @@ function SignUpPage() {
     if (failure) {
       setFormData(data);
     } else {
-      navigate(`${AppRoute.LogIn}?${SIGN_UP_PARAM}=true`);
+      dispatch(setAuthStatus(AuthStatus.SignUpSuccess));
+      navigate(AppRoute.LogIn);
     }
   };
 
@@ -40,8 +44,8 @@ function SignUpPage() {
         onSubmit={handleFormSubmit}
         email={formData.email}
         password={formData.password}
-        passwordConfirm={formData.passwordConfirm}
         onInputChange={handleInputChange}
+        passwordConfirm={formData.passwordConfirm}
       />
     </div>
   );

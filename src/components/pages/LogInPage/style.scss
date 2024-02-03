@@ -12,12 +12,12 @@ div#log-in-page {
     margin: 1rem;
   }
 
-  div#log-in-page__sign-up-alert {
+  div#log-in-page__sign-in-alert {
     @include m.card;
 
     grid-column: 2;
     grid-row: 3;
-    margin: 1rem;
+    margin: 0 1rem;
     padding: 1rem;
     text-align: center;
 

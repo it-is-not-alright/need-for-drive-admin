@@ -15,6 +15,7 @@ function AuthForm({
   password,
   passwordConfirm,
   onInputChange,
+  pending = false,
 }: AuthFormProps) {
   const isSignUp = passwordConfirm !== undefined;
 
@@ -59,7 +60,11 @@ function AuthForm({
           <Link to={isSignUp ? AppRoute.LogIn : AppRoute.SignUp}>
             {isSignUp ? 'Вход' : 'Регистрация'}
           </Link>
-          <Button text={isSignUp ? 'Отправить' : 'Войти'} onClick={onSubmit} />
+          <Button
+            text={isSignUp ? 'Отправить' : 'Войти'}
+            onClick={onSubmit}
+            pending={pending}
+          />
         </div>
       </div>
     </form>

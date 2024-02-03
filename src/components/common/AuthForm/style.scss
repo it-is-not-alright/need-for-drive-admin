@@ -29,19 +29,13 @@ form.auth-form {
     div.auth-form__footer {
       display: flex;
       flex-wrap: wrap;
+      gap: 0.5rem;
       align-items: center;
       padding: 0 1rem 1rem;
   
       a {
-        flex-grow: 1000;
-        padding: 0.5rem 0.5rem 0.5rem 0;
-        color: c.$blue;
+        flex: 1;
         font-size: 0.8rem;
-        text-decoration: none;
-      }
-  
-      button {
-        flex-grow: 1;
       }
     }
   }

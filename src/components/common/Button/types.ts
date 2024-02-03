@@ -5,8 +5,9 @@ enum ButtonType {
 
 type ButtonProps = {
   text: string;
-  type?: ButtonType;
   onClick: () => void;
+  type?: ButtonType;
+  pending?: boolean;
 };
 
 export { ButtonProps, ButtonType };

@@ -14,9 +14,7 @@ const initLogInFormData: LogInFormData = {
 };
 
 const logInDataScheme: LogInFormDataScheme = {
-  email: Validator.string()
-    .min(1, 'Поле обязательно для заполнения')
-    .matches(/^\S+@\S+\.\S+$/, 'Некорректный адрес электронной почты'),
+  email: Validator.string().min(1, 'Поле обязательно для заполнения'),
   password: Validator.string().min(1, 'Поле обязательно для заполнения'),
 };
 

@@ -1,40 +1,54 @@
-import React, { Component, ErrorInfo } from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { resetRequestError } from '~/src/redux/request-error/actions';
+import { requestErrorSelector } from '~/src/redux/request-error/selectors';
 
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
-import { ErrorBoundaryProps, ErrorBoundaryState } from './types';
+import { initState } from './constants';
+import {
+  ErrorBoundaryDispatchProps,
+  ErrorBoundaryOwnProps,
+  ErrorBoundaryProps,
+  ErrorBoundaryState,
+  ErrorBoundaryStateProps,
+} from './types';
 
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
-    this.state = { errorMessage: '' };
+    this.state = initState;
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    // eslint-disable-next-line no-console
-    console.error('ErrorBoundary caught an error: ', error, errorInfo);
-    const errorMessage: string = error.message;
-    this.setState({ errorMessage });
+  componentDidCatch(): void {
+    this.setState({ unhandledError: true });
   }
 
   private reset = (): void => {
-    this.setState({ errorMessage: '' });
+    const { reset } = this.props;
+    reset();
+    this.setState(initState);
   };
 
   render() {
-    const { errorMessage } = this.state;
-    if (errorMessage) {
+    const { unhandledError } = this.state;
+    const { status, message, children } = this.props;
+    if (unhandledError || message) {
       return (
         <ErrorPage
-          code="???"
-          title="Что-то пошло не так"
-          message={errorMessage}
+          status={message ? status : '???'}
+          message={message ?? 'Что-то пошло не так'}
+          tip="Попробуйте перезагрузить страницу"
           reset={this.reset}
         />
       );
     }
-    const { children } = this.props;
     return children;
   }
 }
 
-export default ErrorBoundary;
+export default connect<
+  ErrorBoundaryStateProps,
+  ErrorBoundaryDispatchProps,
+  ErrorBoundaryOwnProps
+>(requestErrorSelector, { reset: resetRequestError })(ErrorBoundary);
