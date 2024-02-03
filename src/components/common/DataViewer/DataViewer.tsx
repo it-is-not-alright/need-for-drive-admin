@@ -1,57 +1,58 @@
 import './style.scss';
 
-import React, { useState } from 'react';
-
-import { Entity } from '~/src/api/types';
+import React, { useEffect, useState } from 'react';
 
 import Button from '../Button/Button';
 import { ButtonType } from '../Button/types';
 import { Select } from '../Select/Select';
 import Pagination from './Pagination/Pagination';
-import { DataViewerProps, Filter } from './types';
+import { DataViewerProps, FilterValueControlItem } from './types';
+import { compareFilters, paramsToURL } from './utils';
 
-function DataViewer<T extends Filter>({
-  page,
-  pageSize,
+function DataViewer<T extends string>({
   total,
-  onPageChange,
-  initFilter,
+  params,
+  defaultParams,
   filterConfig,
-  onFilterApply,
+  setSearchParams,
   children,
 }: DataViewerProps<T>) {
-  const [filterApplied, setFilterApplied] = useState(true);
-  const [filter, setFilter] = useState(initFilter);
+  const [filter, setFilter] = useState(params.filter);
 
-  const handleFilterChange = (field: string, value: Entity | null) => {
-    setFilter({
-      ...filter,
-      [field]: value,
-    });
-    setFilterApplied(false);
+  useEffect(() => {
+    setFilter(params.filter);
+  }, [params]);
+
+  const handleFilterChange = (
+    param: T,
+    item: FilterValueControlItem | null,
+  ) => {
+    setFilter({ ...filter, [param]: item.value });
   };
 
   const handleFilterResetButtonClick = () => {
-    setFilter(initFilter);
-    setFilterApplied(false);
+    setSearchParams(paramsToURL({ ...defaultParams, page: params.page }));
   };
 
   const handleFilterApplyButtonClick = () => {
-    onFilterApply(filter);
-    setFilterApplied(true);
+    setSearchParams(paramsToURL({ ...params, filter, page: 1 }));
+  };
+
+  const handlePageChange = (page: number) => {
+    setSearchParams(paramsToURL({ ...params, page }));
   };
 
   return (
     <div className="data-grid">
       <div className="data-grid__header">
         <div className="data-grid__select-area">
-          {Object.keys(filterConfig).map((key) => (
+          {Object.keys(filterConfig).map((param: T) => (
             <Select
-              key={key}
-              items={filterConfig[key].values}
-              placeholder={filterConfig[key].placeholder}
-              selectedItem={filter[key]}
-              onChange={(item) => handleFilterChange(key, item)}
+              key={param}
+              items={Object.values(filterConfig[param].values)}
+              placeholder={filterConfig[param].placeholder}
+              selectedItem={filterConfig[param].values[filter[param]] || null}
+              onChange={(item) => handleFilterChange(param, item)}
             />
           ))}
         </div>
@@ -60,21 +61,22 @@ function DataViewer<T extends Filter>({
             text="Сбросить"
             onClick={handleFilterResetButtonClick}
             type={ButtonType.Danger}
+            isDisabled={params.filterIsDefault}
           />
           <Button
             text="Применить"
             onClick={handleFilterApplyButtonClick}
-            isDisabled={filterApplied}
+            isDisabled={compareFilters(filter, params.filter)}
           />
         </div>
       </div>
       <div className="data-grid__main">{children}</div>
       <div className="data-grid__footer">
         <Pagination
-          page={page}
-          pageSize={pageSize}
+          page={params.page}
+          pageSize={10}
           total={total}
-          onChange={onPageChange}
+          onChange={handlePageChange}
         />
       </div>
     </div>

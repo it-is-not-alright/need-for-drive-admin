@@ -10,14 +10,14 @@ function CheckboxGroup({
   name,
   map,
   onChange,
-  isReadonly = false,
+  isReadOnly = false,
 }: CheckboxGroupProps) {
   const classes = classNames('checkbox-group', {
-    'checkbox-group-readonly': isReadonly,
+    'checkbox-group-readonly': isReadOnly,
   });
 
   const handleChange = (key: string, checked: boolean) => {
-    if (isReadonly) {
+    if (isReadOnly) {
       return;
     }
     onChange({ ...map, [key]: { ...map[key], checked } });
@@ -33,6 +33,7 @@ function CheckboxGroup({
           checked={map[key].checked}
           key={key}
           onChange={(checked) => handleChange(key, checked)}
+          isReadOnly={isReadOnly}
         />
       ))}
     </div>

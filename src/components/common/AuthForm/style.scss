@@ -3,8 +3,6 @@
 @use '~/comp/_dimensions' as d;
 
 form.auth-form {
-  height: fit-content;
-
   div.auth-form__logo {
     display: flex;
     flex-wrap: wrap;

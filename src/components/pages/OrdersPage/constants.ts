@@ -1,33 +1,16 @@
 import i30Image from '~/assets/images/hyundai_i30-n.png';
-import { Entity, OrderRaw } from '~/src/api/types';
+import { OrderRaw } from '~/src/api/types';
 
-import { OrderFilter, OrderFilterConfig } from './types';
+import { OrderSearchParams } from './types';
 
-const cities: Entity[] = [
-  { id: 1, label: 'Ульяновск' },
-  { id: 2, label: 'Казань' },
-];
-
-const cars: Entity[] = [
-  { id: 1, label: 'Elantra' },
-  { id: 2, label: 'Car 1' },
-  { id: 3, label: 'Car 2' },
-];
-
-const initFilter: OrderFilter = {
-  cityId: null,
-  carId: null,
-};
-
-const filterConfig: OrderFilterConfig = {
-  cityId: {
-    values: cities,
-    placeholder: 'Город',
+const defaultParams: OrderSearchParams = {
+  page: 1,
+  filter: {
+    carId: null,
+    cityId: null,
+    orderStatusId: null,
   },
-  carId: {
-    values: cars,
-    placeholder: 'Модель',
-  },
+  filterIsDefault: true,
 };
 
 const orders: OrderRaw[] = [
@@ -56,7 +39,11 @@ const orders: OrderRaw[] = [
       name: '',
       address: 'Нариманова 42',
     },
+    orderStatusId: {
+      id: 1,
+      name: '',
+    },
   },
 ];
 
-export { filterConfig, initFilter, orders };
+export { defaultParams, orders };

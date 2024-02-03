@@ -1,32 +1,37 @@
 import { User } from '~/src/api/types';
 
-import { LOG_IN, LOG_OUT, SET_AUTH_STATUS, VERIFY_TOKEN } from './constants';
+import {
+  AUTH_STATUS_CHANGED,
+  LOG_IN_REQUESTED,
+  LOG_OUT_REQUESTED,
+  TOKEN_VERIFICATION_REQUESTED,
+} from './constants';
 import {
   AuthStatus,
-  LogInAction,
-  LogOutAction,
-  SetAuthStatusAction,
-  VerifyTokenAction,
+  AuthStatusChangedAction,
+  LogInRequestedAction,
+  LogOutRequestedAction,
+  TokenVerificationRequestedAction,
 } from './types';
 
-const logIn = (payload: User): LogInAction => ({
-  type: LOG_IN,
-  payload,
+const requestLogIn = (user: User): LogInRequestedAction => ({
+  type: LOG_IN_REQUESTED,
+  payload: user,
 });
 
-const verifyToken = (): VerifyTokenAction => ({
-  type: VERIFY_TOKEN,
+const requestTokenVerification = (): TokenVerificationRequestedAction => ({
+  type: TOKEN_VERIFICATION_REQUESTED,
   payload: null,
 });
 
-const logOut = (): LogOutAction => ({
-  type: LOG_OUT,
+const requestLogOut = (): LogOutRequestedAction => ({
+  type: LOG_OUT_REQUESTED,
   payload: null,
 });
 
-const setAuthStatus = (payload: AuthStatus): SetAuthStatusAction => ({
-  type: SET_AUTH_STATUS,
-  payload,
+const setAuthStatus = (status: AuthStatus): AuthStatusChangedAction => ({
+  type: AUTH_STATUS_CHANGED,
+  payload: status,
 });
 
-export { logIn, logOut, setAuthStatus, verifyToken };
+export { requestLogIn, requestLogOut, requestTokenVerification, setAuthStatus };

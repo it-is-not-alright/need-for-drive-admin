@@ -1,25 +1,46 @@
-import { Entity } from '~/src/api/types';
+import { SetURLSearchParams } from 'react-router-dom';
 
-type Filter = {
-  [field: string]: Entity | null;
+import { ControlItem } from '../../types';
+
+type FilterSearchParams<T extends string> = {
+  [K in T]: string | null;
 };
 
-type FilterConfig<T extends Filter> = {
-  [K in keyof T]: {
-    values: Entity[];
+type SearchParams<T extends string> = {
+  page: number;
+  filter: FilterSearchParams<T>;
+  filterIsDefault: boolean;
+};
+
+interface FilterValueControlItem extends ControlItem {
+  value: string;
+}
+
+type FilterValues = {
+  [value: string]: FilterValueControlItem;
+};
+
+type FilterConfig<T extends string> = {
+  [K in T]: {
     placeholder: string;
+    values: FilterValues;
   };
 };
 
-type DataViewerProps<T extends Filter> = {
-  page: number;
-  pageSize: number;
+type DataViewerProps<T extends string> = {
   total: number;
-  onPageChange: (page: number) => void;
-  initFilter: T;
+  params: SearchParams<T>;
+  defaultParams: SearchParams<T>;
   filterConfig: FilterConfig<T>;
-  onFilterApply: (filter: T) => void;
+  setSearchParams: SetURLSearchParams;
   children: React.ReactNode;
 };
 
-export { DataViewerProps, Filter, FilterConfig };
+export {
+  DataViewerProps,
+  FilterConfig,
+  FilterSearchParams,
+  FilterValueControlItem,
+  FilterValues,
+  SearchParams,
+};

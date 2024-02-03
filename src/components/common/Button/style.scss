@@ -5,7 +5,7 @@
 button.simple-btn {
   @include m.interactive;
   @include m.protected-width;
-  
+
   position: relative;
   padding: 0.5rem 1.75rem;
   color: c.$white;

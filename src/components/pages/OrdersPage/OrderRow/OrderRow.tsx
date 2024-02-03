@@ -39,7 +39,7 @@ function OrderRow({ raw }: OrderRowProps) {
         {DateUtil.toString(new Date(Number(raw.dateTo)))} <br />
         Цвет: <span>{raw.color}</span>
       </p>
-      <CheckboxGroup name="service" map={checkboxMap} isReadonly />
+      <CheckboxGroup name={`${raw.id}-service`} map={checkboxMap} isReadOnly />
       <p className="order-row__price">{NumberUtil.asCurrency(raw.price)}</p>
       <ButtonGroup items={buttonGroupItems} />
     </div>

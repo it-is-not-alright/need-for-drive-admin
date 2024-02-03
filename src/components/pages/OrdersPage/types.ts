@@ -1,12 +1,9 @@
-import { Entity } from '~/src/api/types';
+import { FilterConfig, SearchParams } from '../../common/DataViewer/types';
 
-import { Filter, FilterConfig } from '../../common/DataViewer/types';
+type OrderFilterParam = 'cityId' | 'carId' | 'orderStatusId';
 
-interface OrderFilter extends Filter {
-  cityId: Entity | null;
-  carId: Entity | null;
-}
+type OrderSearchParams = SearchParams<OrderFilterParam>;
 
-type OrderFilterConfig = FilterConfig<OrderFilter>;
+type OrderFilterConfig = FilterConfig<OrderFilterParam>;
 
-export { OrderFilter, OrderFilterConfig };
+export { OrderFilterConfig, OrderSearchParams };

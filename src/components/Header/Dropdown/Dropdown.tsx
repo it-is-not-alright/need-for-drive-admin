@@ -5,16 +5,18 @@ import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import AccountImage from '~/assets/images/account.png';
-import { logOut } from '~/src/redux/auth/actions';
+import { requestLogOut } from '~/src/redux/auth/actions';
 
 import Badge from '../../common/Badge/Badge';
 import { BadgeType } from '../../common/Badge/types';
+import ConfirmPopUp from '../../common/ConfirmPopUp/ConfirmPopUp';
 import Icon from '../../common/Icon/Icon';
 import { NUM_OF_NOTIFICATIONS } from '../constants';
 
 function Dropdown() {
   const dispatch = useDispatch();
-  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [popUpIsDisplayed, setPopUpIsDisplayed] = useState(false);
   const dropdown = useRef<HTMLDivElement>();
   const classes = classNames('dropdown', { 'dropdown-expanded': isExpanded });
 
@@ -39,7 +41,14 @@ function Dropdown() {
   };
 
   const handleLogOutItemClick = () => {
-    dispatch(logOut());
+    setPopUpIsDisplayed(true);
+  };
+
+  const handleLogOutConfirm = (confirmed: boolean) => {
+    if (confirmed) {
+      dispatch(requestLogOut());
+    }
+    setPopUpIsDisplayed(false);
   };
 
   return (
@@ -71,6 +80,10 @@ function Dropdown() {
           Выход
         </button>
       </div>
+      <ConfirmPopUp
+        isDisplayed={popUpIsDisplayed}
+        onResponse={handleLogOutConfirm}
+      />
     </div>
   );
 }

@@ -45,7 +45,7 @@ class APIClient {
     init: RequestInit,
     options: RequestOptions,
   ): Promise<RequestResult<T>> {
-    const fullURL = `${this.baseURL}/${url}`;
+    const fullURL = `${this.baseURL}/${url}${options.params ?? ''}`;
     let fullInit = setHeaders(init, options);
     if (options.body) {
       fullInit.body = JSON.stringify(options.body);

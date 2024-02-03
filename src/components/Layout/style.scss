@@ -11,7 +11,7 @@
   padding: 0;
   font-weight: 400;
   font-size: inherit;
-  font-family: f.$roboto , sans-serif;
+  font-family: f.$roboto, sans-serif;
   outline: 0;
   -webkit-tap-highlight-color: transparent;
 }
@@ -19,7 +19,10 @@
 a {
   text-decoration: none;
 
-  &:link, &:visited, &:hover, &:active {
+  &:link,
+  &:visited,
+  &:hover,
+  &:active {
     color: c.$blue;
   }
 }
@@ -47,7 +50,7 @@ body,
 
     @include m.on-non-mobile {
       grid-row: 1 / 4;
-    };
+    }
   }
 
   header {
@@ -66,7 +69,7 @@ body,
 
     @include m.on-non-mobile {
       grid-column: 2;
-    };
+    }
   }
 }
 

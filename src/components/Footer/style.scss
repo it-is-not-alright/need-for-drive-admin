@@ -13,9 +13,10 @@ footer {
 
   @include m.on-non-mobile {
     padding: 1.5rem;
-  };
+  }
 
-  a, p {
+  a,
+  p {
     font-size: d.$fs-1;
   }
 

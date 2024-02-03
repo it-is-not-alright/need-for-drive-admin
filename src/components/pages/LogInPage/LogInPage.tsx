@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import AuthForm from '~/comp/common/AuthForm/AuthForm';
-import { logIn, setAuthStatus } from '~/src/redux/auth/actions';
+import { requestLogIn, setAuthStatus } from '~/src/redux/auth/actions';
 import { authSelector } from '~/src/redux/auth/selectors';
 import { AuthStatus } from '~/src/redux/auth/types';
 import RouteUtil from '~/src/route/util';
@@ -47,7 +47,7 @@ function LogInPage() {
         username: formData.email.value,
         password: formData.password.value,
       };
-      dispatch(logIn(user));
+      dispatch(requestLogIn(user));
     }
   };
 

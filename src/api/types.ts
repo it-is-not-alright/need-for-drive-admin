@@ -2,6 +2,10 @@ enum Endpoint {
   LogIn = 'auth/login',
   Refresh = 'auth/refresh',
   LogOut = 'auth/logout',
+  Car = 'db/car',
+  City = 'db/city',
+  OrderStatus = 'db/orderStatus',
+  Order = 'db/order',
 }
 
 type AuthRaw = {
@@ -20,6 +24,7 @@ type User = {
 type RequestOptions = {
   headers?: HeadersInit;
   body?: unknown;
+  params?: string;
 };
 
 type RequestError = {
@@ -32,9 +37,9 @@ type RequestResult<T> = {
   content?: T;
 };
 
-type Entity = {
-  id: number;
-  label: string;
+type ArrayRequestData<T> = {
+  count: number;
+  data: T[];
 };
 
 type CarRaw = {
@@ -46,6 +51,11 @@ type CarRaw = {
 };
 
 type CityRaw = {
+  id: number;
+  name: string;
+};
+
+type OrderStatusRaw = {
   id: number;
   name: string;
 };
@@ -68,13 +78,17 @@ type OrderRaw = {
   carId: CarRaw;
   cityId: CityRaw;
   pointId: PointRaw;
+  orderStatusId: OrderStatusRaw;
 };
 
 export {
+  ArrayRequestData,
   AuthRaw,
+  CarRaw,
+  CityRaw,
   Endpoint,
-  Entity,
   OrderRaw,
+  OrderStatusRaw,
   RequestError,
   RequestOptions,
   RequestResult,

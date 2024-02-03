@@ -15,14 +15,14 @@ div.dropdown {
     align-items: center;
     width: inherit;
     padding: 0.8rem;
-  
+
     @include m.on-non-mobile {
       padding: 0.8rem 1.5rem;
     }
-  
+
     div.dropdown__img-wrapper {
       position: relative;
-      
+
       img {
         display: block;
         width: 2rem;
@@ -34,23 +34,23 @@ div.dropdown {
           height: 2.5rem;
         }
       }
-  
+
       span.badge {
         @include m.on-non-mobile {
           display: none;
-        };
+        }
       }
     }
-  
+
     div.dropdown__additional-content {
       display: none;
-  
+
       @include m.on-non-mobile {
         display: flex;
         gap: 2rem;
         align-items: center;
-      };
-    
+      }
+
       svg {
         width: $icon-size;
         height: $icon-size;
@@ -91,7 +91,7 @@ div.dropdown {
       &:first-child {
         @include m.on-non-mobile {
           display: none;
-        };
+        }
       }
     }
   }

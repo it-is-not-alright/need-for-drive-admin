@@ -1,10 +1,10 @@
-import { Entity } from '~/src/api/types';
+import { ControlItem } from '../../types';
 
-type SelectProps = {
-  items: Entity[];
+type SelectProps<T extends ControlItem> = {
+  items: T[];
   placeholder: string;
-  selectedItem: Entity | null;
-  onChange: (item: Entity) => void;
+  selectedItem: T | null;
+  onChange: (item: T) => void;
 };
 
 export { SelectProps };

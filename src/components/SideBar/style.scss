@@ -14,7 +14,7 @@ div.side-bar {
   @include m.on-non-mobile {
     border-right: none;
     box-shadow: 0.3rem 0 0.5rem c.$black-coral;
-  };
+  }
 
   button.side-bar__toggle {
     @include m.interactive;
@@ -27,7 +27,7 @@ div.side-bar {
 
     @include m.on-non-mobile {
       padding: 1.35rem;
-    };
+    }
 
     div {
       display: flex;
@@ -37,7 +37,7 @@ div.side-bar {
       p {
         display: none;
       }
-  
+
       svg {
         width: $icon-size;
         height: $icon-size;
@@ -57,7 +57,7 @@ div.side-bar {
       width: 16rem;
       height: auto;
       box-shadow: none;
-    };
+    }
   }
 
   &.side-bar-expanded {
@@ -67,7 +67,7 @@ div.side-bar {
       p {
         @include m.on-non-mobile {
           display: block;
-        };
+        }
       }
     }
 

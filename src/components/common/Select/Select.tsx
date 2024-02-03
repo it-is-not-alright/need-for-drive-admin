@@ -3,12 +3,16 @@ import './style.scss';
 import classNames from 'classnames';
 import React, { useRef, useState } from 'react';
 
-import { Entity } from '~/src/api/types';
-
+import { ControlItem } from '../../types';
 import Icon from '../Icon/Icon';
 import { SelectProps } from './types';
 
-function Select({ items, placeholder, selectedItem, onChange }: SelectProps) {
+function Select<T extends ControlItem>({
+  items,
+  placeholder,
+  selectedItem,
+  onChange,
+}: SelectProps<T>) {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const select = useRef<HTMLDivElement>();
   const classes = classNames('select', { 'select-expanded': isExpanded });
@@ -33,7 +37,7 @@ function Select({ items, placeholder, selectedItem, onChange }: SelectProps) {
     window.addEventListener('click', collapse);
   };
 
-  const handleItemClick = (item: Entity) => {
+  const handleItemClick = (item: T) => {
     onChange(item);
   };
 

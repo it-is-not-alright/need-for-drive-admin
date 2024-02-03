@@ -6,7 +6,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
-import { verifyToken } from '~/src/redux/auth/actions';
+import { requestTokenVerification } from '~/src/redux/auth/actions';
 import { authSelector } from '~/src/redux/auth/selectors';
 import { AuthStatus } from '~/src/redux/auth/types';
 
@@ -21,7 +21,7 @@ function Layout() {
   const isAuthorized = status === AuthStatus.Authorized;
 
   useEffect(() => {
-    dispatch(verifyToken());
+    dispatch(requestTokenVerification());
   }, []);
 
   return (
