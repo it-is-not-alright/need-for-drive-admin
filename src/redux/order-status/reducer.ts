@@ -8,7 +8,7 @@ import {
 import { StatusFilterValuesAction } from './types';
 
 const initState: RequestState<FilterValues> = {
-  data: {},
+  content: {},
   pending: false,
 };
 
@@ -20,7 +20,7 @@ const statusFilterValuesReducer = (
     case STATUS_FILTER_VALUES_REQUESTED:
       return { ...state, pending: true };
     case STATUS_FILTER_VALUES_RECIVED:
-      return { data: action.payload, pending: false };
+      return { content: action.payload, pending: false };
     default:
       return state;
   }

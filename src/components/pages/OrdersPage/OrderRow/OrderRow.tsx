@@ -5,8 +5,8 @@ import React, { useMemo } from 'react';
 import ButtonGroup from '~/src/components/common/ButtonGroup/ButtonGroup';
 import CheckboxGroup from '~/src/components/common/CheckboxGroup/CheckboxGroup';
 import { CheckboxGroupMap } from '~/src/components/common/CheckboxGroup/types';
-import DateUtil from '~/src/util/date';
-import NumberUtil from '~/src/util/number';
+import { dateToString } from '~/src/utils/date';
+import { numberAsCurrency } from '~/src/utils/number';
 
 import { buttonGroupItems } from './constants';
 import { OrderRowProps } from './types';
@@ -33,14 +33,20 @@ function OrderRow({ raw }: OrderRowProps) {
     <div className="order-row">
       <img src={raw.carId.thumbnail.path} alt={raw.carId.name} />
       <p className="order-row__text-block">
-        <span>{raw.carId.name}</span> в <span>{raw.cityId.name}</span>,{' '}
-        {raw.pointId.address} <br />
-        {DateUtil.toString(new Date(Number(raw.dateFrom)))} -{' '}
-        {DateUtil.toString(new Date(Number(raw.dateTo)))} <br />
+        <span>{raw.carId.name.toUpperCase()}</span> в{' '}
+        <span>{raw.cityId.name}</span>, {raw.pointId.address} <br />
+        {dateToString(new Date(Number(raw.dateFrom)))} -{' '}
+        {dateToString(new Date(Number(raw.dateTo)))} <br />
         Цвет: <span>{raw.color}</span>
       </p>
-      <CheckboxGroup name={`${raw.id}-service`} map={checkboxMap} isReadOnly />
-      <p className="order-row__price">{NumberUtil.asCurrency(raw.price)}</p>
+      <div className="checkbox-wrapper">
+        <CheckboxGroup
+          name={`${raw.id}-service`}
+          map={checkboxMap}
+          isDisabled
+        />
+      </div>
+      <p className="order-row__price">{numberAsCurrency(raw.price)}</p>
       <ButtonGroup items={buttonGroupItems} />
     </div>
   );

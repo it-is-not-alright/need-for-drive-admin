@@ -4,7 +4,7 @@ type CheckboxProps = {
   label: string;
   checked: boolean;
   onChange: (checked: boolean) => void;
-  isReadOnly: boolean;
+  isDisabled: boolean;
 };
 
 export { CheckboxProps };

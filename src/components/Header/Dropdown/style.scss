@@ -51,6 +51,10 @@ div.dropdown {
         align-items: center;
       }
 
+      p {
+        color: c.$davys-grey;
+      }
+
       svg {
         width: $icon-size;
         height: $icon-size;

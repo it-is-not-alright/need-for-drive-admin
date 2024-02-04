@@ -5,7 +5,7 @@ import { ORDERS_RECIVED, ORDERS_REQUESTED } from './constants';
 import { OrdersAction } from './types';
 
 const initState: RequestState<ArrayRequestData<OrderRaw>> = {
-  data: {
+  content: {
     data: [],
     count: 0,
   },
@@ -20,7 +20,7 @@ const ordersReducer = (
     case ORDERS_REQUESTED:
       return { ...state, pending: true };
     case ORDERS_RECIVED:
-      return { data: action.payload, pending: false };
+      return { content: action.payload, pending: false };
     default:
       return state;
   }

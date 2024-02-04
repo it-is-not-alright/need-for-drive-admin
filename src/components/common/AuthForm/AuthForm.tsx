@@ -24,11 +24,11 @@ function AuthForm({
     <form className="auth-form">
       <div className="auth-form__logo">
         <Icon id="logo" width="45" height="45" />
-        <p className="police-blue">Need for drive</p>
+        <h1 className="title">Need for drive</h1>
       </div>
       <div className="auth-form__body">
-        <div className="auth-form__header police-blue">
-          {isSignUp ? 'Регистрация' : 'Вход'}
+        <div className="auth-form__header">
+          <h2 className="title">{isSignUp ? 'Регистрация' : 'Вход'}</h2>
         </div>
         <div className="auth-form__main">
           <TextInput

@@ -1,4 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import './style.scss';
+
+import React, { Fragment, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 
@@ -13,7 +15,8 @@ import { statusFilterValuesSelector } from '~/src/redux/order-status/selectors';
 
 import DataViewer from '../../common/DataViewer/DataViewer';
 import { collectParams, paramsToURL } from '../../common/DataViewer/utils';
-import { defaultParams } from './constants';
+import Spinner from '../../common/Spinner/Spinner';
+import { defaultParams, pageSize } from './constants';
 import OrderRow from './OrderRow/OrderRow';
 import { OrderFilterConfig } from './types';
 
@@ -35,40 +38,47 @@ function OrdersPage() {
   useEffect(() => {
     const newParams = collectParams(defaultParams, searchParams);
     setParams(newParams);
-    dispatch(fetchOrders(`${paramsToURL(newParams)}&limit=${5}`));
+    dispatch(fetchOrders(`${paramsToURL(newParams)}&limit=${pageSize}`));
   }, [searchParams]);
 
   const filterConfig: OrderFilterConfig = useMemo(() => {
     return {
       cityId: {
         placeholder: 'Город',
-        values: cityFilterValues.data,
+        values: cityFilterValues.content,
       },
       carId: {
         placeholder: 'Модель',
-        values: carFilterValues.data,
+        values: carFilterValues.content,
       },
       orderStatusId: {
         placeholder: 'Статус',
-        values: statusFilterValues.data,
+        values: statusFilterValues.content,
       },
     };
   }, [carFilterValues, cityFilterValues, statusFilterValues]);
 
   return (
     <div className="page">
-      <h1>Заказы</h1>
+      <h1 className="title">Заказы</h1>
       <DataViewer
-        total={orders.data.count}
+        limit={pageSize}
+        total={orders.content.count}
         params={params}
         defaultParams={defaultParams}
         filterConfig={filterConfig}
         setSearchParams={setSearchParams}
       >
-        {orders.data.data.map((raw) => (
-          <OrderRow raw={raw} key={raw.id} />
+        {orders.content.data.map((raw, index) => (
+          <Fragment key={raw.id}>
+            <OrderRow raw={raw} />
+            {index !== orders.content.data.length - 1 && (
+              <div className="spacer" />
+            )}
+          </Fragment>
         ))}
       </DataViewer>
+      <Spinner isDisplayed={orders.pending} />
     </div>
   );
 }

@@ -10,6 +10,7 @@ import { DataViewerProps, FilterValueControlItem } from './types';
 import { compareFilters, paramsToURL } from './utils';
 
 function DataViewer<T extends string>({
+  limit,
   total,
   params,
   defaultParams,
@@ -27,15 +28,17 @@ function DataViewer<T extends string>({
     param: T,
     item: FilterValueControlItem | null,
   ) => {
-    setFilter({ ...filter, [param]: item.value });
+    setFilter({ ...filter, [param]: item?.value ?? null });
   };
 
   const handleFilterResetButtonClick = () => {
-    setSearchParams(paramsToURL({ ...defaultParams, page: params.page }));
+    setSearchParams(paramsToURL(defaultParams));
   };
 
   const handleFilterApplyButtonClick = () => {
-    setSearchParams(paramsToURL({ ...params, filter, page: 1 }));
+    setSearchParams(
+      paramsToURL({ ...params, filter, page: defaultParams.page }),
+    );
   };
 
   const handlePageChange = (page: number) => {
@@ -43,9 +46,9 @@ function DataViewer<T extends string>({
   };
 
   return (
-    <div className="data-grid">
-      <div className="data-grid__header">
-        <div className="data-grid__select-area">
+    <div className="data-viewer">
+      <div className="data-viewer__header">
+        <div className="data-viewer__select-area">
           {Object.keys(filterConfig).map((param: T) => (
             <Select
               key={param}
@@ -56,7 +59,7 @@ function DataViewer<T extends string>({
             />
           ))}
         </div>
-        <div className="data-grid__button-area">
+        <div className="data-viewer__button-area">
           <Button
             text="Сбросить"
             onClick={handleFilterResetButtonClick}
@@ -70,15 +73,24 @@ function DataViewer<T extends string>({
           />
         </div>
       </div>
-      <div className="data-grid__main">{children}</div>
-      <div className="data-grid__footer">
-        <Pagination
-          page={params.page}
-          pageSize={10}
-          total={total}
-          onChange={handlePageChange}
-        />
+      <div className="data-viewer__main">
+        {total > 0 ? (
+          children
+        ) : (
+          <p className="data-viewer__placeholder">Результаты не найдены</p>
+        )}
       </div>
+      {total > 0 && (
+        <div className="data-viewer__footer">
+          <Pagination
+            page={params.page}
+            pageSize={limit}
+            total={total}
+            onChange={handlePageChange}
+            offset={1}
+          />
+        </div>
+      )}
     </div>
   );
 }

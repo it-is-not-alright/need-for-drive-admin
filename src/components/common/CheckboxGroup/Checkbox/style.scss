@@ -8,9 +8,11 @@ div.checkbox {
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  width: fit-content;
 
   div.checkbox__checkmark {
     width: $size;
+    min-width: $size;
     height: $size;
     padding: 0.15rem;
     border-width: 1px;

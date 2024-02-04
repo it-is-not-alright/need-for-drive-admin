@@ -7,7 +7,7 @@ div.spinner {
   align-items: center;
 
   span.spinner__kernel {
-    @include m.spinner(c.$green, 3rem, 0.2rem);
+    @include m.spinner(c.$blue, 3rem, 0.2rem);
 
     display: block;
   }

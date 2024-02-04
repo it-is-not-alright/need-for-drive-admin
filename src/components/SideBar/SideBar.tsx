@@ -32,7 +32,7 @@ function SideBar({ isDisplayed }: SideBarProps) {
       >
         <div>
           <Icon id="logo" />
-          <p className="police-blue">Need for drive</p>
+          <p>Need for drive</p>
         </div>
       </button>
       <div className="side-bar__menu">

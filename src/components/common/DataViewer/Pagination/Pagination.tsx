@@ -5,43 +5,54 @@ import React from 'react';
 import { PaginationItem } from './PaginationItem/PaginationItem';
 import { PaginationProps } from './types';
 
-function Pagination({ page, pageSize, total, onChange }: PaginationProps) {
+function Pagination({
+  page,
+  pageSize,
+  total,
+  onChange,
+  offset = 0,
+}: PaginationProps) {
   const lastPage = Math.ceil(total / pageSize);
+  const offsettedPage = page + offset;
+
+  const handleChange = (newPage: number) => {
+    onChange(newPage - offset);
+  };
 
   return (
     <div className="pagination">
       <PaginationItem
         value="«"
-        onClick={() => onChange(page - 1)}
-        isDisplayed={page !== 1}
+        onClick={() => handleChange(offsettedPage - 1)}
+        isDisplayed={offsettedPage !== 1}
       />
       <PaginationItem
         value="1"
-        onClick={() => onChange(1)}
-        isDisplayed={page > 2}
+        onClick={() => handleChange(1)}
+        isDisplayed={offsettedPage > 2}
       />
-      {page > 3 && <span>...</span>}
+      {offsettedPage > 3 && <span>...</span>}
       <PaginationItem
-        value={page - 1}
-        onClick={() => onChange(page - 1)}
-        isDisplayed={page > 1}
+        value={offsettedPage - 1}
+        onClick={() => handleChange(offsettedPage - 1)}
+        isDisplayed={offsettedPage > 1}
       />
-      <PaginationItem value={page} isActive />
+      <PaginationItem value={offsettedPage} isActive />
       <PaginationItem
-        value={page + 1}
-        onClick={() => onChange(page + 1)}
-        isDisplayed={lastPage > page}
+        value={offsettedPage + 1}
+        onClick={() => handleChange(offsettedPage + 1)}
+        isDisplayed={lastPage > offsettedPage}
       />
-      {lastPage - page > 2 && <span>...</span>}
+      {lastPage - offsettedPage > 2 && <span>...</span>}
       <PaginationItem
         value={lastPage}
-        onClick={() => onChange(lastPage)}
-        isDisplayed={lastPage - page > 1}
+        onClick={() => handleChange(lastPage)}
+        isDisplayed={lastPage - offsettedPage > 1}
       />
       <PaginationItem
         value="»"
-        onClick={() => onChange(page + 1)}
-        isDisplayed={lastPage > page}
+        onClick={() => handleChange(offsettedPage + 1)}
+        isDisplayed={lastPage > offsettedPage}
       />
     </div>
   );

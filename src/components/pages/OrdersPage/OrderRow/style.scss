@@ -9,7 +9,13 @@ div.order-row {
   justify-content: space-around;
   align-items: center;
 
+  img {
+    max-width: min(9rem, 100%);
+  }
+
   p.order-row__text-block {
+    flex: 1;
+    min-width: min(15rem, 100%);
     color: c.$roman-silver;
     font-size: d.$fs-2;
     line-height: 1.5rem;
@@ -19,12 +25,20 @@ div.order-row {
     }
   }
 
-  img {
-    max-width: min(9rem, 100%);
+  div.checkbox-wrapper {
+    flex: 1;
+
+    div.checkbox-group {
+      width: fit-content;
+      margin: auto;
+    }
   }
 
   p.order-row__price {
+    flex: 1;
+    min-width: 9ch;
     color: c.$dark;
     font-size: 1.5rem;
+    text-align: center;
   }
 }

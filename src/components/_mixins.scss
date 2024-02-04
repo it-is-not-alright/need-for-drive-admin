@@ -4,7 +4,7 @@
 @mixin card($border-radius: 0.75rem) {
   background-color: c.$white;
   border-radius: $border-radius;
-  box-shadow: 0 0.25rem 0.5rem c.$black-coral;
+  box-shadow: 0 0.25rem 0.5rem c.$shadow;
 }
 
 @mixin spinner($color, $size, $width) {

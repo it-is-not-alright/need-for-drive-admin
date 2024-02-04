@@ -19,7 +19,7 @@ function ErrorPage({ status, message, tip, reset }: ErrorPageProps) {
     <div className="page error-page">
       <div>
         <h1>{status}</h1>
-        <h2 className="police-blue">{message}</h2>
+        <h2>{message}</h2>
         <p>{tip}</p>
         <Button text="На главную" onClick={handleHomeButtonClick} />
       </div>

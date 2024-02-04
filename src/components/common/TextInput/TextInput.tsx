@@ -28,14 +28,11 @@ function TextInput({
 
   return (
     <>
-      <label className="gray" htmlFor={id}>
-        {title}
-      </label>
+      <label htmlFor={id}>{title}</label>
       <div className={classNames('text-input', { invalid: error })}>
         <input
           id={id}
           type={hidden ? 'password' : 'text'}
-          className="police-blue"
           value={value}
           onChange={(event) => handleChange(event)}
           maxLength={maxLength}

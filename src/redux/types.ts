@@ -4,7 +4,7 @@ type PayloadAction<T, P> = {
 };
 
 type RequestState<T> = {
-  data: T;
+  content: T;
   pending: boolean;
 };
 

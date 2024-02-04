@@ -9,11 +9,11 @@ div.side-bar {
   z-index: 2;
   background-color: c.$white;
   border-right: 1px solid c.$light-periwinkle;
-  box-shadow: 0 0.25rem 0.5rem c.$black-coral;
+  box-shadow: 0 0.25rem 0.5rem c.$shadow;
 
   @include m.on-non-mobile {
     border-right: none;
-    box-shadow: 0.3rem 0 0.5rem c.$black-coral;
+    box-shadow: 0.3rem 0 0.5rem c.$shadow;
   }
 
   button.side-bar__toggle {
@@ -36,6 +36,7 @@ div.side-bar {
 
       p {
         display: none;
+        color: c.$police-blue;
       }
 
       svg {
@@ -50,7 +51,7 @@ div.side-bar {
     display: none;
     width: 100vw;
     background-color: inherit;
-    box-shadow: 0 0.25rem 0.5rem c.$black-coral;
+    box-shadow: 0 0.25rem 0.5rem c.$shadow;
 
     @include m.on-non-mobile {
       position: static;

@@ -28,6 +28,7 @@ type FilterConfig<T extends string> = {
 };
 
 type DataViewerProps<T extends string> = {
+  limit: number;
   total: number;
   params: SearchParams<T>;
   defaultParams: SearchParams<T>;

@@ -15,7 +15,10 @@ function Select<T extends ControlItem>({
 }: SelectProps<T>) {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const select = useRef<HTMLDivElement>();
-  const classes = classNames('select', { 'select-expanded': isExpanded });
+  const classes = classNames('select', {
+    'select-expanded': isExpanded,
+    'select-filled': selectedItem,
+  });
 
   const handleToggleClick = () => {
     if (isExpanded) {
@@ -52,18 +55,27 @@ function Select<T extends ControlItem>({
         <Icon id="select" />
       </button>
       <div className="select__menu">
-        {items.map((item) => (
-          <button
-            type="button"
-            key={item.id}
-            onClick={() => handleItemClick(item)}
-            className={classNames('select__item', {
-              'select__item-active': item.id === selectedItem?.id,
-            })}
-          >
-            {item.label}
-          </button>
-        ))}
+        <button
+          type="button"
+          className="select__clear-button"
+          onClick={() => handleItemClick(null)}
+        >
+          Очистить
+        </button>
+        <div className="select__item-box">
+          {items.map((item) => (
+            <button
+              type="button"
+              key={item.id}
+              onClick={() => handleItemClick(item)}
+              className={classNames('select__item', {
+                'select__item-active': item.id === selectedItem?.id,
+              })}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

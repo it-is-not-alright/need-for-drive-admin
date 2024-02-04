@@ -11,7 +11,7 @@ function Checkbox({
   label,
   checked,
   onChange,
-  isReadOnly,
+  isDisabled,
 }: CheckboxProps) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.checked);
@@ -25,7 +25,7 @@ function Checkbox({
         name={name}
         checked={checked}
         onChange={handleChange}
-        readOnly={isReadOnly}
+        disabled={isDisabled}
       />
       <div className="checkbox__checkmark">
         <Icon id="check" />

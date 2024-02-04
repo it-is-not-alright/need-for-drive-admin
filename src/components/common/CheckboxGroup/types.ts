@@ -9,7 +9,7 @@ type CheckboxGroupProps = {
   name: string;
   map: CheckboxGroupMap;
   onChange?: (map: CheckboxGroupMap) => void;
-  isReadOnly?: boolean;
+  isDisabled?: boolean;
 };
 
 export { CheckboxGroupMap, CheckboxGroupProps };

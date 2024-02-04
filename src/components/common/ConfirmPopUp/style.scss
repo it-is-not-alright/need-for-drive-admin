@@ -1,9 +1,0 @@
-@use '~/comp/_colors' as c;
-
-div.pop-up__footer {
-  display: flex;
-  gap: 1rem;
-  justify-content: flex-end;
-  padding: 1rem;
-  border-top: 1px solid c.$dark-blue-gray;
-}

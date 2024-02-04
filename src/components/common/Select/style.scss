@@ -5,8 +5,6 @@
 $icon-size: 0.6rem;
 
 div.select {
-  @include m.protected-width;
-
   position: relative;
   font-size: d.$fs-1;
 
@@ -18,14 +16,17 @@ div.select {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem 0.5rem 0.5rem 0.75rem;
     border-width: 1px;
     border-style: solid;
     border-color: c.$lavender-gray;
     border-radius: 0.25rem;
 
     p {
+      overflow: hidden;
       color: c.$roman-silver;
+      text-wrap: nowrap;
+      text-overflow: ellipsis;
     }
 
     svg {
@@ -37,28 +38,50 @@ div.select {
   }
 
   div.select__menu {
-    @include m.card(0.25rem);
-
     position: absolute;
     z-index: 1;
     width: 100%;
     margin-top: 0.2rem;
-    padding: 0.5rem 0;
-    border-width: 1px;
-    border-style: solid;
-    border-color: c.$lavender-gray;
+    box-shadow: 0 0.25rem 0.5rem c.$shadow;
 
-    button.select__item {
-      @include m.interactive;
+    button {
       @include m.protected-width;
 
-      display: block;
       width: 100%;
       padding: 0.4rem 0.75rem;
       color: c.$police-blue;
+    }
 
-      &.select__item-active {
-        color: c.$blue;
+    button.select__clear-button {
+      @include m.interactive(c.$light);
+
+      text-align: center;
+      border-width: 1px;
+      border-style: solid;
+      border-color: c.$lavender-gray;
+      border-radius: 0.25rem 0.25rem 0 0;
+    }
+
+    div.select__item-box {
+      max-height: 12rem;
+      padding: 0.5rem 0;
+      overflow-y: auto;
+      background-color: c.$white;
+      border-width: 1px;
+      border-style: solid;
+      border-color: c.$lavender-gray;
+      border-top-style: none;
+      border-radius: 0 0 0.25rem 0.25rem;
+
+      button.select__item {
+        @include m.interactive;
+
+        display: block;
+        color: c.$police-blue;
+  
+        &.select__item-active {
+          color: c.$blue;
+        }
       }
     }
   }
@@ -66,6 +89,14 @@ div.select {
   &:not(.select-expanded) {
     div.select__menu {
       display: none;
+    }
+  }
+
+  &.select-filled {
+    button.select__toggle {
+      p {
+        color: c.$police-blue;
+      }
     }
   }
 }

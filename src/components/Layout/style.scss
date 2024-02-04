@@ -73,18 +73,6 @@ body,
   }
 }
 
-.gray {
-  color: c.$davys-grey;
-}
-
-.police-blue {
-  color: c.$police-blue;
-}
-
-.fs-1 {
-  font-size: d.$fs-1;
-}
-
 button {
   background-color: transparent;
   border: 0;
@@ -98,4 +86,14 @@ div.page {
 img {
   user-select: none;
   pointer-events: none;
+}
+
+h1.title {
+  color: c.$police-blue;
+  font-size: d.$fs-5;
+}
+
+h2.title {
+  color: c.$police-blue;
+  font-size: d.$fs-4;
 }

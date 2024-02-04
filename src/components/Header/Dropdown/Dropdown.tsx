@@ -9,14 +9,14 @@ import { requestLogOut } from '~/src/redux/auth/actions';
 
 import Badge from '../../common/Badge/Badge';
 import { BadgeType } from '../../common/Badge/types';
-import ConfirmPopUp from '../../common/ConfirmPopUp/ConfirmPopUp';
+import ConfirmationModal from '../../common/ConfirmationModal/ConfirmationModal';
 import Icon from '../../common/Icon/Icon';
 import { NUM_OF_NOTIFICATIONS } from '../constants';
 
 function Dropdown() {
   const dispatch = useDispatch();
   const [isExpanded, setIsExpanded] = useState(false);
-  const [popUpIsDisplayed, setPopUpIsDisplayed] = useState(false);
+  const [popUpIsDisplayed, setModalIsDisplayed] = useState(false);
   const dropdown = useRef<HTMLDivElement>();
   const classes = classNames('dropdown', { 'dropdown-expanded': isExpanded });
 
@@ -41,14 +41,14 @@ function Dropdown() {
   };
 
   const handleLogOutItemClick = () => {
-    setPopUpIsDisplayed(true);
+    setModalIsDisplayed(true);
   };
 
   const handleLogOutConfirm = (confirmed: boolean) => {
     if (confirmed) {
       dispatch(requestLogOut());
     }
-    setPopUpIsDisplayed(false);
+    setModalIsDisplayed(false);
   };
 
   return (
@@ -63,7 +63,7 @@ function Dropdown() {
           <Badge value={NUM_OF_NOTIFICATIONS} type={BadgeType.Notification} />
         </div>
         <div className="dropdown__additional-content">
-          <p className="gray">Admin</p>
+          <p>Admin</p>
           <Icon id="arrow-down" />
         </div>
       </button>
@@ -80,7 +80,11 @@ function Dropdown() {
           Выход
         </button>
       </div>
-      <ConfirmPopUp
+      <ConfirmationModal
+        title="Выход"
+        message="Вы действительно хотите выйти?"
+        confirmLabel="Выйти"
+        cancelLabel="Остаться"
         isDisplayed={popUpIsDisplayed}
         onResponse={handleLogOutConfirm}
       />
