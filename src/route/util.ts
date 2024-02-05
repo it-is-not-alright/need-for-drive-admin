@@ -21,10 +21,6 @@ class RouteUtil {
     }
     return matchPath(route.path, path) !== null;
   }
-
-  static isActive(route: AppRoute, location: string): boolean {
-    return RouteUtil.match(route, location);
-  }
 }
 
 export default RouteUtil;

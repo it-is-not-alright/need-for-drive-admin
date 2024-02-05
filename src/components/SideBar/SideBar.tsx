@@ -39,7 +39,7 @@ function SideBar({ isDisplayed }: SideBarProps) {
         {links.map((link) => (
           <SideBarItem
             link={link}
-            isActive={RouteUtil.isActive(link.route, location.pathname)}
+            isActive={RouteUtil.match(link.route, location.pathname)}
             key={link.route.path}
           />
         ))}
