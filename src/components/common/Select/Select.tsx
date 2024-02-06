@@ -1,7 +1,7 @@
 import './style.scss';
 
 import classNames from 'classnames';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { ControlItem } from '../../types';
 import Icon from '../Icon/Icon';
@@ -14,23 +14,30 @@ function Select<T extends ControlItem>({
   onChange,
 }: SelectProps<T>) {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const toggleButton = useRef<HTMLButtonElement>();
   const classes = classNames('select', {
     'select-expanded': isExpanded,
     'select-filled': selectedItem,
   });
 
-  const collapse = () => {
-    setIsExpanded(false);
-    window.removeEventListener('click', collapse);
+  const collapse = (event: MouseEvent) => {
+    const { target } = event;
+    if (
+      toggleButton.current === null ||
+      !(target instanceof Node) ||
+      !toggleButton.current.contains(target)
+    ) {
+      setIsExpanded(false);
+      window.removeEventListener('click', collapse);
+    }
   };
 
-  const handleToggleClick = (event: React.MouseEvent<HTMLElement>) => {
+  const handleToggleClick = () => {
     if (isExpanded) {
       return;
     }
     setIsExpanded(true);
     window.addEventListener('click', collapse);
-    event.stopPropagation();
   };
 
   const handleChange = (item: T) => {
@@ -40,6 +47,7 @@ function Select<T extends ControlItem>({
   return (
     <div className={classes}>
       <button
+        ref={toggleButton}
         type="button"
         className="select__toggle"
         onClick={handleToggleClick}
