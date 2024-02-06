@@ -1,7 +1,7 @@
 import './style.scss';
 
 import classNames from 'classnames';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 
 import { ControlItem } from '../../types';
 import Icon from '../Icon/Icon';
@@ -14,38 +14,31 @@ function Select<T extends ControlItem>({
   onChange,
 }: SelectProps<T>) {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
-  const select = useRef<HTMLDivElement>();
   const classes = classNames('select', {
     'select-expanded': isExpanded,
     'select-filled': selectedItem,
   });
 
-  const handleToggleClick = () => {
+  const collapse = () => {
+    setIsExpanded(false);
+    window.removeEventListener('click', collapse);
+  };
+
+  const handleToggleClick = (event: React.MouseEvent<HTMLElement>) => {
     if (isExpanded) {
-      setIsExpanded(false);
       return;
     }
     setIsExpanded(true);
-    const collapse = (event: MouseEvent) => {
-      const { target } = event;
-      if (
-        select.current === null ||
-        !(target instanceof Node) ||
-        !select.current.contains(target)
-      ) {
-        setIsExpanded(false);
-        window.removeEventListener('click', collapse);
-      }
-    };
     window.addEventListener('click', collapse);
+    event.stopPropagation();
   };
 
-  const handleItemClick = (item: T) => {
+  const handleChange = (item: T) => {
     onChange(item);
   };
 
   return (
-    <div className={classes} ref={select}>
+    <div className={classes}>
       <button
         type="button"
         className="select__toggle"
@@ -58,27 +51,34 @@ function Select<T extends ControlItem>({
         <button
           type="button"
           className="select__clear-button"
-          onClick={() => handleItemClick(null)}
+          onClick={() => handleChange(null)}
         >
           Очистить
         </button>
-        <div className="select__item-box">
-          {items.map((item) => (
-            <button
-              type="button"
-              key={item.id}
-              onClick={() => handleItemClick(item)}
-              className={classNames('select__item', {
-                'select__item-active': item.id === selectedItem?.id,
-              })}
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
+        <ul className="select__list">
+          {items.map((item) => {
+            const isSelected = item.id === selectedItem?.id;
+            const handleClick = () => handleChange(item);
+            return (
+              <li
+                key={item.id}
+                tabIndex={0}
+                role="option"
+                onClick={handleClick}
+                onKeyDown={handleClick}
+                aria-selected={isSelected ? 'true' : 'false'}
+                className={classNames('select__option', {
+                  'select__option-selected': isSelected,
+                })}
+              >
+                {item.label}
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </div>
   );
 }
 
-export { Select };
+export default Select;

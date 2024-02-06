@@ -8,7 +8,7 @@ import { AuthStatus } from '~/src/redux/auth/types';
 import RouteUtil from '../../route/util';
 import Spinner from '../common/Spinner/Spinner';
 
-function PrivateRoute() {
+function AuthorizationRoutes() {
   const { status } = useSelector(authSelector);
 
   if (status === AuthStatus.Pending) {
@@ -16,10 +16,10 @@ function PrivateRoute() {
   }
 
   if (status === AuthStatus.Authorized) {
-    return <Outlet />;
+    return <Navigate to={RouteUtil.main.path} replace />;
   }
 
-  return <Navigate to={RouteUtil.logIn.path} replace />;
+  return <Outlet />;
 }
 
-export default PrivateRoute;
+export default AuthorizationRoutes;

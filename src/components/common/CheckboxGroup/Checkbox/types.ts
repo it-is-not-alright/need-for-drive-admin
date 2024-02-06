@@ -3,7 +3,7 @@ type CheckboxProps = {
   name: string;
   label: string;
   checked: boolean;
-  onChange: (checked: boolean) => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   isDisabled: boolean;
 };
 

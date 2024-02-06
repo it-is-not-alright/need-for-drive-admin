@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 import Button from '../Button/Button';
 import { ButtonType } from '../Button/types';
-import { Select } from '../Select/Select';
+import Select from '../Select/Select';
 import Pagination from './Pagination/Pagination';
 import { DataViewerProps, FilterValueControlItem } from './types';
 import { compareFilters, paramsToURL } from './utils';

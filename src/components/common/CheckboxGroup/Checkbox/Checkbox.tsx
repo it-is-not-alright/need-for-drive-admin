@@ -13,10 +13,6 @@ function Checkbox({
   onChange,
   isDisabled,
 }: CheckboxProps) {
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(event.target.checked);
-  };
-
   return (
     <div className="checkbox">
       <input
@@ -24,7 +20,7 @@ function Checkbox({
         type="checkbox"
         name={name}
         checked={checked}
-        onChange={handleChange}
+        onChange={onChange}
         disabled={isDisabled}
       />
       <div className="checkbox__checkmark">

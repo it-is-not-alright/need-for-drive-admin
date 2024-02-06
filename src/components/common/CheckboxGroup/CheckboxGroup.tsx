@@ -13,12 +13,8 @@ function CheckboxGroup({
   isDisabled = false,
 }: CheckboxGroupProps) {
   const classes = classNames('checkbox-group', {
-    'checkbox-group-readonly': isDisabled,
+    'checkbox-group-disabled': isDisabled,
   });
-
-  const handleChange = (key: string, checked: boolean) => {
-    onChange({ ...map, [key]: { ...map[key], checked } });
-  };
 
   return (
     <div className={classes}>
@@ -29,7 +25,7 @@ function CheckboxGroup({
           label={map[key].label}
           checked={map[key].checked}
           key={key}
-          onChange={(checked) => handleChange(key, checked)}
+          onChange={(event) => onChange(key, event)}
           isDisabled={isDisabled}
         />
       ))}

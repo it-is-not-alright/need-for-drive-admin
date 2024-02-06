@@ -8,7 +8,7 @@ type CheckboxGroupMap = {
 type CheckboxGroupProps = {
   name: string;
   map: CheckboxGroupMap;
-  onChange?: (map: CheckboxGroupMap) => void;
+  onChange?: (key: string, event: React.ChangeEvent<HTMLInputElement>) => void;
   isDisabled?: boolean;
 };
 

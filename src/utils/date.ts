@@ -5,7 +5,7 @@ function pad(num: number): string {
 function dateToString(date: Date): string {
   const day = pad(date.getDate());
   const month = pad(date.getMonth() + 1);
-  const year = pad(date.getFullYear());
+  const year = date.getFullYear();
   const hours = pad(date.getHours());
   const minutes = pad(date.getMinutes());
   return `${day}.${month}.${year} ${hours}:${minutes}`;

@@ -1,4 +1,4 @@
-import { AuthStatus } from '~/src/redux/types';
+import { AuthStatus } from '~/src/redux/auth/types';
 
 type AuthWrapperProps = {
   status: AuthStatus;

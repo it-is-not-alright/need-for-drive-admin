@@ -7,7 +7,7 @@ div.checkbox-group {
   flex-direction: column;
   gap: 0.5rem;
 
-  &:not(.checkbox-group-readonly) {
+  &:not(.checkbox-group-disabled) {
     input {
       cursor: pointer;
     }
