@@ -3,6 +3,12 @@ import { FilterValues } from '~/src/components/common/DataViewer/types';
 import { client } from '..';
 import { ArrayRequestData, CarRaw, Endpoint, RequestResult } from '../types';
 
+async function getCars(
+  params: string,
+): Promise<RequestResult<ArrayRequestData<CarRaw>>> {
+  return client.get<ArrayRequestData<CarRaw>>(Endpoint.Car, { params });
+}
+
 async function getFilterValues(): Promise<RequestResult<FilterValues>> {
   const raw = await client.get<ArrayRequestData<CarRaw>>(Endpoint.Car);
   if (raw.error) {
@@ -15,4 +21,4 @@ async function getFilterValues(): Promise<RequestResult<FilterValues>> {
   return { content: values };
 }
 
-export { getFilterValues };
+export { getCars, getFilterValues };

@@ -1,7 +1,7 @@
 import { all, fork } from 'redux-saga/effects';
 
 import { authWatcher } from './auth/watcher';
-import { carFilterValuesWatcher } from './car/watcher';
+import { carFilterValuesWatcher, carsWatcher } from './car/watchers';
 import { cityFilterValuesWatcher } from './city/watcher';
 import { ordersWatcher } from './order/watcher';
 import { statusFilterValuesWatcher } from './order-status/watcher';
@@ -13,6 +13,7 @@ function* rootSaga(): Generator {
     fork(cityFilterValuesWatcher),
     fork(statusFilterValuesWatcher),
     fork(ordersWatcher),
+    fork(carsWatcher),
   ]);
 }
 

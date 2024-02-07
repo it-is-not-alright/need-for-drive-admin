@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 import authReducer from './auth/reducer';
-import carFilterValuesReducer from './car/reducer';
+import { carFilterValuesReducer, carsReducer } from './car/reducers';
 import cityFilterValuesReducer from './city/reducer';
 import ordersReducer from './order/reducer';
 import statusFilterValuesReducer from './order-status/reducer';
@@ -14,8 +14,8 @@ const rootReducer = combineReducers({
   cityFilterValues: cityFilterValuesReducer,
   statusFilterValues: statusFilterValuesReducer,
   orders: ordersReducer,
+  cars: carsReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
-
 export default rootReducer;
