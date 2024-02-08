@@ -1,43 +1,30 @@
 import './style.scss';
 
 import classNames from 'classnames';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 
+import useClickAway from '../../hooks/use-click-away';
 import { ControlItem } from '../../types';
 import Icon from '../Icon/Icon';
 import { SelectProps } from './types';
 
 function Select<T extends ControlItem>({
+  id,
   items,
   placeholder,
   selectedItem,
   onChange,
 }: SelectProps<T>) {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
-  const toggleButton = useRef<HTMLButtonElement>();
   const classes = classNames('select', {
     'select-expanded': isExpanded,
     'select-filled': selectedItem,
   });
-
-  const collapse = (event: MouseEvent) => {
-    const { target } = event;
-    if (
-      toggleButton.current === null ||
-      !(target instanceof Node) ||
-      !toggleButton.current.contains(target)
-    ) {
-      setIsExpanded(false);
-      window.removeEventListener('click', collapse);
-    }
-  };
+  const toggleButtonId = `${id}__toggle`;
+  useClickAway(`#${toggleButtonId}`, () => setIsExpanded(false));
 
   const handleToggleClick = () => {
-    if (isExpanded) {
-      return;
-    }
-    setIsExpanded(true);
-    window.addEventListener('click', collapse);
+    setIsExpanded(!isExpanded);
   };
 
   const handleChange = (item: T) => {
@@ -47,8 +34,8 @@ function Select<T extends ControlItem>({
   return (
     <div className={classes}>
       <button
-        ref={toggleButton}
         type="button"
+        id={toggleButtonId}
         className="select__toggle"
         onClick={handleToggleClick}
       >
@@ -66,14 +53,13 @@ function Select<T extends ControlItem>({
         <ul className="select__list">
           {items.map((item) => {
             const isSelected = item.id === selectedItem?.id;
-            const handleClick = () => handleChange(item);
             return (
               <li
                 key={item.id}
                 tabIndex={0}
                 role="option"
-                onClick={handleClick}
-                onKeyDown={handleClick}
+                onClick={() => handleChange(item)}
+                onKeyDown={() => handleChange(item)}
                 aria-selected={isSelected ? 'true' : 'false'}
                 className={classNames('select__option', {
                   'select__option-selected': isSelected,

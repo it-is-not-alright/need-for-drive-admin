@@ -52,6 +52,7 @@ function DataViewer<T extends string>({
           {Object.keys(filterConfig).map((param: T) => (
             <Select
               key={param}
+              id={param}
               items={Object.values(filterConfig[param].values)}
               placeholder={filterConfig[param].placeholder}
               selectedItem={filterConfig[param].values[filter[param]] || null}

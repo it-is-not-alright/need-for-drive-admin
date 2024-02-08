@@ -1,7 +1,7 @@
 import './style.scss';
 
 import classNames from 'classnames';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import AccountImage from '~/assets/images/account.png';
@@ -11,33 +11,18 @@ import Badge from '../../common/Badge/Badge';
 import { BadgeType } from '../../common/Badge/types';
 import ConfirmationModal from '../../common/ConfirmationModal/ConfirmationModal';
 import Icon from '../../common/Icon/Icon';
+import useClickAway from '../../hooks/use-click-away';
 import { NUM_OF_NOTIFICATIONS } from '../constants';
 
 function Dropdown() {
   const dispatch = useDispatch();
   const [isExpanded, setIsExpanded] = useState(false);
   const [popUpIsDisplayed, setModalIsDisplayed] = useState(false);
-  const dropdown = useRef<HTMLDivElement>();
   const classes = classNames('dropdown', { 'dropdown-expanded': isExpanded });
+  useClickAway('.dropdown__toggle', () => setIsExpanded(false));
 
   const handleToggleClick = () => {
-    if (isExpanded) {
-      setIsExpanded(false);
-      return;
-    }
-    setIsExpanded(true);
-    const collapse = (event: MouseEvent) => {
-      const { target } = event;
-      if (
-        dropdown.current === null ||
-        !(target instanceof Node) ||
-        !dropdown.current.contains(target)
-      ) {
-        setIsExpanded(false);
-        window.removeEventListener('click', collapse);
-      }
-    };
-    window.addEventListener('click', collapse);
+    setIsExpanded(!isExpanded);
   };
 
   const handleLogOutItemClick = () => {
@@ -52,7 +37,7 @@ function Dropdown() {
   };
 
   return (
-    <div className={classes} ref={dropdown}>
+    <div className={classes}>
       <button
         className="dropdown__toggle"
         type="button"
