@@ -8,27 +8,27 @@ import {
   CARS_REQUESTED,
 } from './constants';
 import {
-  CarFilterValuesRecivedAction,
-  CarFilterValuesRequestedAction,
   CarsRecivedAction,
   CarsRequestedAction,
+  FilterByCarValuesRecivedAction,
+  FilterByCarValuesRequestedAction,
 } from './types';
 
-const fetchCarFilterValues = (): CarFilterValuesRequestedAction => ({
+const fetchFilterByCarValues = (): FilterByCarValuesRequestedAction => ({
   type: CAR_FILTER_VALUES_REQUESTED,
   payload: null,
 });
 
-const setCarFilterValues = (
+const setFilterByCarValues = (
   values: FilterValues,
-): CarFilterValuesRecivedAction => ({
+): FilterByCarValuesRecivedAction => ({
   type: CAR_FILTER_VALUES_RECIVED,
   payload: values,
 });
 
-const fetchCars = (): CarsRequestedAction => ({
+const fetchCars = (payload: string): CarsRequestedAction => ({
   type: CARS_REQUESTED,
-  payload: null,
+  payload,
 });
 
 const setCars = (cars: ArrayRequestData<CarRaw>): CarsRecivedAction => ({
@@ -36,4 +36,4 @@ const setCars = (cars: ArrayRequestData<CarRaw>): CarsRecivedAction => ({
   payload: cars,
 });
 
-export { fetchCarFilterValues, fetchCars, setCarFilterValues, setCars };
+export { fetchCars, fetchFilterByCarValues, setCars, setFilterByCarValues };

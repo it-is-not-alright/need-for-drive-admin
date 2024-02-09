@@ -1,28 +1,31 @@
 import './style.scss';
 
 import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import Button from '../Button/Button';
 import { ButtonType } from '../Button/types';
 import Select from '../Select/Select';
 import Pagination from './Pagination/Pagination';
 import { DataViewerProps, FilterValueControlItem } from './types';
-import { compareFilters, paramsToURL } from './utils';
+import { collectParams, compareFilters, paramsToURL } from './utils';
 
 function DataViewer<T extends string>({
   limit,
   total,
-  params,
   defaultParams,
+  onChange,
   filterConfig,
-  setSearchParams,
   children,
 }: DataViewerProps<T>) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const params = collectParams(defaultParams, searchParams);
   const [filter, setFilter] = useState(params.filter);
 
   useEffect(() => {
     setFilter(params.filter);
-  }, [params]);
+    onChange(`${paramsToURL(params)}&limit=${limit}`);
+  }, [searchParams]);
 
   const handleFilterChange = (
     param: T,
@@ -47,33 +50,35 @@ function DataViewer<T extends string>({
 
   return (
     <div className="data-viewer">
-      <div className="data-viewer__header">
-        <div className="data-viewer__select-area">
-          {Object.keys(filterConfig).map((param: T) => (
-            <Select
-              key={param}
-              id={param}
-              items={Object.values(filterConfig[param].values)}
-              placeholder={filterConfig[param].placeholder}
-              selectedItem={filterConfig[param].values[filter[param]] || null}
-              onChange={(item) => handleFilterChange(param, item)}
+      {filterConfig && (
+        <div className="data-viewer__header">
+          <div className="data-viewer__select-area">
+            {Object.keys(filterConfig).map((param: T) => (
+              <Select
+                key={param}
+                id={param}
+                items={Object.values(filterConfig[param].values)}
+                placeholder={filterConfig[param].placeholder}
+                selectedItem={filterConfig[param].values[filter[param]] || null}
+                onChange={(item) => handleFilterChange(param, item)}
+              />
+            ))}
+          </div>
+          <div className="data-viewer__button-area">
+            <Button
+              text="Сбросить"
+              onClick={handleFilterResetButtonClick}
+              type={ButtonType.Danger}
+              isDisabled={params.filterIsDefault}
             />
-          ))}
+            <Button
+              text="Применить"
+              onClick={handleFilterApplyButtonClick}
+              isDisabled={compareFilters(filter, params.filter)}
+            />
+          </div>
         </div>
-        <div className="data-viewer__button-area">
-          <Button
-            text="Сбросить"
-            onClick={handleFilterResetButtonClick}
-            type={ButtonType.Danger}
-            isDisabled={params.filterIsDefault}
-          />
-          <Button
-            text="Применить"
-            onClick={handleFilterApplyButtonClick}
-            isDisabled={compareFilters(filter, params.filter)}
-          />
-        </div>
-      </div>
+      )}
       <div className="data-viewer__main">
         {total > 0 ? (
           children

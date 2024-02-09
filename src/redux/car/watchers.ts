@@ -6,25 +6,26 @@ import { FilterValues } from '~/src/components/common/DataViewer/types';
 
 import { defaultRequestError } from '../constants';
 import { setRequestError } from '../request-error/actions';
-import { setCarFilterValues, setCars } from './actions';
+import { setCars, setFilterByCarValues } from './actions';
 import { CAR_FILTER_VALUES_REQUESTED, CARS_REQUESTED } from './constants';
+import { CarsRequestedAction } from './types';
 
-function* carFilterValuesWorker(): Generator {
+function* filterByCarValuesWorker(): Generator {
   try {
     const result = (yield call(getFilterValues)) as RequestResult<FilterValues>;
     if (result.error) {
       yield put(setRequestError(result.error));
     } else {
-      yield put(setCarFilterValues(result.content));
+      yield put(setFilterByCarValues(result.content));
     }
   } catch (error) {
     yield put(setRequestError(defaultRequestError));
   }
 }
 
-function* carsWorker(): Generator {
+function* carsWorker(action: CarsRequestedAction): Generator {
   try {
-    const result = (yield call(getCars, '?tank=2897')) as RequestResult<
+    const result = (yield call(getCars, action.payload)) as RequestResult<
       ArrayRequestData<CarRaw>
     >;
     if (result.error) {
@@ -37,12 +38,12 @@ function* carsWorker(): Generator {
   }
 }
 
-function* carFilterValuesWatcher(): Generator {
-  yield takeLatest(CAR_FILTER_VALUES_REQUESTED, carFilterValuesWorker);
+function* filterByCarValuesWatcher(): Generator {
+  yield takeLatest(CAR_FILTER_VALUES_REQUESTED, filterByCarValuesWorker);
 }
 
 function* carsWatcher(): Generator {
   yield takeLatest(CARS_REQUESTED, carsWorker);
 }
 
-export { carFilterValuesWatcher, carsWatcher };
+export { carsWatcher, filterByCarValuesWatcher };

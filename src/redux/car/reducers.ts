@@ -10,11 +10,11 @@ import {
   initCarsState,
   initFilterValuesState,
 } from './constants';
-import { CarFilterValuesAction, CarsAction } from './types';
+import { CarsAction, FilterByCarValuesAction } from './types';
 
-const carFilterValuesReducer = (
+const filterByCarValuesReducer = (
   state: RequestState<FilterValues> = initFilterValuesState,
-  action: CarFilterValuesAction = null,
+  action: FilterByCarValuesAction = null,
 ): RequestState<FilterValues> => {
   switch (action.type) {
     case CAR_FILTER_VALUES_REQUESTED:
@@ -40,4 +40,4 @@ const carsReducer = (
   }
 };
 
-export { carFilterValuesReducer, carsReducer };
+export { carsReducer, filterByCarValuesReducer };

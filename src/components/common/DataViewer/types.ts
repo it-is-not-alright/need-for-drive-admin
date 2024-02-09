@@ -1,5 +1,3 @@
-import { SetURLSearchParams } from 'react-router-dom';
-
 import { ControlItem } from '../../types';
 
 type FilterSearchParams<T extends string> = {
@@ -30,10 +28,9 @@ type FilterConfig<T extends string> = {
 type DataViewerProps<T extends string> = {
   limit: number;
   total: number;
-  params: SearchParams<T>;
   defaultParams: SearchParams<T>;
-  filterConfig: FilterConfig<T>;
-  setSearchParams: SetURLSearchParams;
+  onChange: (params: string) => void;
+  filterConfig?: FilterConfig<T>;
   children: React.ReactNode;
 };
 

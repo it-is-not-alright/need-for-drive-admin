@@ -6,24 +6,27 @@ import { FilterValues } from '~/src/components/common/DataViewer/types';
 
 import { defaultRequestError } from '../constants';
 import { setRequestError } from '../request-error/actions';
-import { setStatusFilterValues } from './actions';
-import { STATUS_FILTER_VALUES_REQUESTED } from './constants';
+import { setFilterByStatusValues } from './actions';
+import { FILTER_BY_STATUS_VALUES_REQUESTED } from './constants';
 
-function* statusFilterValuesWorker(): Generator {
+function* filterByStatusValuesWorker(): Generator {
   try {
     const result = (yield call(getFilterValues)) as RequestResult<FilterValues>;
     if (result.error) {
       yield put(setRequestError(result.error));
     } else {
-      yield put(setStatusFilterValues(result.content));
+      yield put(setFilterByStatusValues(result.content));
     }
   } catch (error) {
     yield put(setRequestError(defaultRequestError));
   }
 }
 
-function* statusFilterValuesWatcher(): Generator {
-  yield takeLatest(STATUS_FILTER_VALUES_REQUESTED, statusFilterValuesWorker);
+function* filterByStatusValuesWatcher(): Generator {
+  yield takeLatest(
+    FILTER_BY_STATUS_VALUES_REQUESTED,
+    filterByStatusValuesWorker,
+  );
 }
 
-export { statusFilterValuesWatcher };
+export { filterByStatusValuesWatcher };

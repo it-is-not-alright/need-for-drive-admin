@@ -2,26 +2,26 @@ import { FilterValues } from '~/src/components/common/DataViewer/types';
 
 import { PayloadAction } from '../types';
 import {
-  CITY_FILTER_VALUES_RECIVED,
-  CITY_FILTER_VALUES_REQUESTED,
+  FILTER_BY_CITY_VALUES_RECIVED,
+  FILTER_BY_CITY_VALUES_REQUESTED,
 } from './constants';
 
-type CityFilterValuesRequestedAction = PayloadAction<
-  typeof CITY_FILTER_VALUES_REQUESTED,
+type FilterByCityValuesRequestedAction = PayloadAction<
+  typeof FILTER_BY_CITY_VALUES_REQUESTED,
   null
 >;
 
-type CityFilterValuesRecivedAction = PayloadAction<
-  typeof CITY_FILTER_VALUES_RECIVED,
+type FilterByCityValuesRecivedAction = PayloadAction<
+  typeof FILTER_BY_CITY_VALUES_RECIVED,
   FilterValues
 >;
 
-type CityFilterValuesAction =
-  | CityFilterValuesRequestedAction
-  | CityFilterValuesRecivedAction;
+type FilterByCityValuesAction =
+  | FilterByCityValuesRequestedAction
+  | FilterByCityValuesRecivedAction;
 
 export {
-  CityFilterValuesAction,
-  CityFilterValuesRecivedAction,
-  CityFilterValuesRequestedAction,
+  FilterByCityValuesAction,
+  FilterByCityValuesRecivedAction,
+  FilterByCityValuesRequestedAction,
 };

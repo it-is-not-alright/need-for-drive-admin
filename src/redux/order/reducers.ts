@@ -26,4 +26,4 @@ const ordersReducer = (
   }
 };
 
-export default ordersReducer;
+export { ordersReducer };

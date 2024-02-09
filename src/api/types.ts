@@ -6,6 +6,7 @@ enum Endpoint {
   City = 'db/city',
   OrderStatus = 'db/orderStatus',
   Order = 'db/order',
+  Point = 'db/point',
 }
 
 type AuthRaw = {
@@ -42,12 +43,23 @@ type ArrayRequestData<T> = {
   data: T[];
 };
 
+type CaregoryRaw = {
+  id: number;
+  name: string;
+};
+
 type CarRaw = {
   id: number;
   name: string;
+  number: string;
+  priceMax: number;
+  priceMin: number;
+  description: string;
+  tank: string;
   thumbnail: {
     path: string;
   };
+  categoryId: CaregoryRaw;
 };
 
 type CityRaw = {
@@ -64,6 +76,7 @@ type PointRaw = {
   id: number;
   name: string;
   address: string;
+  cityId: CityRaw;
 };
 
 type OrderRaw = {
@@ -89,6 +102,7 @@ export {
   Endpoint,
   OrderRaw,
   OrderStatusRaw,
+  PointRaw,
   RequestError,
   RequestOptions,
   RequestResult,

@@ -9,34 +9,34 @@ import {
   CARS_REQUESTED,
 } from './constants';
 
-type CarFilterValuesRequestedAction = PayloadAction<
+type FilterByCarValuesRequestedAction = PayloadAction<
   typeof CAR_FILTER_VALUES_REQUESTED,
   null
 >;
 
-type CarFilterValuesRecivedAction = PayloadAction<
+type FilterByCarValuesRecivedAction = PayloadAction<
   typeof CAR_FILTER_VALUES_RECIVED,
   FilterValues
 >;
 
-type CarsRequestedAction = PayloadAction<typeof CARS_REQUESTED, null>;
+type CarsRequestedAction = PayloadAction<typeof CARS_REQUESTED, string>;
 
 type CarsRecivedAction = PayloadAction<
   typeof CARS_RECIVED,
   ArrayRequestData<CarRaw>
 >;
 
-type CarFilterValuesAction =
-  | CarFilterValuesRequestedAction
-  | CarFilterValuesRecivedAction;
+type FilterByCarValuesAction =
+  | FilterByCarValuesRequestedAction
+  | FilterByCarValuesRecivedAction;
 
 type CarsAction = CarsRequestedAction | CarsRecivedAction;
 
 export {
-  CarFilterValuesAction,
-  CarFilterValuesRecivedAction,
-  CarFilterValuesRequestedAction,
   CarsAction,
   CarsRecivedAction,
   CarsRequestedAction,
+  FilterByCarValuesAction,
+  FilterByCarValuesRecivedAction,
+  FilterByCarValuesRequestedAction,
 };

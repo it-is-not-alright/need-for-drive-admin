@@ -12,9 +12,9 @@ const ordersSelector = (
 
 const orderFilterConfigSelector = createSelector(
   [
-    (state: RootState) => state.cityFilterValues,
-    (state: RootState) => state.carFilterValues,
-    (state: RootState) => state.statusFilterValues,
+    (state: RootState) => state.filterByCityValues,
+    (state: RootState) => state.filterByCarValues,
+    (state: RootState) => state.filterByStatusValues,
   ],
   (cities, cars, statuses): OrderFilterConfig => {
     return {

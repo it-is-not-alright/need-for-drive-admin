@@ -1,20 +1,22 @@
 import { combineReducers } from 'redux';
 
-import authReducer from './auth/reducer';
-import { carFilterValuesReducer, carsReducer } from './car/reducers';
-import cityFilterValuesReducer from './city/reducer';
-import ordersReducer from './order/reducer';
-import statusFilterValuesReducer from './order-status/reducer';
-import requestErrorReducer from './request-error/reducer';
+import { authReducer } from './auth/reducers';
+import { carsReducer, filterByCarValuesReducer } from './car/reducers';
+import { filterByCityValuesReducer } from './city/reducers';
+import { ordersReducer } from './order/reducers';
+import { filterByStatusValuesReducer } from './order-status/reducers';
+import { pointsReducer } from './point/reducers';
+import { requestErrorReducer } from './request-error/reducers';
 
 const rootReducer = combineReducers({
   authState: authReducer,
   requestError: requestErrorReducer,
-  carFilterValues: carFilterValuesReducer,
-  cityFilterValues: cityFilterValuesReducer,
-  statusFilterValues: statusFilterValuesReducer,
+  filterByCarValues: filterByCarValuesReducer,
+  filterByCityValues: filterByCityValuesReducer,
+  filterByStatusValues: filterByStatusValuesReducer,
   orders: ordersReducer,
   cars: carsReducer,
+  points: pointsReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
