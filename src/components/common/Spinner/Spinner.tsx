@@ -2,11 +2,16 @@ import './style.scss';
 
 import React from 'react';
 
-function Spinner() {
+import Dialog from '../Dialog/Dialog';
+import { SpinnerProps } from './types';
+
+function Spinner({ isDisplayed = true }: SpinnerProps) {
   return (
-    <div className="spinner">
-      <span className="spinner__kernel" />
-    </div>
+    <Dialog isDisplayed={isDisplayed}>
+      <div className="spinner">
+        <span className="spinner__kernel" />
+      </div>
+    </Dialog>
   );
 }
 

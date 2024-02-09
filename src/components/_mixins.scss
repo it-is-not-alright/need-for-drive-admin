@@ -1,9 +1,10 @@
-@use './colors' as c;
+@use '~/comp/_colors' as c;
+@use '~/comp/_dimensions' as d;
 
-@mixin card {
+@mixin card($border-radius: 0.75rem) {
   background-color: c.$white;
-  border-radius: 1rem;
-  box-shadow: 0 0.25rem 0.5rem c.$black-coral; 
+  border-radius: $border-radius;
+  box-shadow: 0 0.25rem 0.5rem c.$shadow;
 }
 
 @mixin spinner($color, $size, $width) {
@@ -25,4 +26,39 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+@mixin on-non-mobile {
+  @media (min-width: d.$tablet) {
+    @content;
+  }
+}
+
+@mixin protected-font-size($size: d.$fs-1) {
+  font-size: max(1rem, $size);
+
+  @media (min-width: d.$desktop-mini) {
+    font-size: $size;
+  }
+}
+
+@mixin interactive($background-color: c.$white) {
+  background-color: $background-color;
+  transition-duration: 0.2s;
+  transition-property: filter, background-color;
+  user-select: none;
+
+  &:not(:disabled):hover {
+    filter: brightness(90%);
+  }
+
+  &:not(:disabled):active {
+    filter: brightness(80%);
+  }
+}
+
+@mixin protected-width {
+  max-width: 100%;
+  text-align: left;
+  word-break: break-all;
 }

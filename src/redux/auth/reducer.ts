@@ -1,4 +1,9 @@
-import { LOG_IN, LOG_OUT, SET_AUTH_STATUS, VERIFY_TOKEN } from './constants';
+import {
+  AUTH_STATUS_CHANGED,
+  LOG_IN_REQUESTED,
+  LOG_OUT_REQUESTED,
+  TOKEN_VERIFICATION_REQUESTED,
+} from './constants';
 import { AuthAction, AuthState, AuthStatus } from './types';
 
 const initialState: AuthState = {
@@ -10,11 +15,11 @@ const authReducer = (
   action: AuthAction = null,
 ): AuthState => {
   switch (action.type) {
-    case VERIFY_TOKEN:
-    case LOG_IN:
-    case LOG_OUT:
+    case TOKEN_VERIFICATION_REQUESTED:
+    case LOG_IN_REQUESTED:
+    case LOG_OUT_REQUESTED:
       return { status: AuthStatus.Pending };
-    case SET_AUTH_STATUS:
+    case AUTH_STATUS_CHANGED:
       return { status: action.payload };
     default:
       return state;

@@ -1,5 +1,5 @@
 import { getRefreshToken, removeToken, saveToken } from '../cookie/auth';
-import { AuthData, Endpoint, RequestOptions, RequestResult } from './types';
+import { AuthRaw, Endpoint, RequestOptions, RequestResult } from './types';
 import { setHeaders, unpack } from './utils';
 
 class APIClient {
@@ -26,7 +26,7 @@ class APIClient {
   }
 
   public async refreshToken(): Promise<RequestResult<boolean>> {
-    const raw = await this.post<AuthData>(Endpoint.Refresh, {
+    const raw = await this.post<AuthRaw>(Endpoint.Refresh, {
       body: { refresh_token: getRefreshToken() },
     });
     if (raw.content) {
@@ -45,7 +45,7 @@ class APIClient {
     init: RequestInit,
     options: RequestOptions,
   ): Promise<RequestResult<T>> {
-    const fullURL = `${this.baseURL}/${url}`;
+    const fullURL = `${this.baseURL}/${url}${options.params ?? ''}`;
     let fullInit = setHeaders(init, options);
     if (options.body) {
       fullInit.body = JSON.stringify(options.body);

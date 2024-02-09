@@ -4,11 +4,11 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { AppRoute } from '~/comp/App/types';
 import AuthForm from '~/comp/common/AuthForm/AuthForm';
-import { logIn, setAuthStatus } from '~/src/redux/auth/actions';
+import { requestLogIn, setAuthStatus } from '~/src/redux/auth/actions';
 import { authSelector } from '~/src/redux/auth/selectors';
 import { AuthStatus } from '~/src/redux/auth/types';
+import RouteUtil from '~/src/route/util';
 import Validator from '~/src/validation/validator';
 
 import { initLogInFormData, logInDataScheme } from './constants';
@@ -34,7 +34,7 @@ function LogInPage() {
       handleLogInFailure();
     } else if (status === AuthStatus.LogInSuccess) {
       dispatch(setAuthStatus(AuthStatus.Authorized));
-      navigate(AppRoute.Main);
+      navigate(RouteUtil.main.path);
     }
   }, [status]);
 
@@ -47,7 +47,7 @@ function LogInPage() {
         username: formData.email.value,
         password: formData.password.value,
       };
-      dispatch(logIn(user));
+      dispatch(requestLogIn(user));
     }
   };
 

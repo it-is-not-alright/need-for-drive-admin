@@ -1,9 +1,8 @@
 @use '~/comp/_mixins' as m;
 @use '~/comp/_colors' as c;
+@use '~/comp/_dimensions' as d;
 
 form.auth-form {
-  height: fit-content;
-  
   div.auth-form__logo {
     display: flex;
     flex-wrap: wrap;
@@ -16,26 +15,26 @@ form.auth-form {
     @include m.card;
 
     margin-top: 1rem;
-    
+
     div.auth-form__header {
       padding: 1.5rem;
       text-align: center;
     }
-  
+
     div.auth-form__main {
       padding: 1rem 1rem 0;
     }
-  
+
     div.auth-form__footer {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
       align-items: center;
       padding: 0 1rem 1rem;
-  
+
       a {
         flex: 1;
-        font-size: 0.8rem;
+        font-size: d.$fs-1;
       }
     }
   }

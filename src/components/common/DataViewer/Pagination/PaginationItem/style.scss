@@ -1,0 +1,30 @@
+@use '~/comp/_colors' as c;
+@use '~/comp/_mixins' as m;
+
+$height: 1.6rem;
+$mobile-height: 2rem;
+
+button.pagination-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: $mobile-height;
+  height: $mobile-height;
+  padding: 0 0.4rem;
+  color: c.$blue;
+  background-color: c.$white;
+  border-radius: 10rem;
+
+  @include m.interactive;
+
+  @include m.on-non-mobile {
+    min-width: $height;
+    height: $height;
+    padding: 0 0.2rem;
+  }
+
+  &.pagination-item-active {
+    color: c.$white;
+    background-color: c.$blue;
+  }
+}

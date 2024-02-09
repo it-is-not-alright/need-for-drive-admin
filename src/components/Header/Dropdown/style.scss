@@ -1,0 +1,118 @@
+@use '~/comp/_colors' as c;
+@use '~/comp/_mixins' as m;
+@use '~/comp/_dimensions' as d;
+
+$icon-size: 0.7rem;
+
+div.dropdown {
+  position: relative;
+
+  button.dropdown__toggle {
+    @include m.interactive;
+
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    width: inherit;
+    padding: 0.8rem;
+
+    @include m.on-non-mobile {
+      padding: 0.8rem 1.5rem;
+    }
+
+    div.dropdown__img-wrapper {
+      position: relative;
+
+      img {
+        display: block;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+
+        @include m.on-non-mobile {
+          width: 2.5rem;
+          height: 2.5rem;
+        }
+      }
+
+      span.badge {
+        @include m.on-non-mobile {
+          display: none;
+        }
+      }
+    }
+
+    div.dropdown__additional-content {
+      display: none;
+
+      @include m.on-non-mobile {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+      }
+
+      p {
+        color: c.$davys-grey;
+      }
+
+      svg {
+        width: $icon-size;
+        height: $icon-size;
+        fill: c.$cadet-blue;
+      }
+    }
+  }
+
+  div.dropdown__menu {
+    @include m.card(0.5rem);
+
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 3;
+    display: block;
+    width: max-content;
+    min-width: calc(100% - 1rem);
+    max-width: calc(100vw - 1rem);
+    margin: 0.5rem;
+    padding: 0.5rem 0;
+    font-size: d.$fs-1;
+    border-width: 1px;
+    border-style: solid;
+    border-color: c.$light-periwinkle;
+
+    button.dropdown__item {
+      @include m.interactive;
+
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      width: 100%;
+      padding: 0.5rem 1rem;
+      color: c.$police-blue;
+      background-color: c.$white;
+
+      &:first-child {
+        @include m.on-non-mobile {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &.dropdown-expanded {
+    button.dropdown__toggle {
+      filter: brightness(90%);
+
+      span.badge {
+        display: none;
+      }
+    }
+  }
+
+  &:not(.dropdown-expanded) {
+    div.dropdown__menu {
+      display: none;
+    }
+  }
+}

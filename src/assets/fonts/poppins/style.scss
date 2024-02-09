@@ -1,0 +1,13 @@
+@use '../weight' as w;
+@use '../families' as f;
+@use 'sass:string';
+
+$font-family: f.$poppins;
+$family: string.to-lower-case($font-family);
+
+@font-face {
+  font-weight: 500;
+  font-family: $font-family;
+  font-style: normal;
+  src: url('#{$family}-#{w.$fw-600}.ttf') format('truetype');
+}

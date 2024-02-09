@@ -6,9 +6,9 @@ import Sprite from '~/assets/sprite.svg';
 
 import { IconProps } from './types';
 
-function Icon({ id, width, height }: IconProps) {
+function Icon({ id, width, height, className }: IconProps) {
   return (
-    <svg width={width} height={height}>
+    <svg width={width} height={height} className={className}>
       <use href={`${Sprite}#${id}`} />
     </svg>
   );

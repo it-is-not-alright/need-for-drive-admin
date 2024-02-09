@@ -1,0 +1,10 @@
+@use '~/comp/_colors' as c;
+
+h1.title {
+  margin-bottom: 1rem;
+}
+
+div.spacer {
+  margin: 1rem 0;
+  border-bottom: 1px solid c.$dark-blue-gray;
+}

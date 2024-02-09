@@ -1,0 +1,25 @@
+@use '~/comp/_colors' as c;
+@use '~/comp/_mixins' as m;
+@use '~/assets/fonts/_families' as f;
+
+$icon-size: 1.3rem;
+
+button.notification-btn {
+  @include m.interactive;
+
+  display: block;
+  height: 100%;
+  aspect-ratio: 1;
+
+  & > div {
+    position: relative;
+    width: fit-content;
+    margin: 0 auto;
+
+    svg {
+      width: $icon-size;
+      height: $icon-size;
+      fill: c.$shadow-blue;
+    }
+  }
+}

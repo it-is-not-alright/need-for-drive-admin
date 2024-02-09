@@ -1,0 +1,79 @@
+@use '~/comp/_colors' as c;
+@use '~/comp/_mixins' as m;
+@use '~/comp/_dimensions' as d;
+
+$icon-size: 1.4rem;
+
+div.side-bar {
+  position: relative;
+  z-index: 2;
+  background-color: c.$white;
+  border-right: 1px solid c.$light-periwinkle;
+  box-shadow: 0 0.25rem 0.5rem c.$shadow;
+
+  @include m.on-non-mobile {
+    border-right: none;
+    box-shadow: 0.3rem 0 0.5rem c.$shadow;
+  }
+
+  button.side-bar__toggle {
+    @include m.interactive;
+
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+    padding: 1.1rem;
+
+    @include m.on-non-mobile {
+      padding: 1.35rem;
+    }
+
+    div {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+
+      p {
+        display: none;
+        color: c.$police-blue;
+      }
+
+      svg {
+        width: $icon-size;
+        height: $icon-size;
+      }
+    }
+  }
+
+  div.side-bar__menu {
+    position: absolute;
+    display: none;
+    width: 100vw;
+    background-color: inherit;
+    box-shadow: 0 0.25rem 0.5rem c.$shadow;
+
+    @include m.on-non-mobile {
+      position: static;
+      width: 16rem;
+      height: auto;
+      box-shadow: none;
+    }
+  }
+
+  &.side-bar-expanded {
+    button.side-bar__toggle {
+      height: auto;
+
+      p {
+        @include m.on-non-mobile {
+          display: block;
+        }
+      }
+    }
+
+    div.side-bar__menu {
+      display: block;
+    }
+  }
+}

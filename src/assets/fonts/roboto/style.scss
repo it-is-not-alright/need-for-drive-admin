@@ -1,8 +1,20 @@
-$font-family: 'Roboto';
+@use '../weight' as w;
+@use '../families' as f;
+@use 'sass:string';
+
+$font-family: f.$roboto;
+$family: string.to-lower-case($font-family);
+
+@font-face {
+  font-weight: 400;
+  font-family: $font-family;
+  font-style: normal;
+  src: url('#{$family}-#{w.$fw-400}.ttf') format('truetype');
+}
 
 @font-face {
   font-weight: 500;
   font-family: $font-family;
   font-style: normal;
-  src: url('roboto-medium.ttf') format('truetype');
+  src: url('#{$family}-#{w.$fw-500}.ttf') format('truetype');
 }

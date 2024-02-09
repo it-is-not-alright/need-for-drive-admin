@@ -1,0 +1,43 @@
+@use '~/comp/_colors' as c;
+@use '~/comp/_mixins' as m;
+
+div.confirmation-modal {
+  @include m.card;
+
+  div.confirmation-modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid c.$dark-blue-gray;
+  
+    button {
+      @include m.interactive;
+
+      width: 1.5rem;
+      height: 1.5rem;
+      padding: 0.25rem;
+      border-radius: 50%;
+  
+      svg {
+        width: 100%;
+        height: 100%;
+        fill: c.$roman-silver;
+      }
+    }
+  }
+  
+  div.confirmation-modal__main {
+    padding: 1rem;
+    color: c.$dark;
+  }
+  
+  div.confirmation-modal__footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: flex-end;
+    padding: 1rem;
+    border-top: 1px solid c.$dark-blue-gray;
+  }
+}

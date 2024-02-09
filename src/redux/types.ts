@@ -3,4 +3,9 @@ type PayloadAction<T, P> = {
   payload: P;
 };
 
-export { PayloadAction };
+type RequestState<T> = {
+  content: T;
+  pending: boolean;
+};
+
+export { PayloadAction, RequestState };

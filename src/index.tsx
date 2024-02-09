@@ -1,10 +1,10 @@
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { HashRouter } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 
-import App from './components/App/App';
 import store from './redux/store';
+import router from './route/routes';
 
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
@@ -12,9 +12,7 @@ const root = createRoot(rootElement);
 root.render(
   <StrictMode>
     <Provider store={store}>
-      <HashRouter>
-        <App />
-      </HashRouter>
+      <RouterProvider router={router} />
     </Provider>
   </StrictMode>,
 );

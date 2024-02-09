@@ -1,0 +1,23 @@
+@use '~/comp/_colors' as c;
+@use '~/comp/_mixins' as m;
+@use '~/comp/_dimensions' as d;
+
+header {
+  z-index: 1;
+  display: flex;
+  box-shadow: 0 0.25rem 0.5rem c.$shadow;
+
+  & > * {
+    &:not(:last-child) {
+      border-right: 1px solid c.$light-periwinkle;
+    }
+  }
+
+  button.notification-btn {
+    display: none;
+
+    @include m.on-non-mobile {
+      display: block;
+    }
+  }
+}

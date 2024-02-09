@@ -1,0 +1,99 @@
+@use '~/comp/_colors' as c;
+@use '~/comp/_mixins' as m;
+@use '~/comp/_dimensions' as d;
+@use '~/assets/fonts/_families' as f;
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  font-size: inherit;
+  font-family: f.$roboto, sans-serif;
+  outline: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  text-decoration: none;
+
+  &:link,
+  &:visited,
+  &:hover,
+  &:active {
+    color: c.$blue;
+  }
+}
+
+html,
+body,
+#root {
+  height: 100dvh;
+}
+
+#root {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  background-color: c.$light;
+
+  & > div.spinner {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  div.side-bar {
+    grid-column: 1;
+    grid-row: 1;
+
+    @include m.on-non-mobile {
+      grid-row: 1 / 4;
+    }
+  }
+
+  header {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  main {
+    display: grid;
+    grid-column: 1 / 3;
+    grid-row: 2;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 1fr auto;
+    height: 100%;
+    overflow-y: auto;
+
+    @include m.on-non-mobile {
+      grid-column: 2;
+    }
+  }
+}
+
+button {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+div.page {
+  padding: 1rem;
+}
+
+img {
+  user-select: none;
+  pointer-events: none;
+}
+
+h1.title {
+  color: c.$police-blue;
+  font-size: d.$fs-5;
+}
+
+h2.title {
+  color: c.$police-blue;
+  font-size: d.$fs-4;
+}

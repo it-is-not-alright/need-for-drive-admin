@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { AppRoute } from '~/comp/App/types';
 import { setAuthStatus } from '~/src/redux/auth/actions';
 import { AuthStatus } from '~/src/redux/auth/types';
+import RouteUtil from '~/src/route/util';
 import Validator from '~/src/validation/validator';
 
 import AuthForm from '../../common/AuthForm/AuthForm';
@@ -27,7 +27,7 @@ function SignUpPage() {
       setFormData(data);
     } else {
       dispatch(setAuthStatus(AuthStatus.SignUpSuccess));
-      navigate(AppRoute.LogIn);
+      navigate(RouteUtil.logIn.path);
     }
   };
 

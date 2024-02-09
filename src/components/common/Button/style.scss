@@ -1,22 +1,27 @@
 @use '~/comp/_colors' as c;
 @use '~/comp/_mixins' as m;
+@use '~/comp/_dimensions' as d;
 
-button {
+button.simple-btn {
+  @include m.interactive;
+  @include m.protected-width;
+
   position: relative;
-  padding: 0.5rem 2rem;
+  padding: 0.5rem 1.75rem;
+  color: c.$white;
+  font-size: d.$fs-1;
   border-radius: 0.25rem;
 
+  p {
+    text-align: center;
+  }
+
   &.primary {
-    color: c.$white;
     background-color: c.$blue;
   }
 
-  &:hover {
-    filter: brightness(90%);
-  }
-
-  &:active {
-    filter: brightness(80%);
+  &.danger {
+    background-color: c.$pink;
   }
 
   &.pending {
@@ -35,5 +40,9 @@ button {
     p {
       visibility: hidden;
     }
+  }
+
+  &:disabled {
+    background-color: c.$light-periwinkle;
   }
 }

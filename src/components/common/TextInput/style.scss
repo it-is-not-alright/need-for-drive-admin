@@ -1,5 +1,13 @@
 @use '~/comp/_colors' as c;
+@use '~/comp/_mixins' as m;
 @use '~/comp/_dimensions' as d;
+
+$icon-size: 1.25rem;
+
+label {
+  color: c.$davys-grey;
+  font-size: d.$fs-1;
+}
 
 div.text-input {
   display: flex;
@@ -14,20 +22,20 @@ div.text-input {
   }
 
   input {
+    @include m.protected-font-size;
+
     width: 100%;
     padding: 0.5rem 0.75rem;
+    color: c.$police-blue;
     background-color: transparent;
     border: 0;
     outline: 0;
-
-    @media (min-width: d.$desktop-mini) {
-      font-size: 0.8rem;
-    }
   }
 
   & + p {
     margin: 0.2rem 0;
     color: c.$pink;
+    font-size: d.$fs-1;
 
     &::after {
       white-space: pre;
@@ -39,6 +47,8 @@ div.text-input {
     padding: 0 0.75rem;
 
     svg {
+      width: $icon-size;
+      height: $icon-size;
       fill: c.$police-blue;
     }
   }
