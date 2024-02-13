@@ -1,7 +1,7 @@
 import './style.scss';
 
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { fetchPoints } from '~/src/redux/point/actions';
 import { pointsSelector } from '~/src/redux/point/selectors';
@@ -12,7 +12,6 @@ import { defaultParams, pageSize } from './constants';
 
 function PointsPage() {
   const points = useSelector(pointsSelector);
-  const dispatch = useDispatch();
 
   return (
     <div className="page">
@@ -20,7 +19,7 @@ function PointsPage() {
       <DataViewer
         limit={pageSize}
         total={points.content.count}
-        onChange={(params) => dispatch(fetchPoints(params))}
+        fetchData={fetchPoints}
         defaultParams={defaultParams}
       >
         <div className="point-table-wrapper">

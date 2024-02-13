@@ -1,7 +1,7 @@
 import './style.scss';
 
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { fetchCars } from '~/src/redux/car/actions';
 import { carsSelector } from '~/src/redux/car/selectors';
@@ -13,7 +13,6 @@ import { defaultParams, pageSize } from './constants';
 
 function CarsPage() {
   const cars = useSelector(carsSelector);
-  const dispatch = useDispatch();
 
   return (
     <div className="page">
@@ -21,12 +20,12 @@ function CarsPage() {
       <DataViewer
         limit={pageSize}
         total={cars.content.count}
-        onChange={(params) => dispatch(fetchCars(params))}
+        fetchData={fetchCars}
         defaultParams={defaultParams}
       >
         <div className="car-grid">
           {cars.content.data.map((car) => (
-            <CarBox car={car} />
+            <CarBox car={car} key={car.id} />
           ))}
         </div>
       </DataViewer>

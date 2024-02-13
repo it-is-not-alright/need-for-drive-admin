@@ -1,6 +1,7 @@
 import './style.scss';
 
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 
 import Button from '../Button/Button';
@@ -14,17 +15,18 @@ function DataViewer<T extends string>({
   limit,
   total,
   defaultParams,
-  onChange,
   filterConfig,
+  fetchData,
   children,
 }: DataViewerProps<T>) {
   const [searchParams, setSearchParams] = useSearchParams();
   const params = collectParams(defaultParams, searchParams);
   const [filter, setFilter] = useState(params.filter);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setFilter(params.filter);
-    onChange(`${paramsToURL(params)}&limit=${limit}`);
+    dispatch(fetchData(`${paramsToURL(params)}&limit=${limit}`));
   }, [searchParams]);
 
   const handleFilterChange = (

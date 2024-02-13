@@ -1,7 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
 import { getOrders } from '~/src/api/services/order';
-import { ArrayRequestData, OrderRaw, RequestResult } from '~/src/api/types';
 
 import { defaultRequestError } from '../constants';
 import { setRequestError } from '../request-error/actions';
@@ -11,9 +10,10 @@ import { OrdersRequestedAction } from './types';
 
 function* ordersWorker(action: OrdersRequestedAction): Generator {
   try {
-    const result = (yield call(getOrders, action.payload)) as RequestResult<
-      ArrayRequestData<OrderRaw>
-    >;
+    const result: Awaited<ReturnType<typeof getOrders>> = yield call(
+      getOrders,
+      action.payload,
+    );
     if (result.error) {
       yield put(setRequestError(result.error));
     } else {

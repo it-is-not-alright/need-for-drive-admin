@@ -34,8 +34,8 @@ function OrdersPage() {
       <DataViewer
         limit={pageSize}
         total={orders.content.count}
-        onChange={(params) => dispatch(fetchOrders(params))}
         defaultParams={defaultParams}
+        fetchData={fetchOrders}
         filterConfig={filterConfig}
       >
         {orders.content.data.map((raw, index) => (

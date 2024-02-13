@@ -1,8 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
 import { getCars, getFilterValues } from '~/src/api/services/car';
-import { ArrayRequestData, CarRaw, RequestResult } from '~/src/api/types';
-import { FilterValues } from '~/src/components/common/DataViewer/types';
 
 import { defaultRequestError } from '../constants';
 import { setRequestError } from '../request-error/actions';
@@ -12,7 +10,8 @@ import { CarsRequestedAction } from './types';
 
 function* filterByCarValuesWorker(): Generator {
   try {
-    const result = (yield call(getFilterValues)) as RequestResult<FilterValues>;
+    const result: Awaited<ReturnType<typeof getFilterValues>> =
+      yield call(getFilterValues);
     if (result.error) {
       yield put(setRequestError(result.error));
     } else {
@@ -25,9 +24,10 @@ function* filterByCarValuesWorker(): Generator {
 
 function* carsWorker(action: CarsRequestedAction): Generator {
   try {
-    const result = (yield call(getCars, action.payload)) as RequestResult<
-      ArrayRequestData<CarRaw>
-    >;
+    const result: Awaited<ReturnType<typeof getCars>> = yield call(
+      getCars,
+      action.payload,
+    );
     if (result.error) {
       yield put(setRequestError(result.error));
     } else {

@@ -1,3 +1,5 @@
+import { AnyAction } from 'redux-saga';
+
 import { ControlItem } from '../../types';
 
 type FilterSearchParams<T extends string> = {
@@ -29,8 +31,8 @@ type DataViewerProps<T extends string> = {
   limit: number;
   total: number;
   defaultParams: SearchParams<T>;
-  onChange: (params: string) => void;
   filterConfig?: FilterConfig<T>;
+  fetchData: (params: string) => AnyAction;
   children: React.ReactNode;
 };
 
