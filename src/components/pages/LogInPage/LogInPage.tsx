@@ -54,7 +54,7 @@ function LogInPage() {
   const handleInputChange = (value: string, prop: string) => {
     setFormData({
       ...formData,
-      [prop]: { value: value.trim(), error: '' },
+      [prop]: { value: value.trim(), error: null },
     });
   };
 

@@ -20,8 +20,7 @@ function Select<T extends ControlItem>({
     'select-expanded': isExpanded,
     'select-filled': selectedItem,
   });
-  const toggleButtonId = `${id}__toggle`;
-  useClickAway(`#${toggleButtonId}`, () => setIsExpanded(false));
+  useClickAway(`#${id}`, () => setIsExpanded(false));
 
   const handleToggleClick = () => {
     setIsExpanded(!isExpanded);
@@ -35,7 +34,7 @@ function Select<T extends ControlItem>({
     <div className={classes}>
       <button
         type="button"
-        id={toggleButtonId}
+        id={id}
         className="select__toggle"
         onClick={handleToggleClick}
       >

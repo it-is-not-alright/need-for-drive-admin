@@ -3,12 +3,12 @@ import './style.scss';
 import classNames from 'classnames';
 import React from 'react';
 
-import { ButtonProps, ButtonType } from './types';
+import { ButtonProps, ButtonStyle } from './types';
 
 function Button({
   text,
   onClick,
-  type = ButtonType.Primary,
+  style: type = ButtonStyle.Primary,
   pending = false,
   isDisabled = false,
 }: ButtonProps) {

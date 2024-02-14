@@ -5,11 +5,11 @@ import { LogInFormData, LogInFormDataScheme } from './types';
 const initLogInFormData: LogInFormData = {
   email: {
     value: '',
-    error: '',
+    error: null,
   },
   password: {
     value: '',
-    error: '',
+    error: null,
   },
 };
 

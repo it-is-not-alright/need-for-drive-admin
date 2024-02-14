@@ -2,14 +2,13 @@
 @use '~/comp/_mixins' as m;
 @use '~/comp/_dimensions' as d;
 
-div.car-box {
+a.car-box {
   @include m.interactive;
 
   display: flex;
   flex-direction: column;
   padding: 1rem;
   border: 1px solid c.$dark-blue-gray;
-  cursor: pointer;
 
   div.car-box__img-wrapper {
     display: flex;
@@ -24,14 +23,14 @@ div.car-box {
     }
   }
 
+  h3 {
+    color: c.$dark;
+  }
+
   div.car-box__info-block {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-
-    p.car-row__name {
-      color: c.$dark;
-    }
 
     div {
       flex: 1;

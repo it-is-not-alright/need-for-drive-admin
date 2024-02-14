@@ -1,0 +1,53 @@
+@use '~/comp/_colors' as c;
+@use '~/comp/_mixins' as m;
+@use '~/comp/_dimensions' as d;
+
+div.car-card {
+  @include m.card;
+
+  display: grid;
+  height: fit-content;
+
+  & > div {
+    padding: 1rem;
+  }
+
+  div.car-card__main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+      max-width: min(14rem, 100%);
+      margin-bottom: 0.5rem;;
+    }
+
+    & > p {
+      margin-bottom: 0.5rem;
+      color: c.$shadow-blue;
+      font-size: d.$fs-1;;
+    }
+  }
+
+  div.car-card__progress {
+    border: solid c.$dark-blue-gray;
+    border-width: 1px 0;
+  }
+
+  div.car-card__description {
+    font-size: d.$fs-2;
+
+    h5 {
+      margin-bottom: 0.5rem;
+      color: c.$roman-silver;
+      font-weight: 500;
+    }
+
+    textarea {
+      width: 100%;
+      color: c.$black-coral;
+      border: none;
+      resize: none;
+    }
+  }
+}

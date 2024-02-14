@@ -5,15 +5,15 @@ import { SignUpFormData, SignUpFormDataScheme } from './types';
 const initSignUpFormData: SignUpFormData = {
   email: {
     value: '',
-    error: '',
+    error: null,
   },
   password: {
     value: '',
-    error: '',
+    error: null,
   },
   passwordConfirm: {
     value: '',
-    error: '',
+    error: null,
   },
 };
 

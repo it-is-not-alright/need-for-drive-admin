@@ -16,11 +16,16 @@ button.simple-btn {
     text-align: center;
   }
 
-  &.primary {
+  &.simple-btn-primary {
     background-color: c.$blue;
   }
 
-  &.danger {
+  &.simple-btn-secondary {
+    color: c.$police-blue;
+    background-color: c.$bright-gray;
+  }
+
+  &.simple-btn-danger {
     background-color: c.$pink;
   }
 

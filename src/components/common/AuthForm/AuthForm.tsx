@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 import RouteUtil from '~/src/route/util';
 
 import Button from '../Button/Button';
+import FormTextInput from '../FormTextInput/FormTextinput';
 import Icon from '../Icon/Icon';
-import TextInput from '../TextInput/TextInput';
 import { AuthFormProps } from './types';
 
 function AuthForm({
@@ -31,18 +31,18 @@ function AuthForm({
           <h2 className="title">{isSignUp ? 'Регистрация' : 'Вход'}</h2>
         </div>
         <div className="auth-form__main">
-          <TextInput
+          <FormTextInput
             id="email"
-            title="Почта"
+            label="Почта"
             value={email.value}
             error={email.error}
             onChange={(value) => onInputChange(value, 'email')}
             maxLength={150}
             autoComplete={isSignUp ? 'off' : 'email'}
           />
-          <TextInput
+          <FormTextInput
             id={isSignUp ? 'new-password' : 'current-password'}
-            title="Пароль"
+            label="Пароль"
             value={password.value}
             error={password.error}
             onChange={(value) => onInputChange(value, 'password')}
@@ -51,9 +51,9 @@ function AuthForm({
             autoComplete={isSignUp ? 'off' : 'current-password'}
           />
           {isSignUp && (
-            <TextInput
+            <FormTextInput
               id="password-confirm"
-              title="Подтвердите пароль"
+              label="Подтвердите пароль"
               value={passwordConfirm.value}
               error={passwordConfirm.error}
               onChange={(value) => onInputChange(value, 'passwordConfirm')}

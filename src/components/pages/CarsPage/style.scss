@@ -1,4 +1,10 @@
-div.car-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
+div#cars-page {
+  h1.title {
+    margin-bottom: 1rem;
+  }
+
+  div.car-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
+  }  
 }

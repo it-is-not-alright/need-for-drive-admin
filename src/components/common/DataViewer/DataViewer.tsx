@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 
 import Button from '../Button/Button';
-import { ButtonType } from '../Button/types';
+import { ButtonStyle } from '../Button/types';
 import Select from '../Select/Select';
 import Pagination from './Pagination/Pagination';
 import { DataViewerProps, FilterValueControlItem } from './types';
@@ -70,7 +70,7 @@ function DataViewer<T extends string>({
             <Button
               text="Сбросить"
               onClick={handleFilterResetButtonClick}
-              type={ButtonType.Danger}
+              style={ButtonStyle.Danger}
               isDisabled={params.filterIsDefault}
             />
             <Button

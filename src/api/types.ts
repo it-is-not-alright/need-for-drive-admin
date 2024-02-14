@@ -56,6 +56,7 @@ type CarRaw = {
   priceMin: number;
   description: string;
   tank: string;
+  colors: string[];
   thumbnail: {
     path: string;
   };

@@ -3,6 +3,7 @@ import './style.scss';
 import React, { useMemo } from 'react';
 
 import ButtonGroup from '~/src/components/common/ButtonGroup/ButtonGroup';
+import { CheckboxStyle } from '~/src/components/common/CheckboxGroup/Checkbox/types';
 import CheckboxGroup from '~/src/components/common/CheckboxGroup/CheckboxGroup';
 import { CheckboxGroupMap } from '~/src/components/common/CheckboxGroup/types';
 import { dateToString } from '~/src/utils/date';
@@ -44,6 +45,7 @@ function OrderRow({ raw }: OrderRowProps) {
           name={`${raw.id}-service`}
           map={checkboxMap}
           isDisabled
+          style={CheckboxStyle.Green}
         />
       </div>
       <p className="order-row__price">{numberAsCurrency(raw.price)}</p>

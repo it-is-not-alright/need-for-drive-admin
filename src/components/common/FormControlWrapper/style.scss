@@ -1,0 +1,22 @@
+@use '~/comp/_colors' as c;
+@use '~/comp/_dimensions' as d;
+
+div.form-control-wrapper {
+  label.form-control-wrapper__label {
+    display:inline-block;
+    margin-bottom: 0.25rem;
+    color: c.$davys-grey;
+    font-size: d.$fs-1;
+  }
+  
+  p.form-control-wrapper__error {
+    margin-top: 0.2rem;
+    color: c.$pink;
+    font-size: d.$fs-1;
+  
+    &::after {
+      white-space: pre;
+      content: ' ';
+    }
+  }
+}

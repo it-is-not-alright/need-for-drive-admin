@@ -1,0 +1,49 @@
+@use '~/comp/_colors' as c;
+@use '~/comp/_mixins' as m;
+
+$icon-size: 0.75rem;
+
+div.string-array-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  div.string-array-editor__input-wrapper {
+    display: flex;
+    gap: 0.5rem;
+    height: auto;
+
+    div.text-input {
+      flex: 1;
+    }
+
+    button {
+      @include m.interactive;
+
+      display: block;
+      padding: 0 0.6rem;
+      border: 1px solid c.$lavender-gray;
+      border-radius: 0.25rem;
+      aspect-ratio: 1;
+
+      svg {
+        width: $icon-size;
+        height: $icon-size;
+        fill: c.$police-blue;
+      }
+
+      &:disabled {
+        cursor: default;
+
+        svg {
+          fill: c.$lavender-gray;
+        }
+      }
+    }
+  }
+
+  div.string-array-editor__checkbox-group-wrapper {
+    height: 8rem;
+    overflow-y: auto;
+  }
+}
