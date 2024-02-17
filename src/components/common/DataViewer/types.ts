@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux-saga';
 
-import { ControlItem } from '../../types';
+import { SelectItem } from '../Select/types';
 
 type FilterSearchParams<T extends string> = {
   [K in T]: string | null;
@@ -12,12 +12,12 @@ type SearchParams<T extends string> = {
   filterIsDefault: boolean;
 };
 
-interface FilterValueControlItem extends ControlItem {
+interface FilterValueSelectItem extends SelectItem {
   value: string;
 }
 
 type FilterValues = {
-  [value: string]: FilterValueControlItem;
+  [value: string]: FilterValueSelectItem;
 };
 
 type FilterConfig<T extends string> = {
@@ -40,7 +40,7 @@ export {
   DataViewerProps,
   FilterConfig,
   FilterSearchParams,
-  FilterValueControlItem,
   FilterValues,
+  FilterValueSelectItem,
   SearchParams,
 };

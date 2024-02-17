@@ -1,7 +1,8 @@
 import { FilterValues } from '~/src/components/common/DataViewer/types';
 
 import { client } from '..';
-import { ArrayRequestData, CarRaw, Endpoint, RequestResult } from '../types';
+import { ArrayRequestData, Endpoint, RequestResult } from '../types';
+import { CarRaw } from './types';
 
 async function getCars(
   params: string,

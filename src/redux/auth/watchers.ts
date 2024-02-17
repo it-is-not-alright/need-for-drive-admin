@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { logIn, logOut, verifyToken } from '~/src/api/services/auth';
+import { logIn, logOut, verifyToken } from '~/src/api/auth/service';
 
 import { defaultRequestError } from '../constants';
 import { setRequestError } from '../request-error/actions';

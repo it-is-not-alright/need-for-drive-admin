@@ -12,7 +12,9 @@ function Button({
   pending = false,
   isDisabled = false,
 }: ButtonProps) {
-  const classList = classNames('simple-btn', type, { pending });
+  const classList = classNames('simple-btn', type, {
+    'simple-btn-pending': pending,
+  });
 
   const handleClick = () => {
     if (!pending) {

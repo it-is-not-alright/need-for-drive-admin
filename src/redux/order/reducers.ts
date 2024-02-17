@@ -1,4 +1,5 @@
-import { ArrayRequestData, OrderRaw } from '~/src/api/types';
+import { OrderRaw } from '~/src/api/order/types';
+import { ArrayRequestData } from '~/src/api/types';
 
 import { RequestState } from '../types';
 import { ORDERS_RECIVED, ORDERS_REQUESTED } from './constants';

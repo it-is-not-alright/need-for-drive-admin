@@ -1,5 +1,15 @@
-type FileInputProps = {
-  placeholder: string;
+type FileDetails = {
+  path: string;
+  size: number;
 };
 
-export { FileInputProps };
+type FileInputProps = {
+  id: string;
+  placeholder: string;
+  accept: string;
+  file: FileDetails | null;
+  pending: boolean;
+  onChange: (file: FileDetails, pending: boolean) => void;
+};
+
+export { FileDetails, FileInputProps };

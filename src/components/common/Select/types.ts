@@ -1,6 +1,9 @@
-import { ControlItem } from '../../types';
+interface SelectItem {
+  id: number;
+  label: string;
+}
 
-type SelectProps<T extends ControlItem> = {
+type SelectProps<T extends SelectItem> = {
   id: string;
   items: T[];
   placeholder: string;
@@ -8,4 +11,4 @@ type SelectProps<T extends ControlItem> = {
   onChange: (item: T) => void;
 };
 
-export { SelectProps };
+export { SelectItem, SelectProps };

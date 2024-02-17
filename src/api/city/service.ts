@@ -1,7 +1,8 @@
 import { FilterValues } from '~/src/components/common/DataViewer/types';
 
 import { client } from '..';
-import { ArrayRequestData, CityRaw, Endpoint, RequestResult } from '../types';
+import { ArrayRequestData, Endpoint, RequestResult } from '../types';
+import { CityRaw } from './types';
 
 async function getFilterValues(): Promise<RequestResult<FilterValues>> {
   const raw = await client.get<ArrayRequestData<CityRaw>>(Endpoint.City);

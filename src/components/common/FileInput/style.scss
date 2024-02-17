@@ -6,7 +6,8 @@ div.file-input {
   display: grid;
   grid-template-columns: 1fr auto;
 
-  p, button {
+  p.file-input__size,
+  button {
     @include m.protected-width;
 
     padding: 0.5rem 0.75rem;
@@ -15,7 +16,7 @@ div.file-input {
     border: solid c.$lavender-gray;
   }
 
-  p {
+  p.file-input__size {
     grid-column: 1;
     grid-row: 1;
     border-width: 1px 0 1px 1px;
@@ -43,6 +44,25 @@ div.file-input {
       height: 100%;
       cursor: pointer;
       opacity: 0;
+    }
+  }
+
+  &.file-input-pending {
+    button {
+      cursor: default;
+  
+      &::after {
+        position: absolute;
+        margin: auto;
+        content: '';
+        inset: 0;
+  
+        @include m.spinner(c.$blue, 1em, 0.1em);
+      }
+
+      p {
+        visibility: hidden;
+      }
     }
   }
 }

@@ -1,4 +1,4 @@
-import { AuthRaw } from '../api/types';
+import { AuthRaw } from '../api/auth/types';
 import { ACCESS_TOKEN_COOKIE, REFRESH_TOKEN_COOKIE } from './constants';
 import Cookie from './util';
 

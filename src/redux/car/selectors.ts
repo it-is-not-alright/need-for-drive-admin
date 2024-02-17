@@ -1,4 +1,5 @@
-import { ArrayRequestData, CarRaw } from '~/src/api/types';
+import { CarRaw } from '~/src/api/car/types';
+import { ArrayRequestData } from '~/src/api/types';
 
 import { RootState } from '../reducer';
 import { RequestState } from '../types';

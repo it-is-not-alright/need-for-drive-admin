@@ -4,11 +4,10 @@ import classNames from 'classnames';
 import React, { useState } from 'react';
 
 import useClickAway from '../../hooks/use-click-away';
-import { ControlItem } from '../../types';
 import Icon from '../Icon/Icon';
-import { SelectProps } from './types';
+import { SelectItem, SelectProps } from './types';
 
-function Select<T extends ControlItem>({
+function Select<T extends SelectItem>({
   id,
   items,
   placeholder,

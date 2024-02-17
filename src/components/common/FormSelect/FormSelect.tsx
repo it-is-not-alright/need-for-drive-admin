@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { ControlItem } from '../../types';
 import FormControlWrapper from '../FormControlWrapper/FormControlWrapper';
 import Select from '../Select/Select';
+import { SelectItem } from '../Select/types';
 import { FormSelectProps } from './types';
 
-function FormSelect<T extends ControlItem>({
+function FormSelect<T extends SelectItem>({
   id,
   items,
   placeholder,

@@ -10,19 +10,19 @@ import RouteUtil from '~/src/route/util';
 import Validator from '~/src/validation/validator';
 
 import AuthForm from '../../common/AuthForm/AuthForm';
-import { initSignUpFormData, signUpDataScheme } from './constants';
+import { initData, scheme } from './constants';
 
 function SignUpPage() {
-  const [formData, setFormData] = useState(initSignUpFormData);
+  const [formData, setFormData] = useState(Validator.toValidatable(initData));
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleFormSubmit = () => {
-    signUpDataScheme.passwordConfirm.equals(
+    scheme.passwordConfirm.equals(
       formData.password.value,
       'Пароли не совпадают',
     );
-    const { data, failure } = Validator.check(formData, signUpDataScheme);
+    const { data, failure } = Validator.check(formData, scheme);
     if (failure) {
       setFormData(data);
     } else {

@@ -11,10 +11,10 @@ import { AuthStatus } from '~/src/redux/auth/types';
 import RouteUtil from '~/src/route/util';
 import Validator from '~/src/validation/validator';
 
-import { initLogInFormData, logInDataScheme } from './constants';
+import { initData, scheme } from './constants';
 
 function LogInPage() {
-  const [formData, setFormData] = useState(initLogInFormData);
+  const [formData, setFormData] = useState(Validator.toValidatable(initData));
   const { status } = useSelector(authSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -39,7 +39,7 @@ function LogInPage() {
   }, [status]);
 
   const handleFormSubmit = () => {
-    const { data, failure } = Validator.check(formData, logInDataScheme);
+    const { data, failure } = Validator.check(formData, scheme);
     if (failure) {
       setFormData(data);
     } else {

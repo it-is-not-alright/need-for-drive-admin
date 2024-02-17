@@ -6,9 +6,7 @@ $icon-size: 1.25rem;
 
 div.text-input {
   display: flex;
-  border-width: 1px;
-  border-style: solid;
-  border-color: c.$lavender-gray;
+  border: 1px solid c.$lavender-gray;
   border-radius: 0.25rem;
 
   &.invalid {

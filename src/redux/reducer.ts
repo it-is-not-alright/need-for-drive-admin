@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 import { authReducer } from './auth/reducers';
 import { carsReducer, filterByCarValuesReducer } from './car/reducers';
+import { categoriesReducer } from './category/reducers';
 import { filterByCityValuesReducer } from './city/reducers';
 import { ordersReducer } from './order/reducers';
 import { filterByStatusValuesReducer } from './order-status/reducers';
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   orders: ordersReducer,
   cars: carsReducer,
   points: pointsReducer,
+  categories: categoriesReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

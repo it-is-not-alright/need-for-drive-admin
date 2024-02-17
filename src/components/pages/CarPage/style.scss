@@ -20,7 +20,7 @@ div#car-page {
     div#car-details {
       @include m.card;
 
-      flex-grow: 10;
+      flex-grow: 5;
       min-width: min(15rem, 100%);
       height: fit-content;
       padding: 1rem;
@@ -37,6 +37,8 @@ div#car-page {
         margin: 1rem 0;
 
         div#model-wrapper,
+        div#min-price-wrapper,
+        div#tank-wrapper,
         div#color {
           grid-column: 1;
         }

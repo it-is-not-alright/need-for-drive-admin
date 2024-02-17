@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { getCars, getFilterValues } from '~/src/api/services/car';
+import { getCars, getFilterValues } from '~/src/api/car/service';
 
 import { defaultRequestError } from '../constants';
 import { setRequestError } from '../request-error/actions';

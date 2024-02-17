@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { getPoints } from '~/src/api/services/point';
+import { getPoints } from '~/src/api/point/service';
 
 import { defaultRequestError } from '../constants';
 import { setRequestError } from '../request-error/actions';

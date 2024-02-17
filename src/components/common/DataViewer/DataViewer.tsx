@@ -8,7 +8,7 @@ import Button from '../Button/Button';
 import { ButtonStyle } from '../Button/types';
 import Select from '../Select/Select';
 import Pagination from './Pagination/Pagination';
-import { DataViewerProps, FilterValueControlItem } from './types';
+import { DataViewerProps, FilterValueSelectItem } from './types';
 import { collectParams, compareFilters, paramsToURL } from './utils';
 
 function DataViewer<T extends string>({
@@ -29,10 +29,7 @@ function DataViewer<T extends string>({
     dispatch(fetchData(`${paramsToURL(params)}&limit=${limit}`));
   }, [searchParams]);
 
-  const handleFilterChange = (
-    param: T,
-    item: FilterValueControlItem | null,
-  ) => {
+  const handleFilterChange = (param: T, item: FilterValueSelectItem | null) => {
     setFilter({ ...filter, [param]: item?.value ?? null });
   };
 
