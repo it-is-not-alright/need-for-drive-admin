@@ -2,6 +2,8 @@ import './style.scss';
 
 import React, { useMemo, useState } from 'react';
 
+import { isNotEmpty } from '~/src/utils/general';
+
 import { CheckboxStyle } from '../CheckboxGroup/Checkbox/types';
 import CheckboxGroup from '../CheckboxGroup/CheckboxGroup';
 import { CheckboxGroupMap } from '../CheckboxGroup/types';
@@ -12,9 +14,10 @@ import { StringArrayEditorProps } from './types';
 
 function StringArrayEditor({
   id,
-  label,
   array,
   onChange,
+  label,
+  error,
 }: StringArrayEditorProps) {
   const [value, setValue] = useState('');
   const inputId = `${id}__input`;
@@ -41,9 +44,14 @@ function StringArrayEditor({
 
   return (
     <div id={id} className="string-array-editor">
-      <FormControlWrapper id={inputId} label={label}>
+      <FormControlWrapper id={inputId} label={label} error={error}>
         <div className="string-array-editor__input-wrapper">
-          <TextInput id={inputId} value={value} onChange={handleInputChange} />
+          <TextInput
+            id={inputId}
+            value={value}
+            onChange={handleInputChange}
+            isInvalid={isNotEmpty(error)}
+          />
           <button
             type="button"
             aria-label="add"

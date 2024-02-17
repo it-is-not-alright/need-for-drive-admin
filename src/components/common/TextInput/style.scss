@@ -9,7 +9,7 @@ div.text-input {
   border: 1px solid c.$lavender-gray;
   border-radius: 0.25rem;
 
-  &.invalid {
+  &.text-input-invalid {
     border-color: c.$pink;
   }
 

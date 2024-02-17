@@ -8,16 +8,16 @@ div#points-page {
 
   div.point-table-wrapper {
     overflow-x: auto;
-  
+
     table {
       width: 100%;
       border: 1px solid c.$light-periwinkle;
       border-collapse: collapse;
-  
+
       thead {
         background-color: c.$light;
       }
-  
+
       th,
       td {
         padding: 0.5rem;

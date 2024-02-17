@@ -4,6 +4,7 @@ type NumberInputProps = {
   value: number;
   onChange: (value: number | null) => void;
   max?: number;
+  isInvalid?: boolean;
 };
 
 export { NumberInputProps };

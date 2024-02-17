@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { isNotEmpty } from '~/src/utils/general';
+
 import FormControlWrapper from '../FormControlWrapper/FormControlWrapper';
 import TextInput from '../TextInput/TextInput';
 import { FormTextInputProps } from './types';
@@ -21,7 +23,7 @@ function FormTextInput({
         value={value}
         onChange={onChange}
         isSecure={isSecure}
-        isInvalid={error !== undefined && error !== null}
+        isInvalid={isNotEmpty(error)}
         maxLength={maxLength}
         autoComplete={autoComplete}
       />

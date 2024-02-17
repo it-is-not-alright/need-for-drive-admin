@@ -8,12 +8,12 @@ div.form-control-wrapper {
     color: c.$davys-grey;
     font-size: d.$fs-1;
   }
-  
+
   p.form-control-wrapper__error {
     margin-top: 0.2rem;
     color: c.$pink;
     font-size: d.$fs-1;
-  
+
     &::after {
       white-space: pre;
       content: ' ';

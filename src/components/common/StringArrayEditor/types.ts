@@ -1,8 +1,9 @@
 type StringArrayEditorProps = {
   id: string;
-  label: string;
   array: string[];
   onChange: (array: string[]) => void;
+  label?: string;
+  error?: string | null;
 };
 
 export { StringArrayEditorProps };

@@ -14,8 +14,12 @@ function FileInput({
   file,
   pending,
   onChange,
+  isInvalid,
 }: FileInputProps) {
-  const classList = classNames('file-input', { 'file-input-pending': pending });
+  const classes = classNames('file-input', {
+    'file-input-pending': pending,
+    'file-input-invalid': isInvalid,
+  });
 
   const getURL = (blob: Blob) => {
     const reader = new FileReader();
@@ -34,7 +38,7 @@ function FileInput({
   };
 
   return (
-    <div className={classList}>
+    <div className={classes}>
       <p className="file-input__size">
         {file ? numberAsSize(file.size) : placeholder}
       </p>

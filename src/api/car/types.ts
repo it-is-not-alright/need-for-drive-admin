@@ -18,4 +18,19 @@ type CarRaw = {
   categoryId: CategoryRaw;
 };
 
-export { CarRaw, Thumbnail };
+type CarMinimized = {
+  id: number | null;
+  name: string;
+  number: string;
+  priceMax: number;
+  priceMin: number;
+  description: string;
+  tank: string;
+  colors: string[];
+  thumbnail: Thumbnail;
+  categoryId: {
+    id: number;
+  };
+};
+
+export { CarMinimized, CarRaw, Thumbnail };

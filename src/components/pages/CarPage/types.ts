@@ -16,7 +16,7 @@ type CarFormData = {
   tank: number | null;
   colors: string[];
   thumbnail: Thumbnail | null;
-  categoryId: CategorySelectItem | null;
+  category: CategorySelectItem | null;
 };
 
 type CarFormDataScheme = Scheme<CarFormData>;

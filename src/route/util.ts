@@ -15,7 +15,7 @@ class RouteUtil {
 
   static cars: AppRoute = { path: '/cars' };
 
-  static car: AppRoute = { path: '/car/:id?' };
+  static car: AppRoute = { path: '/car/:id' };
 
   static points: AppRoute = { path: '/points' };
 

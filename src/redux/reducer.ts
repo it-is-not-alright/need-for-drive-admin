@@ -1,7 +1,11 @@
 import { combineReducers } from 'redux';
 
 import { authReducer } from './auth/reducers';
-import { carsReducer, filterByCarValuesReducer } from './car/reducers';
+import {
+  carReducer,
+  carsReducer,
+  filterByCarValuesReducer,
+} from './car/reducers';
 import { categoriesReducer } from './category/reducers';
 import { filterByCityValuesReducer } from './city/reducers';
 import { ordersReducer } from './order/reducers';
@@ -17,6 +21,7 @@ const rootReducer = combineReducers({
   filterByStatusValues: filterByStatusValuesReducer,
   orders: ordersReducer,
   cars: carsReducer,
+  car: carReducer,
   points: pointsReducer,
   categories: categoriesReducer,
 });

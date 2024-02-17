@@ -41,7 +41,11 @@ function ConfirmationModal({
           <p>{message}</p>
         </div>
         <div className="confirmation-modal__footer">
-          <Button text={cancelLabel} onClick={handleCancelButtonClick} />
+          <Button
+            text={cancelLabel}
+            onClick={handleCancelButtonClick}
+            style={ButtonStyle.Secondary}
+          />
           <Button
             text={confirmLabel}
             onClick={handleConfirmButtonClick}

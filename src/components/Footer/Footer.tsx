@@ -18,4 +18,6 @@ function Footer({ isDisplayed }: FooterProps) {
   );
 }
 
-export default Footer;
+const memoizedFooter = React.memo(Footer);
+
+export default memoizedFooter;

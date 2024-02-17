@@ -4,21 +4,23 @@
 div.confirmation-modal {
   @include m.card;
 
+  max-width: 24rem;
+
   div.confirmation-modal__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
     border-bottom: 1px solid c.$dark-blue-gray;
-  
+
     button {
       @include m.interactive;
 
-      width: 1.5rem;
-      height: 1.5rem;
-      padding: 0.25rem;
+      width: 2rem;
+      height: 2rem;
+      padding: 0.5rem;
       border-radius: 50%;
-  
+
       svg {
         width: 100%;
         height: 100%;
@@ -26,12 +28,16 @@ div.confirmation-modal {
       }
     }
   }
-  
+
   div.confirmation-modal__main {
     padding: 1rem;
-    color: c.$dark;
+    background-color: c.$light;
+
+    p {
+      color: c.$dark;
+    }
   }
-  
+
   div.confirmation-modal__footer {
     display: flex;
     flex-wrap: wrap;

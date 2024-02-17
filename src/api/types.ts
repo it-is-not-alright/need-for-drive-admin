@@ -31,9 +31,14 @@ type ArrayRequestData<T> = {
   data: T[];
 };
 
+type ObjectRequestData<T> = {
+  data: T;
+};
+
 export {
   ArrayRequestData,
   Endpoint,
+  ObjectRequestData,
   RequestError,
   RequestOptions,
   RequestResult,

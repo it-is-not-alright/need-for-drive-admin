@@ -10,6 +10,7 @@ type FileInputProps = {
   file: FileDetails | null;
   pending: boolean;
   onChange: (file: FileDetails, pending: boolean) => void;
+  isInvalid?: boolean;
 };
 
 export { FileDetails, FileInputProps };

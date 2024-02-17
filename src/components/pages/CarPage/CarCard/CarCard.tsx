@@ -3,55 +3,52 @@ import './style.scss';
 import classNames from 'classnames';
 import React, { useState } from 'react';
 
-import FileInput from '~/src/components/common/FileInput/FileInput';
 import { FileDetails } from '~/src/components/common/FileInput/types';
+import FormFileInput from '~/src/components/common/FormFileInput/FormFileInput';
 import ProgressBar from '~/src/components/common/ProgressBar/ProgressBar';
 
 import { CarCardProps } from './types';
 
-function CarCard({
-  percentage,
-  name,
-  description,
-  thumbnail,
-  category,
-  handleInput,
-}: CarCardProps) {
+function CarCard({ percentage, formData, onInput }: CarCardProps) {
   const [filePending, setFilePending] = useState(false);
   const imageWrapperClass = classNames('car-card__img-wrapper', {
-    'car-card__img-wrapper-empty': thumbnail === null,
+    'car-card__img-wrapper-empty': formData.thumbnail.value === null,
   });
 
   const handleFileInputChange = (file: FileDetails, pending: boolean) => {
     setFilePending(pending);
-    handleInput('thumbnail', file);
+    onInput('thumbnail', file);
   };
 
   const handleDescriptionChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
-    handleInput('description', event.target.value);
+    onInput('description', event.target.value);
   };
 
   return (
     <div className="car-card">
       <div className="car-card__main">
         <div className={imageWrapperClass}>
-          {thumbnail ? (
-            <img src={thumbnail.path} alt={name} />
+          {formData.thumbnail.value ? (
+            <img
+              src={formData.thumbnail.value.path}
+              alt={formData.name.value}
+            />
           ) : (
             <p>Изображение не выбрано</p>
           )}
         </div>
-        <h2 className="title">{name || 'Модель не указана'}</h2>
-        <p>{category?.name ?? 'Категория не выбрана'}</p>
-        <FileInput
+        <h2 className="title">{formData.name.value || 'Модель не указана'}</h2>
+        <p>{formData.category.value?.name ?? 'Категория не выбрана'}</p>
+        <FormFileInput
           id="image"
           placeholder="Выберите файл..."
           accept="image/gif, image/jpeg, image/png, image/bmp"
           pending={filePending}
-          file={thumbnail}
+          file={formData.thumbnail.value}
           onChange={handleFileInputChange}
+          error={formData.thumbnail.error}
         />
       </div>
       <div className="car-card__progress">
@@ -61,7 +58,7 @@ function CarCard({
         <label htmlFor="description">Описание</label>
         <textarea
           id="description"
-          value={description}
+          value={formData.description.value}
           rows={6}
           onChange={handleDescriptionChange}
         />

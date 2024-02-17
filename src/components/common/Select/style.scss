@@ -76,7 +76,8 @@ div.select {
         width: 100%;
         padding: 0.4rem 0.75rem;
         color: c.$police-blue;
-  
+        cursor: pointer;
+
         &.select__option-selected {
           color: c.$blue;
         }
@@ -95,6 +96,12 @@ div.select {
       p {
         color: c.$police-blue;
       }
+    }
+  }
+
+  &.select-invalid {
+    button.select__toggle {
+      border-color: c.$pink;
     }
   }
 }

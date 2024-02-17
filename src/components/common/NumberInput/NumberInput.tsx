@@ -1,5 +1,6 @@
 import './style.scss';
 
+import classNames from 'classnames';
 import React from 'react';
 
 import { NumberInputProps } from './types';
@@ -10,7 +11,12 @@ function NumberInput({
   value,
   onChange,
   max = Infinity,
+  isInvalid = false,
 }: NumberInputProps) {
+  const classes = classNames('number-input', {
+    'number-input-invalid': isInvalid,
+  });
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue: number = parseInt(event.target.value, 10);
     if (Number.isNaN(newValue)) {
@@ -21,7 +27,7 @@ function NumberInput({
   };
 
   return (
-    <div className="number-input">
+    <div className={classes}>
       <input
         id={id}
         type="text"

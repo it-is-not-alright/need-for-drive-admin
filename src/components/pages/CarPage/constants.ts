@@ -2,7 +2,7 @@ import Validator from '~/src/validation/validator';
 
 import { CarFormData, CarFormDataScheme } from './types';
 
-const initData: CarFormData = {
+const initCarFormData: CarFormData = {
   id: null,
   name: '',
   number: '',
@@ -12,7 +12,7 @@ const initData: CarFormData = {
   tank: null,
   colors: [],
   thumbnail: null,
-  categoryId: null,
+  category: null,
 };
 
 const scheme: CarFormDataScheme = {
@@ -25,7 +25,7 @@ const scheme: CarFormDataScheme = {
   tank: Validator.number().required('Поле обязательно для заполнения'),
   colors: Validator.array().required('Укажите не менее одного цвета'),
   thumbnail: Validator.object().required('Выберите изображение для автомобиля'),
-  categoryId: Validator.object().required('Поле обязательно для заполнения'),
+  category: Validator.object().required('Поле обязательно для заполнения'),
 };
 
-export { initData, scheme };
+export { initCarFormData, scheme };

@@ -1,0 +1,41 @@
+@use '~/comp/_colors' as c;
+@use '~/comp/_mixins' as m;
+@use '~/comp/_dimensions' as d;
+
+$icon-size: 0.75rem;
+
+div.success-pop-up {
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  width: 100%;
+  min-width: 0;
+  background-color: c.$green;
+  box-shadow: 0 0.25rem 0.5rem c.$shadow;
+
+  svg {
+    width: $icon-size;
+    height: $icon-size;
+    fill: c.$white;
+  }
+
+  div.success-pop-up__main,
+  button {
+    padding: 0.75rem 1.25rem;
+  }
+
+  div.success-pop-up__main {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    p {
+      color: c.$white;
+      font-size: d.$fs-1;
+    }
+  }
+
+  button {
+    @include m.interactive(c.$green);
+  }
+}

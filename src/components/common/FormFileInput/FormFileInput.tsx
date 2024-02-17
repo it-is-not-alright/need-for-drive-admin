@@ -2,27 +2,28 @@ import React from 'react';
 
 import { isNotEmpty } from '~/src/utils/general';
 
+import FileInput from '../FileInput/FileInput';
 import FormControlWrapper from '../FormControlWrapper/FormControlWrapper';
-import Select from '../Select/Select';
-import { SelectItem } from '../Select/types';
-import { FormSelectProps } from './types';
+import { FormFileInputProps } from './types';
 
-function FormSelect<T extends SelectItem>({
+function FormFileInput({
   id,
-  items,
   placeholder,
-  selectedItem,
+  accept,
+  file,
+  pending,
   onChange,
   label,
   error,
-}: FormSelectProps<T>) {
+}: FormFileInputProps) {
   return (
     <FormControlWrapper id={id} label={label} error={error}>
-      <Select
+      <FileInput
         id={id}
-        items={items}
         placeholder={placeholder}
-        selectedItem={selectedItem}
+        accept={accept}
+        file={file}
+        pending={pending}
         onChange={onChange}
         isInvalid={isNotEmpty(error)}
       />
@@ -30,4 +31,4 @@ function FormSelect<T extends SelectItem>({
   );
 }
 
-export default FormSelect;
+export default FormFileInput;

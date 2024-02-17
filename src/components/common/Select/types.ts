@@ -9,6 +9,7 @@ type SelectProps<T extends SelectItem> = {
   placeholder: string;
   selectedItem: T | null;
   onChange: (item: T) => void;
+  isInvalid?: boolean;
 };
 
 export { SelectItem, SelectProps };

@@ -20,4 +20,6 @@ function Header({ isDisplayed }: HeaderProps) {
   );
 }
 
-export default Header;
+const memoizedHeader = React.memo(Header);
+
+export default memoizedHeader;

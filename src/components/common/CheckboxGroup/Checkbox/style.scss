@@ -57,9 +57,9 @@ div.checkbox {
     }
 
     input:checked ~ div.checkbox__checkmark {
-        border-color: c.$green;
-      }
+      border-color: c.$green;
     }
+  }
 
   &.checkbox-blue {
     div.checkbox__checkmark svg {

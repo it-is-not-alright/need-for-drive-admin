@@ -16,6 +16,9 @@ function TextInput({
   autoComplete = 'off',
 }: TextInputProps) {
   const [hidden, setHidden] = useState<boolean>(isSecure);
+  const classes = classNames('text-input', {
+    'text-input-invalid': isInvalid,
+  });
 
   const handleShowButtonClick = () => {
     setHidden(!hidden);
@@ -26,7 +29,7 @@ function TextInput({
   };
 
   return (
-    <div className={classNames('text-input', { invalid: isInvalid })}>
+    <div className={classes}>
       <input
         id={id}
         type={hidden ? 'password' : 'text'}

@@ -4,25 +4,32 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
+import { createCar, updateCar } from '~/src/api/car/service';
+import { fetchCar, resetCar } from '~/src/redux/car/actions';
+import { carSelector } from '~/src/redux/car/selectors';
 import { fetchCategories } from '~/src/redux/category/actions';
-import { categoriesSelector } from '~/src/redux/category/selectors';
 import Validator from '~/src/validation/validator';
 
-import Button from '../../common/Button/Button';
-import { ButtonStyle } from '../../common/Button/types';
-import FormNumberInput from '../../common/FormNumberInput/FormNumberInput';
-import FormSelect from '../../common/FormSelect/FormSelect';
-import FormTextInput from '../../common/FormTextInput/FormTextinput';
-import StringArrayEditor from '../../common/StringArrayEditor/StringArrayEditor';
+import ConfirmationModal from '../../common/ConfirmationModal/ConfirmationModal';
+import Spinner from '../../common/Spinner/Spinner';
+import SuccessPopUp from '../../common/SuccessPopUp/SuccessPopUp';
 import CarCard from './CarCard/CarCard';
-import { initData, scheme } from './constants';
+import CarForm from './CarForm/CarForm';
+import { initCarFormData, scheme } from './constants';
 import { CarPageParams } from './types';
 
 function CarPage() {
-  const [formData, setFormData] = useState(Validator.toValidatable(initData));
+  const [backUp, setBackUp] = useState(
+    Validator.toValidatable(initCarFormData),
+  );
+  const [formData, setFormData] = useState(
+    Validator.toValidatable(initCarFormData),
+  );
   const percentage = Validator.getCompletionPercentage(formData, scheme);
+  const [modalIsDisplayed, setModalIsDisplayed] = useState(false);
+  const [popUpIsDisplayed, setPopUpIsDisplayed] = useState(false);
   const params = useParams<CarPageParams>();
-  const categories = useSelector(categoriesSelector);
+  const car = useSelector(carSelector);
   const dispatch = useDispatch();
   const id = parseInt(params.id, 10) || null;
   const isEdit = id !== null;
@@ -30,6 +37,19 @@ function CarPage() {
   useEffect(() => {
     dispatch(fetchCategories());
   }, []);
+
+  useEffect(() => {
+    if (id !== null) {
+      dispatch(fetchCar(id));
+    } else {
+      dispatch(resetCar());
+    }
+  }, [id]);
+
+  useEffect(() => {
+    setBackUp(Validator.toValidatable(car.content));
+    setFormData(Validator.toValidatable(car.content));
+  }, [car]);
 
   const handleInput = (key: string, value: unknown) => {
     setFormData({ ...formData, [key]: { value, error: null } });
@@ -39,108 +59,66 @@ function CarPage() {
     const { data, failure } = Validator.check(formData, scheme);
     if (failure) {
       setFormData(data);
+    } else {
+      if (isEdit) {
+        // в F-9 будет middleware
+        updateCar(formData);
+      } else {
+        // в F-9 будет middleware
+        createCar(formData);
+      }
+      setPopUpIsDisplayed(true);
     }
   };
 
+  const handleCancelButtonClick = () => {
+    setModalIsDisplayed(true);
+  };
+
+  const handleModalConfirm = (confirmed: boolean) => {
+    if (confirmed) {
+      setFormData(backUp);
+    }
+    setModalIsDisplayed(false);
+  };
+
+  const handlePopUpHide = () => {
+    setPopUpIsDisplayed(false);
+  };
+
   return (
-    <div className="page" id="car-page">
-      <h1 className="title">Карточка автомобиля</h1>
-      <div id="car-page__main">
-        <CarCard
-          percentage={percentage}
-          name={formData.name.value}
-          description={formData.description.value}
-          thumbnail={formData.thumbnail.value}
-          category={formData.categoryId.value}
-          handleInput={handleInput}
-        />
-        <div id="car-details">
-          <h3>Настройки автомобиля</h3>
-          <div id="car-details__input-block">
-            <FormTextInput
-              id="model"
-              value={formData.name.value}
-              onChange={(value) => handleInput('name', value)}
-              label="Модель"
-              error={formData.name.error}
-              maxLength={150}
-            />
-            <FormSelect
-              id="category"
-              items={categories.content.data}
-              placeholder="Не выбрано"
-              selectedItem={formData.categoryId.value}
-              onChange={(item) => handleInput('categoryId', item)}
-              label="Категория"
-              error={formData.categoryId.error}
-            />
-            <FormNumberInput
-              id="min-price"
-              unit="₽"
-              value={formData.priceMin.value}
-              onChange={(value) => handleInput('priceMin', value)}
-              label="Минимальная стоимость"
-              error={formData.priceMin.error}
-            />
-            <FormNumberInput
-              id="max-price"
-              unit="₽"
-              value={formData.priceMax.value}
-              onChange={(value) => handleInput('priceMax', value)}
-              label="Максимальная стоимость"
-              error={formData.priceMax.error}
-            />
-            <FormNumberInput
-              id="tank"
-              unit="%"
-              value={formData.tank.value}
-              onChange={(value) => handleInput('tank', value)}
-              max={100}
-              label="Уровень топлива"
-              error={formData.tank.error}
-            />
-            <FormTextInput
-              id="number"
-              value={formData.number.value}
-              onChange={(value) => handleInput('number', value)}
-              maxLength={150}
-              label="Номер"
-              error={formData.number.error}
-            />
-            <StringArrayEditor
-              id="color"
-              label="Доступные цвета"
-              array={formData.colors.value}
-              onChange={(array) => handleInput('colors', array)}
-            />
-          </div>
-          <div id="car-details__btn-block">
-            <div>
-              <Button
-                text="Сохранить"
-                onClick={handleFormSubmit}
-                isDisabled={percentage !== 100}
-              />
-              <Button
-                text="Отменить"
-                onClick={() => {}}
-                style={ButtonStyle.Secondary}
-              />
-            </div>
-            {isEdit && (
-              <div>
-                <Button
-                  text="Удалить"
-                  onClick={() => {}}
-                  style={ButtonStyle.Danger}
-                  isDisabled={percentage !== 100}
-                />
-              </div>
-            )}
-          </div>
+    <>
+      <SuccessPopUp
+        message="Данные сохранены"
+        isDisplayed={popUpIsDisplayed}
+        onHide={handlePopUpHide}
+      />
+      <div className="page" id="car-page">
+        <h1 className="title">Карточка автомобиля</h1>
+        <div id="car-page__main">
+          <CarCard
+            percentage={percentage}
+            formData={formData}
+            onInput={handleInput}
+          />
+          <CarForm
+            formData={formData}
+            onInput={handleInput}
+            onSubmit={handleFormSubmit}
+            onCancel={handleCancelButtonClick}
+          />
         </div>
+        <Spinner isDisplayed={car.pending} />
+        <ConfirmationModal
+          title="Отмена изменений"
+          message="Вы действительно хотите отменить внесенные изменения?"
+          confirmLabel="Отменить"
+          cancelLabel="Назад"
+          isDisplayed={modalIsDisplayed}
+          onResponse={handleModalConfirm}
+        />
       </div>
-    </div>
+    </>
   );
 }
 

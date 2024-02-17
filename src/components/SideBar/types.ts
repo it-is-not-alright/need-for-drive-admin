@@ -8,7 +8,6 @@ type SideBarLink = {
   label: string;
   route: AppRoute;
   iconId: string;
-  isTemporary: boolean;
 };
 
 export { SideBarLink, SideBarProps };

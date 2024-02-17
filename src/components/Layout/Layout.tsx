@@ -4,7 +4,7 @@ import '~/assets/fonts/poppins/style.scss';
 
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
 import { requestTokenVerification } from '~/src/redux/auth/actions';
 import { authSelector } from '~/src/redux/auth/selectors';
@@ -18,6 +18,7 @@ import SideBar from '../SideBar/SideBar';
 function Layout() {
   const { status } = useSelector(authSelector);
   const dispatch = useDispatch();
+  const location = useLocation();
   const isAuthorized = status === AuthStatus.Authorized;
 
   useEffect(() => {
@@ -29,7 +30,7 @@ function Layout() {
       <SideBar isDisplayed={isAuthorized} />
       <Header isDisplayed={isAuthorized} />
       <main>
-        <ErrorBoundary>
+        <ErrorBoundary key={location.pathname}>
           <Outlet />
         </ErrorBoundary>
         <Footer isDisplayed={isAuthorized} />

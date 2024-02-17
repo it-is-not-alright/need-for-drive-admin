@@ -13,11 +13,13 @@ function Select<T extends SelectItem>({
   placeholder,
   selectedItem,
   onChange,
+  isInvalid = false,
 }: SelectProps<T>) {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const classes = classNames('select', {
     'select-expanded': isExpanded,
     'select-filled': selectedItem,
+    'select-invalid': isInvalid,
   });
   useClickAway(`#${id}`, () => setIsExpanded(false));
 
