@@ -9,10 +9,10 @@ const fetchOrders = (params: string): OrdersRequestedAction => ({
 });
 
 const setOrders = (
-  values: ArrayRequestData<OrderRaw>,
+  orders: ArrayRequestData<OrderRaw>,
 ): OrdersRecivedAction => ({
   type: ORDERS_RECIVED,
-  payload: values,
+  payload: orders,
 });
 
 export { fetchOrders, setOrders };

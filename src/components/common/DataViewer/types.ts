@@ -1,4 +1,4 @@
-import { SetURLSearchParams } from 'react-router-dom';
+import { AnyAction } from 'redux-saga';
 
 import { ControlItem } from '../../types';
 
@@ -30,10 +30,9 @@ type FilterConfig<T extends string> = {
 type DataViewerProps<T extends string> = {
   limit: number;
   total: number;
-  params: SearchParams<T>;
   defaultParams: SearchParams<T>;
-  filterConfig: FilterConfig<T>;
-  setSearchParams: SetURLSearchParams;
+  filterConfig?: FilterConfig<T>;
+  fetchData: (params: string) => AnyAction;
   children: React.ReactNode;
 };
 

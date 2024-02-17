@@ -1,24 +1,24 @@
 import { FilterValues } from '~/src/components/common/DataViewer/types';
 
 import {
-  CITY_FILTER_VALUES_RECIVED,
-  CITY_FILTER_VALUES_REQUESTED,
+  FILTER_BY_CITY_VALUES_RECIVED,
+  FILTER_BY_CITY_VALUES_REQUESTED,
 } from './constants';
 import {
-  CityFilterValuesRecivedAction,
-  CityFilterValuesRequestedAction,
+  FilterByCityValuesRecivedAction,
+  FilterByCityValuesRequestedAction,
 } from './types';
 
-const fetchCityFilterValues = (): CityFilterValuesRequestedAction => ({
-  type: CITY_FILTER_VALUES_REQUESTED,
+const fetchFilterByCityValues = (): FilterByCityValuesRequestedAction => ({
+  type: FILTER_BY_CITY_VALUES_REQUESTED,
   payload: null,
 });
 
-const setCityFilterValues = (
+const setFilterByCityValues = (
   values: FilterValues,
-): CityFilterValuesRecivedAction => ({
-  type: CITY_FILTER_VALUES_RECIVED,
+): FilterByCityValuesRecivedAction => ({
+  type: FILTER_BY_CITY_VALUES_RECIVED,
   payload: values,
 });
 
-export { fetchCityFilterValues, setCityFilterValues };
+export { fetchFilterByCityValues, setFilterByCityValues };

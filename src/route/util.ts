@@ -15,6 +15,8 @@ class RouteUtil {
 
   static cars: AppRoute = { path: '/cars' };
 
+  static points: AppRoute = { path: '/points' };
+
   static match(route: AppRoute, path: string): boolean {
     if (route.mirror && matchPath(route.mirror, path)) {
       return true;

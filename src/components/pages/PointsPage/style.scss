@@ -1,0 +1,24 @@
+@use '~/comp/_colors' as c;
+@use '~/comp/_dimensions' as d;
+
+div.point-table-wrapper {
+  overflow-x: auto;
+
+  table {
+    width: 100%;
+    border: 1px solid c.$light-periwinkle;
+    border-collapse: collapse;
+
+    thead {
+      background-color: c.$light;
+    }
+
+    th,
+    td {
+      padding: 0.5rem;
+      color: c.$dark;
+      font-size: d.$fs-2;
+      border: 1px solid c.$light-periwinkle;
+    }
+  }
+}

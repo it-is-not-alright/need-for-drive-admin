@@ -1,7 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
 import { logIn, logOut, verifyToken } from '~/src/api/services/auth';
-import { RequestResult } from '~/src/api/types';
 
 import { defaultRequestError } from '../constants';
 import { setRequestError } from '../request-error/actions';
@@ -15,10 +14,10 @@ import { AuthStatus, LogInRequestedAction } from './types';
 
 function* logInWorker(action: LogInRequestedAction): Generator {
   try {
-    const result = (yield call(
+    const result: Awaited<ReturnType<typeof logIn>> = yield call(
       logIn,
       action.payload,
-    )) as RequestResult<AuthStatus>;
+    );
     if (result.error) {
       yield put(setRequestError(result.error));
       yield put(setAuthStatus(AuthStatus.Unknown));
@@ -33,7 +32,7 @@ function* logInWorker(action: LogInRequestedAction): Generator {
 
 function* logOutWorker(): Generator {
   try {
-    const result = (yield call(logOut)) as RequestResult<null>;
+    const result: Awaited<ReturnType<typeof logOut>> = yield call(logOut);
     if (result.error) {
       yield put(setRequestError(result.error));
       yield put(setAuthStatus(AuthStatus.Unknown));
@@ -48,7 +47,8 @@ function* logOutWorker(): Generator {
 
 function* verifyTokenWorker(): Generator {
   try {
-    const result = (yield call(verifyToken)) as RequestResult<AuthStatus>;
+    const result: Awaited<ReturnType<typeof verifyToken>> =
+      yield call(verifyToken);
     if (result.error) {
       yield put(setRequestError(result.error));
       yield put(setAuthStatus(AuthStatus.Unknown));

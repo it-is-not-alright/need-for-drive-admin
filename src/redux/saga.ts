@@ -1,18 +1,21 @@
 import { all, fork } from 'redux-saga/effects';
 
-import { authWatcher } from './auth/watcher';
-import { carFilterValuesWatcher } from './car/watcher';
-import { cityFilterValuesWatcher } from './city/watcher';
-import { ordersWatcher } from './order/watcher';
-import { statusFilterValuesWatcher } from './order-status/watcher';
+import { authWatcher } from './auth/watchers';
+import { carsWatcher, filterByCarValuesWatcher } from './car/watchers';
+import { filterByCityValuesWatcher } from './city/watchers';
+import { ordersWatcher } from './order/watchers';
+import { filterByStatusValuesWatcher } from './order-status/watchers';
+import { pointsWatcher } from './point/watchers';
 
 function* rootSaga(): Generator {
   yield all([
     fork(authWatcher),
-    fork(carFilterValuesWatcher),
-    fork(cityFilterValuesWatcher),
-    fork(statusFilterValuesWatcher),
+    fork(filterByCarValuesWatcher),
+    fork(filterByCityValuesWatcher),
+    fork(filterByStatusValuesWatcher),
     fork(ordersWatcher),
+    fork(carsWatcher),
+    fork(pointsWatcher),
   ]);
 }
 

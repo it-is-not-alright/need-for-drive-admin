@@ -1,6 +1,6 @@
-import { CarSearchParams } from './types';
+import { PointSearchParams } from './types';
 
-const defaultParams: CarSearchParams = {
+const defaultParams: PointSearchParams = {
   page: 0,
   filter: {},
   filterIsDefault: true,

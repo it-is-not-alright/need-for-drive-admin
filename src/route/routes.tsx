@@ -7,6 +7,7 @@ import CarsPage from '../components/pages/CarsPage/CarsPage';
 import LogInPage from '../components/pages/LogInPage/LogInPage';
 import NotFoundPage from '../components/pages/NotFoundPage/NotFoundPage';
 import OrdersPage from '../components/pages/OrdersPage/OrdersPage';
+import PointsPage from '../components/pages/PointsPage/PointsPage';
 import SignUpPage from '../components/pages/SignUpPage/SignUpPage';
 import PrivateRoutes from '../components/PrivateRoutes/PrivateRoutes';
 import RouteUtil from './util';
@@ -46,6 +47,10 @@ const router = createHashRouter([
           {
             path: RouteUtil.cars.path,
             element: <CarsPage />,
+          },
+          {
+            path: RouteUtil.points.path,
+            element: <PointsPage />,
           },
         ],
       },

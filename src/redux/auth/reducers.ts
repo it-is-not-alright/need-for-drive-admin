@@ -26,4 +26,4 @@ const authReducer = (
   }
 };
 
-export default authReducer;
+export { authReducer };

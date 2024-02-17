@@ -22,4 +22,4 @@ const requestErrorReducer = (
   }
 };
 
-export default requestErrorReducer;
+export { requestErrorReducer };

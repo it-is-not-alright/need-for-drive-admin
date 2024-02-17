@@ -1,24 +1,24 @@
 import { FilterValues } from '~/src/components/common/DataViewer/types';
 
 import {
-  STATUS_FILTER_VALUES_RECIVED,
-  STATUS_FILTER_VALUES_REQUESTED,
+  FILTER_BY_STATUS_VALUES_RECIVED,
+  FILTER_BY_STATUS_VALUES_REQUESTED,
 } from './constants';
 import {
-  StatusFilterValuesRecivedAction,
-  StatusFilterValuesRequestedAction,
+  FilterByStatusValuesRecivedAction,
+  FilterByStatusValuesRequestedAction,
 } from './types';
 
-const fetchStatusFilterValues = (): StatusFilterValuesRequestedAction => ({
-  type: STATUS_FILTER_VALUES_REQUESTED,
+const fetchFilterByStatusValues = (): FilterByStatusValuesRequestedAction => ({
+  type: FILTER_BY_STATUS_VALUES_REQUESTED,
   payload: null,
 });
 
-const setStatusFilterValues = (
+const setFilterByStatusValues = (
   values: FilterValues,
-): StatusFilterValuesRecivedAction => ({
-  type: STATUS_FILTER_VALUES_RECIVED,
+): FilterByStatusValuesRecivedAction => ({
+  type: FILTER_BY_STATUS_VALUES_RECIVED,
   payload: values,
 });
 
-export { fetchStatusFilterValues, setStatusFilterValues };
+export { fetchFilterByStatusValues, setFilterByStatusValues };
