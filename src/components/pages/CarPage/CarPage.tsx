@@ -56,6 +56,10 @@ function CarPage() {
   };
 
   const handleFormSubmit = () => {
+    scheme.priceMax.min(
+      formData.priceMin.value,
+      'Максимальная стоимость должна быть выше минимальной',
+    );
     const { data, failure } = Validator.check(formData, scheme);
     if (failure) {
       setFormData(data);
