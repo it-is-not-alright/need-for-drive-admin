@@ -3,16 +3,18 @@ import './style.scss';
 import classNames from 'classnames';
 import React from 'react';
 
-import { ButtonProps, ButtonType } from './types';
+import { ButtonProps, ButtonStyle } from './types';
 
 function Button({
   text,
   onClick,
-  type = ButtonType.Primary,
+  style: type = ButtonStyle.Primary,
   pending = false,
   isDisabled = false,
 }: ButtonProps) {
-  const classList = classNames('simple-btn', type, { pending });
+  const classes = classNames('simple-btn', type, {
+    'simple-btn-pending': pending,
+  });
 
   const handleClick = () => {
     if (!pending) {
@@ -23,7 +25,7 @@ function Button({
   return (
     <button
       type="button"
-      className={classList}
+      className={classes}
       onClick={handleClick}
       disabled={isDisabled}
     >

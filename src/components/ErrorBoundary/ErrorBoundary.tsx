@@ -18,6 +18,8 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = initState;
+    const { reset } = this.props;
+    reset();
   }
 
   componentDidCatch(): void {

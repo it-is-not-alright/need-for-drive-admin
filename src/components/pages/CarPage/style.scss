@@ -1,0 +1,23 @@
+div#car-page {
+  position: relative;
+
+  h1.title {
+    margin-bottom: 1rem;
+  }
+
+  div#car-page__main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    div.car-card {
+      flex: 1;
+      min-width: min(15rem, 100%);
+    }
+
+    div.car-form {
+      flex: 3;
+      min-width: min(15rem, 100%);
+    }
+  }
+}

@@ -1,24 +1,30 @@
 @use '~/comp/_colors' as c;
 @use '~/comp/_dimensions' as d;
 
-div.point-table-wrapper {
-  overflow-x: auto;
+div#points-page {
+  h1.title {
+    margin-bottom: 1rem;
+  }
 
-  table {
-    width: 100%;
-    border: 1px solid c.$light-periwinkle;
-    border-collapse: collapse;
+  div.point-table-wrapper {
+    overflow-x: auto;
 
-    thead {
-      background-color: c.$light;
-    }
-
-    th,
-    td {
-      padding: 0.5rem;
-      color: c.$dark;
-      font-size: d.$fs-2;
+    table {
+      width: 100%;
       border: 1px solid c.$light-periwinkle;
+      border-collapse: collapse;
+
+      thead {
+        background-color: c.$light;
+      }
+
+      th,
+      td {
+        padding: 0.5rem;
+        color: c.$dark;
+        font-size: d.$fs-2;
+        border: 1px solid c.$light-periwinkle;
+      }
     }
   }
 }

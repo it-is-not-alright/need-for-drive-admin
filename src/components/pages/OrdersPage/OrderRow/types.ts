@@ -1,4 +1,4 @@
-import { OrderRaw } from '~/src/api/types';
+import { OrderRaw } from '~/src/api/order/types';
 
 type OrderRowProps = {
   raw: OrderRaw;

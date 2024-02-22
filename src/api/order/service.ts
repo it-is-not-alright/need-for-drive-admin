@@ -1,5 +1,6 @@
 import { client } from '..';
-import { ArrayRequestData, Endpoint, OrderRaw, RequestResult } from '../types';
+import { ArrayRequestData, Endpoint, RequestResult } from '../types';
+import { OrderRaw } from './types';
 
 async function getOrders(
   params: string,

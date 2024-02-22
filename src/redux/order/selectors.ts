@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 
-import { ArrayRequestData, OrderRaw } from '~/src/api/types';
+import { OrderRaw } from '~/src/api/order/types';
+import { ArrayRequestData } from '~/src/api/types';
 import { OrderFilterConfig } from '~/src/components/pages/OrdersPage/types';
 
 import { RootState } from '../reducer';

@@ -14,7 +14,7 @@ function PointsPage() {
   const points = useSelector(pointsSelector);
 
   return (
-    <div className="page">
+    <div className="page" id="points-page">
       <h1 className="title">Пункты выдачи</h1>
       <DataViewer
         limit={pageSize}

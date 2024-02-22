@@ -1,10 +1,9 @@
 type TextInputProps = {
   id: string;
-  title: string;
   value: string;
-  error: string;
   onChange: (value: string) => void;
   isSecure?: boolean;
+  isInvalid?: boolean;
   maxLength?: number;
   autoComplete?: string;
 };

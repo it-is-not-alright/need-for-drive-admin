@@ -4,43 +4,23 @@
 
 $icon-size: 1.25rem;
 
-label {
-  color: c.$davys-grey;
-  font-size: d.$fs-1;
-}
-
 div.text-input {
   display: flex;
-  margin-top: 0.5rem;
-  border-width: 1px;
-  border-style: solid;
-  border-color: c.$lavender-gray;
+  border: 1px solid c.$lavender-gray;
   border-radius: 0.25rem;
 
-  &.invalid {
+  &.text-input-invalid {
     border-color: c.$pink;
   }
 
   input {
-    @include m.protected-font-size;
-
     width: 100%;
     padding: 0.5rem 0.75rem;
     color: c.$police-blue;
+    font-size: d.$fs-1;
     background-color: transparent;
     border: 0;
     outline: 0;
-  }
-
-  & + p {
-    margin: 0.2rem 0;
-    color: c.$pink;
-    font-size: d.$fs-1;
-
-    &::after {
-      white-space: pre;
-      content: ' ';
-    }
   }
 
   button {

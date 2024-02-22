@@ -1,3 +1,5 @@
+import { CheckboxStyle } from './Checkbox/types';
+
 type CheckboxGroupMap = {
   [item: string]: {
     checked: boolean;
@@ -10,6 +12,7 @@ type CheckboxGroupProps = {
   map: CheckboxGroupMap;
   onChange?: (key: string, event: React.ChangeEvent<HTMLInputElement>) => void;
   isDisabled?: boolean;
+  style?: CheckboxStyle;
 };
 
 export { CheckboxGroupMap, CheckboxGroupProps };

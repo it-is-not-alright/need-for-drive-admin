@@ -29,7 +29,7 @@ function OrdersPage() {
   }, []);
 
   return (
-    <div className="page">
+    <div className="page" id="orders-page">
       <h1 className="title">Заказы</h1>
       <DataViewer
         limit={pageSize}

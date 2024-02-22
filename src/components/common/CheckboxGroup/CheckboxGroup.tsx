@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import React from 'react';
 
 import Checkbox from './Checkbox/Checkbox';
+import { CheckboxStyle } from './Checkbox/types';
 import { CheckboxGroupProps } from './types';
 
 function CheckboxGroup({
@@ -11,6 +12,7 @@ function CheckboxGroup({
   map,
   onChange,
   isDisabled = false,
+  style = CheckboxStyle.Blue,
 }: CheckboxGroupProps) {
   const classes = classNames('checkbox-group', {
     'checkbox-group-disabled': isDisabled,
@@ -27,6 +29,7 @@ function CheckboxGroup({
           key={key}
           onChange={(event) => onChange(key, event)}
           isDisabled={isDisabled}
+          style={style}
         />
       ))}
     </div>

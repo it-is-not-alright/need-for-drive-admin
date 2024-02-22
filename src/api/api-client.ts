@@ -1,5 +1,6 @@
 import { getRefreshToken, removeToken, saveToken } from '../cookie/auth';
-import { AuthRaw, Endpoint, RequestOptions, RequestResult } from './types';
+import { AuthRaw } from './auth/types';
+import { Endpoint, RequestOptions, RequestResult } from './types';
 import { setHeaders, unpack } from './utils';
 
 class APIClient {

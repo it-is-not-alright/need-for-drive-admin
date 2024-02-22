@@ -1,4 +1,5 @@
-import { ArrayRequestData, PointRaw } from '~/src/api/types';
+import { PointRaw } from '~/src/api/point/types';
+import { ArrayRequestData } from '~/src/api/types';
 
 import { RequestState } from '../types';
 import { POINTS_RECIVED, POINTS_REQUESTED } from './constants';

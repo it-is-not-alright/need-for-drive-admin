@@ -1,3 +1,8 @@
+enum CheckboxStyle {
+  Green = 'checkbox-green',
+  Blue = 'checkbox-blue',
+}
+
 type CheckboxProps = {
   id: string;
   name: string;
@@ -5,6 +10,7 @@ type CheckboxProps = {
   checked: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   isDisabled: boolean;
+  style: CheckboxStyle;
 };
 
-export { CheckboxProps };
+export { CheckboxProps, CheckboxStyle };

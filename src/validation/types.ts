@@ -1,3 +1,4 @@
+import NumberInspector from './inspectors/number';
 import StringInspector from './inspectors/string';
 import { Inspector } from './inspectors/types';
 
@@ -6,7 +7,11 @@ type AbstractScheme<T extends object> = {
 };
 
 type Scheme<T extends object> = {
-  [K in keyof T]?: T[K] extends string ? StringInspector : Inspector<T[K]>;
+  [K in keyof T]?: T[K] extends string
+    ? StringInspector
+    : T[K] extends number
+      ? NumberInspector
+      : Inspector<T[K]>;
 };
 
 type ValidatablePropetry<T> = {

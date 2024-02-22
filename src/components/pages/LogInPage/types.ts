@@ -1,12 +1,10 @@
-import { Scheme, Validatable } from '~/src/validation/types';
+import { Scheme } from '~/src/validation/types';
 
-type LogInFormFields = {
+type LogInFormData = {
   email: string;
   password: string;
 };
 
-type LogInFormData = Validatable<LogInFormFields>;
+type LogInFormDataScheme = Scheme<LogInFormData>;
 
-type LogInFormDataScheme = Scheme<LogInFormFields>;
-
-export { LogInFormData, LogInFormDataScheme, LogInFormFields };
+export { LogInFormData, LogInFormDataScheme };

@@ -17,7 +17,7 @@ import { NUM_OF_NOTIFICATIONS } from '../constants';
 function Dropdown() {
   const dispatch = useDispatch();
   const [isExpanded, setIsExpanded] = useState(false);
-  const [popUpIsDisplayed, setModalIsDisplayed] = useState(false);
+  const [modalIsDisplayed, setModalIsDisplayed] = useState(false);
   const classes = classNames('dropdown', { 'dropdown-expanded': isExpanded });
   useClickAway('.dropdown__toggle', () => setIsExpanded(false));
 
@@ -29,7 +29,7 @@ function Dropdown() {
     setModalIsDisplayed(true);
   };
 
-  const handleLogOutConfirm = (confirmed: boolean) => {
+  const handleModalConfirm = (confirmed: boolean) => {
     if (confirmed) {
       dispatch(requestLogOut());
     }
@@ -70,8 +70,8 @@ function Dropdown() {
         message="Вы действительно хотите выйти?"
         confirmLabel="Выйти"
         cancelLabel="Остаться"
-        isDisplayed={popUpIsDisplayed}
-        onResponse={handleLogOutConfirm}
+        isDisplayed={modalIsDisplayed}
+        onResponse={handleModalConfirm}
       />
     </div>
   );

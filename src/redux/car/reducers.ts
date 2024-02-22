@@ -1,16 +1,22 @@
-import { ArrayRequestData, CarRaw } from '~/src/api/types';
+import { CarRaw } from '~/src/api/car/types';
+import { ArrayRequestData } from '~/src/api/types';
 import { FilterValues } from '~/src/components/common/DataViewer/types';
+import { CarFormData } from '~/src/components/pages/CarPage/types';
 
 import { RequestState } from '../types';
 import {
   CAR_FILTER_VALUES_RECIVED,
   CAR_FILTER_VALUES_REQUESTED,
+  CAR_RECIVED,
+  CAR_REQUESTED,
+  CAR_RESET,
   CARS_RECIVED,
   CARS_REQUESTED,
   initCarsState,
+  initCarState,
   initFilterValuesState,
 } from './constants';
-import { CarsAction, FilterByCarValuesAction } from './types';
+import { CarAction, CarsAction, FilterByCarValuesAction } from './types';
 
 const filterByCarValuesReducer = (
   state: RequestState<FilterValues> = initFilterValuesState,
@@ -40,4 +46,20 @@ const carsReducer = (
   }
 };
 
-export { carsReducer, filterByCarValuesReducer };
+const carReducer = (
+  state: RequestState<CarFormData> = initCarState,
+  action: CarAction = null,
+): RequestState<CarFormData> => {
+  switch (action.type) {
+    case CAR_REQUESTED:
+      return { ...state, pending: true };
+    case CAR_RECIVED:
+      return { content: action.payload, pending: false };
+    case CAR_RESET:
+      return initCarState;
+    default:
+      return state;
+  }
+};
+
+export { carReducer, carsReducer, filterByCarValuesReducer };

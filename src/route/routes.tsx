@@ -3,6 +3,7 @@ import { createHashRouter } from 'react-router-dom';
 
 import AuthorizationRoutes from '../components/AuthorizationRoutes/AuthorizationRoutes';
 import Layout from '../components/Layout/Layout';
+import CarPage from '../components/pages/CarPage/CarPage';
 import CarsPage from '../components/pages/CarsPage/CarsPage';
 import LogInPage from '../components/pages/LogInPage/LogInPage';
 import NotFoundPage from '../components/pages/NotFoundPage/NotFoundPage';
@@ -47,6 +48,10 @@ const router = createHashRouter([
           {
             path: RouteUtil.cars.path,
             element: <CarsPage />,
+          },
+          {
+            path: RouteUtil.car.path,
+            element: <CarPage />,
           },
           {
             path: RouteUtil.points.path,

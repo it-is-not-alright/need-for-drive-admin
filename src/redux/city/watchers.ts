@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { getFilterValues } from '~/src/api/services/city';
+import { getFilterValues } from '~/src/api/city/service';
 
 import { defaultRequestError } from '../constants';
 import { setRequestError } from '../request-error/actions';

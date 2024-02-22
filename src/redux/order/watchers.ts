@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { getOrders } from '~/src/api/services/order';
+import { getOrders } from '~/src/api/order/service';
 
 import { defaultRequestError } from '../constants';
 import { setRequestError } from '../request-error/actions';

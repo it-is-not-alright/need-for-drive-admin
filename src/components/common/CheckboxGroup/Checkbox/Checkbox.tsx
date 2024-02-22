@@ -1,5 +1,6 @@
 import './style.scss';
 
+import classNames from 'classnames';
 import React from 'react';
 
 import Icon from '../../Icon/Icon';
@@ -12,9 +13,10 @@ function Checkbox({
   checked,
   onChange,
   isDisabled,
+  style,
 }: CheckboxProps) {
   return (
-    <div className="checkbox">
+    <div className={classNames('checkbox', style)}>
       <input
         id={id}
         type="checkbox"

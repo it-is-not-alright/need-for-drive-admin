@@ -1,5 +1,6 @@
 import { client } from '..';
-import { ArrayRequestData, Endpoint, PointRaw, RequestResult } from '../types';
+import { ArrayRequestData, Endpoint, RequestResult } from '../types';
+import { PointRaw } from './types';
 
 async function getPoints(
   params: string,

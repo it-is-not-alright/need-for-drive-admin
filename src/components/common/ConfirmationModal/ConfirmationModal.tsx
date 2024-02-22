@@ -3,7 +3,7 @@ import './style.scss';
 import React from 'react';
 
 import Button from '../Button/Button';
-import { ButtonType } from '../Button/types';
+import { ButtonStyle } from '../Button/types';
 import Dialog from '../Dialog/Dialog';
 import Icon from '../Icon/Icon';
 import { ConfirmationModalProps } from './types';
@@ -41,11 +41,15 @@ function ConfirmationModal({
           <p>{message}</p>
         </div>
         <div className="confirmation-modal__footer">
-          <Button text={cancelLabel} onClick={handleCancelButtonClick} />
+          <Button
+            text={cancelLabel}
+            onClick={handleCancelButtonClick}
+            style={ButtonStyle.Secondary}
+          />
           <Button
             text={confirmLabel}
             onClick={handleConfirmButtonClick}
-            type={ButtonType.Danger}
+            style={ButtonStyle.Danger}
           />
         </div>
       </div>

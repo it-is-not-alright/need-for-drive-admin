@@ -48,4 +48,6 @@ function SideBar({ isDisplayed }: SideBarProps) {
   );
 }
 
-export default SideBar;
+const memoizedSideBar = React.memo(SideBar);
+
+export default memoizedSideBar;

@@ -2,7 +2,8 @@ import { getAccessToken, removeToken, saveToken } from '~/src/cookie/auth';
 import { AuthStatus } from '~/src/redux/auth/types';
 
 import { client } from '..';
-import { AuthRaw, Endpoint, RequestResult, User } from '../types';
+import { Endpoint, RequestResult } from '../types';
+import { AuthRaw, User } from './types';
 
 async function logOut(): Promise<RequestResult<null>> {
   const raw = await client.post<null>(Endpoint.LogOut);

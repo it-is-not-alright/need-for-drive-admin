@@ -4,24 +4,24 @@ import classNames from 'classnames';
 import React, { useState } from 'react';
 
 import useClickAway from '../../hooks/use-click-away';
-import { ControlItem } from '../../types';
 import Icon from '../Icon/Icon';
-import { SelectProps } from './types';
+import { SelectItem, SelectProps } from './types';
 
-function Select<T extends ControlItem>({
+function Select<T extends SelectItem>({
   id,
   items,
   placeholder,
   selectedItem,
   onChange,
+  isInvalid = false,
 }: SelectProps<T>) {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const classes = classNames('select', {
     'select-expanded': isExpanded,
     'select-filled': selectedItem,
+    'select-invalid': isInvalid,
   });
-  const toggleButtonId = `${id}__toggle`;
-  useClickAway(`#${toggleButtonId}`, () => setIsExpanded(false));
+  useClickAway(`#${id}`, () => setIsExpanded(false));
 
   const handleToggleClick = () => {
     setIsExpanded(!isExpanded);
@@ -35,7 +35,7 @@ function Select<T extends ControlItem>({
     <div className={classes}>
       <button
         type="button"
-        id={toggleButtonId}
+        id={id}
         className="select__toggle"
         onClick={handleToggleClick}
       >

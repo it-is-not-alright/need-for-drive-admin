@@ -15,6 +15,8 @@ class RouteUtil {
 
   static cars: AppRoute = { path: '/cars' };
 
+  static car: AppRoute = { path: '/car/:id' };
+
   static points: AppRoute = { path: '/points' };
 
   static match(route: AppRoute, path: string): boolean {
@@ -22,6 +24,10 @@ class RouteUtil {
       return true;
     }
     return matchPath(route.path, path) !== null;
+  }
+
+  static setId(route: AppRoute, id: number): string {
+    return route.path.replace(':id', String(id));
   }
 }
 

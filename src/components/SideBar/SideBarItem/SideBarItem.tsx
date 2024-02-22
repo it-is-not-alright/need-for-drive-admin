@@ -11,6 +11,7 @@ function SideBarItem({ link, isActive }: SideBarItemProps) {
   const classes = classNames('side-bar__item', {
     'side-bar__item-active': isActive,
   });
+
   return (
     <Link to={link.route.path} className={classes}>
       <Icon id={link.iconId} />

@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { getFilterValues } from '~/src/api/services/order-status';
+import { getFilterValues } from '~/src/api/order-status/service';
 
 import { defaultRequestError } from '../constants';
 import { setRequestError } from '../request-error/actions';

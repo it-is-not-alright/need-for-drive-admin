@@ -15,7 +15,7 @@ function CarsPage() {
   const cars = useSelector(carsSelector);
 
   return (
-    <div className="page">
+    <div className="page" id="cars-page">
       <h1 className="title">Автомобили</h1>
       <DataViewer
         limit={pageSize}

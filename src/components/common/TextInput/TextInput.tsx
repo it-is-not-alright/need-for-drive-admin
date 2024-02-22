@@ -8,15 +8,17 @@ import { TextInputProps } from './types';
 
 function TextInput({
   id,
-  title,
   value,
-  error,
   onChange,
   isSecure = false,
+  isInvalid = false,
   maxLength,
   autoComplete = 'off',
 }: TextInputProps) {
   const [hidden, setHidden] = useState<boolean>(isSecure);
+  const classes = classNames('text-input', {
+    'text-input-invalid': isInvalid,
+  });
 
   const handleShowButtonClick = () => {
     setHidden(!hidden);
@@ -27,29 +29,25 @@ function TextInput({
   };
 
   return (
-    <>
-      <label htmlFor={id}>{title}</label>
-      <div className={classNames('text-input', { invalid: error })}>
-        <input
-          id={id}
-          type={hidden ? 'password' : 'text'}
-          value={value}
-          onChange={(event) => handleChange(event)}
-          maxLength={maxLength}
-          autoComplete={autoComplete}
-        />
-        {isSecure && (
-          <button
-            type="button"
-            onClick={handleShowButtonClick}
-            aria-label="show-button"
-          >
-            <Icon id={hidden ? 'show' : 'hide'} />
-          </button>
-        )}
-      </div>
-      <p>{error}</p>
-    </>
+    <div className={classes}>
+      <input
+        id={id}
+        type={hidden ? 'password' : 'text'}
+        value={value}
+        onChange={(event) => handleChange(event)}
+        maxLength={maxLength}
+        autoComplete={autoComplete}
+      />
+      {isSecure && (
+        <button
+          type="button"
+          onClick={handleShowButtonClick}
+          aria-label="show-button"
+        >
+          <Icon id={hidden ? 'show' : 'hide'} />
+        </button>
+      )}
+    </div>
   );
 }
 

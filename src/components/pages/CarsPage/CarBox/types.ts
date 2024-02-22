@@ -1,4 +1,4 @@
-import { CarRaw } from '~/src/api/types';
+import { CarRaw } from '~/src/api/car/types';
 
 type CarBoxProps = {
   car: CarRaw;
